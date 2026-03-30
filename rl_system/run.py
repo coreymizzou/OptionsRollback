@@ -459,6 +459,20 @@ def ask_track_position(scanner_result: Dict, tracker: PositionTracker,
         except Exception:
             pass
 
+    short_  = trade_.get("short_leg", {})
+    strategy_ = trade_.get("strategy", "")
+
+    # Store short leg details in notes so spread P&L can be computed correctly
+    # raw_scanner_data has full details but notes gives quick access
+    if "SPREAD" in strategy_ and short_:
+        notes_ = _json.dumps({
+            "short_strike":      short_.get("strike"),
+            "short_option_type": short_.get("option_type") or main_.get("option_type"),
+            "spread": True
+        })
+    else:
+        notes_ = "recorded via y/n prompt"
+
     _pos_data = {
         "ticker":           scanner_result.get("ticker", "?"),
         "strategy":         trade_.get("strategy"),
@@ -475,7 +489,7 @@ def ask_track_position(scanner_result: Dict, tracker: PositionTracker,
         "confluence_score": scanner_result.get("confluence", {}).get("score"),
         "entry_ivr":        vol_.get("ivr"),
         "entry_dte":        entry_dte_,
-        "notes":            "recorded via y/n prompt",
+        "notes":            notes_,
         "raw_scanner_data": _json.dumps(scanner_result, default=str)
     }
     position_id = _insert_pos(_pos_data)
@@ -565,16 +579,48 @@ def ask_close_position(position_id: int, position: Dict, tracker: PositionTracke
 _price_cache: Dict[int, tuple] = {}
 _PRICE_CACHE_TTL = 30  # seconds — refresh twice per tick for faster target/stop detection
 
+def _fetch_option_mid(ticker: str, strike: float, expiration: str,
+                      opt_type: str, api_key: str) -> Optional[float]:
+    """
+    Fetch mid price for a single option contract from Tradier.
+    Returns None if not found or no valid bid/ask.
+    """
+    import requests as req
+    try:
+        r = req.get(
+            "https://api.tradier.com/v1/markets/options/chains",
+            headers={"Authorization": f"Bearer {api_key}", "Accept": "application/json"},
+            params={"symbol": ticker, "expiration": expiration, "greeks": "false"},
+            timeout=8
+        )
+        if r.status_code == 200:
+            options = r.json().get("options", {}).get("option", []) or []
+            for c in options:
+                if (abs(float(c.get("strike", 0)) - float(strike)) < 0.01 and
+                        c.get("option_type", "").lower() == opt_type.lower()):
+                    bid  = float(c.get("bid", 0) or 0)
+                    ask  = float(c.get("ask", 0) or 0)
+                    last = float(c.get("last", 0) or 0)
+                    if bid > 0 and ask > 0:
+                        return round((bid + ask) / 2, 2)
+                    if last > 0:
+                        return round(last, 2)
+    except Exception as e:
+        logger.debug(f"Tradier fetch failed for {ticker} {strike} {opt_type}: {e}")
+    return None
+
+
 def get_current_option_price(position: Dict) -> Optional[float]:
     """
-    Fetch the actual current mid price for a specific open contract
-    using Tradier or yfinance.
+    Fetch the current net price for an open position.
 
-    Caches results for ~30 seconds to avoid rate limiting Tradier.
-    Falls back to entry_price if live data is unavailable.
+    For spreads: fetches BOTH legs and returns long_mid - short_mid
+    For single legs: fetches the one contract and returns its mid
+
+    This is the critical function for P&L accuracy — must match ThinkorSwim.
+    Caches for 30 seconds. Falls back to entry_price on failure.
     """
     import os
-    import requests as req
 
     position_id = position.get("id")
 
@@ -585,72 +631,114 @@ def get_current_option_price(position: Dict) -> Optional[float]:
         if age < _PRICE_CACHE_TTL:
             return cached_price
 
-    ticker     = position.get("ticker", "")
-    strike     = position.get("strike")
-    expiration = position.get("expiration")
-    opt_type   = position.get("option_type", "call")
+    ticker      = position.get("ticker", "")
+    strike      = position.get("strike")
+    expiration  = position.get("expiration")
     entry_price = position.get("entry_price", 0)
+    strategy    = (position.get("strategy") or "").upper()
+
+    # Infer long leg option type from strategy
+    stored_type = position.get("option_type") or ""
+    if stored_type.lower() in ("call", "put"):
+        opt_type = stored_type.lower()
+    elif "BEAR" in strategy or "PUT" in strategy:
+        opt_type = "put"
+    elif "BULL" in strategy or "CALL" in strategy:
+        opt_type = "call"
+    else:
+        opt_type = "put"
 
     if not ticker or not strike or not expiration:
         return entry_price
+
+    # ── Check if this is a spread — read short leg from notes
+    short_strike   = None
+    short_opt_type = None
+    is_spread      = "SPREAD" in strategy
+    if is_spread:
+        try:
+            notes = json.loads(position.get("notes") or "{}")
+            if notes.get("spread"):
+                short_strike   = notes.get("short_strike")
+                short_opt_type = notes.get("short_option_type") or opt_type
+        except Exception:
+            # Fall back to raw_scanner_data
+            try:
+                raw = json.loads(position.get("raw_scanner_data") or "{}")
+                short_leg = raw.get("trade", {}).get("short_leg", {})
+                if short_leg:
+                    short_strike   = short_leg.get("strike")
+                    short_opt_type = short_leg.get("option_type") or opt_type
+            except Exception:
+                pass
 
     def _cache_and_return(price: float) -> float:
         if position_id:
             _price_cache[position_id] = (price, datetime.now())
         return price
 
-    # ── Try Tradier first
     api_key = os.environ.get("TRADIER_API_KEY", "")
+
+    # ── Fetch long leg price
+    long_mid = None
     if api_key:
+        long_mid = _fetch_option_mid(ticker, strike, expiration, opt_type, api_key)
+
+    # Fallback to yfinance for long leg
+    if long_mid is None:
         try:
-            base = "https://api.tradier.com/v1"
-            headers = {
-                "Authorization": f"Bearer {api_key}",
-                "Accept": "application/json"
-            }
-            r = req.get(
-                f"{base}/markets/options/chains",
-                headers=headers,
-                params={
-                    "symbol":     ticker,
-                    "expiration": expiration,
-                    "greeks":     "false"
-                },
-                timeout=8
-            )
-            if r.status_code == 200:
-                options = r.json().get("options", {}).get("option", [])
-                for c in options:
-                    if (abs(float(c.get("strike", 0)) - float(strike)) < 0.01 and
-                            c.get("option_type", "").lower() == opt_type.lower()):
-                        bid = float(c.get("bid", 0) or 0)
-                        ask = float(c.get("ask", 0) or 0)
-                        if bid > 0 and ask > 0:
-                            return _cache_and_return(round((bid + ask) / 2, 2))
-                        last = float(c.get("last", 0) or 0)
-                        if last > 0:
-                            return _cache_and_return(round(last, 2))
+            import yfinance as yf
+            stock = yf.Ticker(ticker)
+            chain = stock.option_chain(expiration)
+            df  = chain.calls if opt_type == "call" else chain.puts
+            row = df[abs(df["strike"] - float(strike)) < 0.01]
+            if not row.empty:
+                bid = float(row.iloc[0]["bid"] or 0)
+                ask = float(row.iloc[0]["ask"] or 0)
+                if bid > 0 and ask > 0:
+                    long_mid = round((bid + ask) / 2, 2)
         except Exception as e:
-            logger.debug(f"Tradier price fetch failed for {ticker}: {e}")
+            logger.debug(f"yfinance long leg failed for {ticker}: {e}")
 
-    # ── Fallback: yfinance option chain
-    try:
-        import yfinance as yf
-        stock = yf.Ticker(ticker)
-        chain = stock.option_chain(expiration)
-        df = chain.calls if opt_type.lower() == "call" else chain.puts
-        row = df[abs(df["strike"] - float(strike)) < 0.01]
-        if not row.empty:
-            bid = float(row.iloc[0]["bid"] or 0)
-            ask = float(row.iloc[0]["ask"] or 0)
-            if bid > 0 and ask > 0:
-                return _cache_and_return(round((bid + ask) / 2, 2))
-    except Exception as e:
-        logger.debug(f"yfinance price fetch failed for {ticker}: {e}")
+    if long_mid is None:
+        logger.debug(f"Could not fetch long leg price for {ticker} {strike} — using entry price")
+        return entry_price
 
-    # ── Last resort: return entry price so nothing breaks
-    logger.debug(f"Could not fetch live price for {ticker} {strike} {expiration} — using entry price")
-    return entry_price
+    # ── For spreads: fetch short leg and compute net value
+    if is_spread and short_strike:
+        short_mid = None
+        if api_key:
+            short_mid = _fetch_option_mid(
+                ticker, short_strike, expiration, short_opt_type, api_key
+            )
+        if short_mid is None:
+            try:
+                import yfinance as yf
+                stock = yf.Ticker(ticker)
+                chain = stock.option_chain(expiration)
+                df  = chain.calls if short_opt_type == "call" else chain.puts
+                row = df[abs(df["strike"] - float(short_strike)) < 0.01]
+                if not row.empty:
+                    bid = float(row.iloc[0]["bid"] or 0)
+                    ask = float(row.iloc[0]["ask"] or 0)
+                    if bid > 0 and ask > 0:
+                        short_mid = round((bid + ask) / 2, 2)
+            except Exception as e:
+                logger.debug(f"yfinance short leg failed for {ticker}: {e}")
+
+        if short_mid is not None:
+            # Spread value = long leg mid - short leg mid
+            # This is what ThinkorSwim shows as the spread's current value
+            spread_mid = round(long_mid - short_mid, 2)
+            logger.debug(
+                f"{ticker} spread: long={long_mid} short={short_mid} net={spread_mid}"
+            )
+            return _cache_and_return(max(spread_mid, 0.01))
+        else:
+            logger.debug(f"Could not fetch short leg for {ticker} — using long leg only")
+
+    # ── Single leg or spread fallback: return long leg mid
+    return _cache_and_return(long_mid)
 
 
 # =============================================================================
@@ -1018,29 +1106,47 @@ def evaluate_open_positions(
         else:
             action, confidence, reasons = agent.score_exit(position, snapshot, ticks)
 
-        # Persist tick snapshot to DB
-        db.insert_tick_snapshot({
-            "position_id":    position_id,
-            "ticker":         ticker,
-            "timestamp":      snapshot["timestamp"],
-            "current_price":  snapshot.get("spot"),
-            "option_mid":     current_option_price,
-            "unrealized_pnl": snapshot.get("unrealized_pnl"),
-            "unrealized_r":   snapshot.get("unrealized_r"),
-            "dte_remaining":  snapshot.get("dte_remaining"),
-            "theta_today":    snapshot.get("theta_today"),
-            "iv_current":     snapshot.get("iv_current"),
-            "ivr_current":    snapshot.get("ivr_current"),
-            "spy_change_pct": snapshot.get("spy_change_pct"),
-            "rsi":            snapshot.get("rsi"),
-            "above_vwap":     1 if snapshot.get("above_vwap") else 0,
-            "regime":         snapshot.get("regime"),
-            "flow_score":     snapshot.get("flow_score"),
-            "feature_vector": _json_dumps([]),   # populated in agent internally
-            "agent_action":   action,
-            "agent_confidence": confidence,
-            "agent_reasons":  _json_dumps(reasons[:5])
-        })
+        # Persist tick snapshot to DB — skip if position was deleted externally
+        if not db.get_position_by_id(position_id):
+            logger.warning(f"Position #{position_id} no longer in DB — removing from tracker")
+            tracker._open.pop(position_id, None)
+            _clear_price_cache(position_id)
+            continue
+        try:
+            db.insert_tick_snapshot({
+                "position_id":    position_id,
+                "ticker":         ticker,
+                "timestamp":      snapshot["timestamp"],
+                "current_price":  snapshot.get("spot"),
+                "option_mid":     current_option_price,
+                "unrealized_pnl": snapshot.get("unrealized_pnl"),
+                "unrealized_r":   snapshot.get("unrealized_r"),
+                "dte_remaining":  snapshot.get("dte_remaining"),
+                "theta_today":    snapshot.get("theta_today"),
+                "iv_current":     snapshot.get("iv_current"),
+                "ivr_current":    snapshot.get("ivr_current"),
+                "spy_change_pct": snapshot.get("spy_change_pct"),
+                "rsi":            snapshot.get("rsi"),
+                "above_vwap":     1 if snapshot.get("above_vwap") else 0,
+                "regime":         snapshot.get("regime"),
+                "flow_score":     snapshot.get("flow_score"),
+                "feature_vector": _json_dumps([]),
+                "agent_action":   action,
+                "agent_confidence": confidence,
+                "agent_reasons":  _json_dumps(reasons[:5])
+            })
+        except Exception as snap_err:
+            if "FOREIGN KEY" in str(snap_err):
+                # Position was deleted externally (--delete while loop running)
+                # Remove from in-memory tracker so loop stops evaluating it
+                logger.warning(
+                    f"Position #{position_id} ({ticker}) was deleted externally — "
+                    f"removing from in-memory tracker. Restart loop to fully clean up."
+                )
+                tracker._open.pop(position_id, None)
+                _clear_price_cache(position_id)
+                continue
+            logger.error(f"tick_snapshot insert failed: {snap_err}")
 
         # Alert if action changed and confidence is high enough
         key = str(position_id)
@@ -1094,21 +1200,23 @@ def evaluate_open_positions(
                 )
                 action_state.update(str(position_id), "EXIT", confidence)
 
-            db.insert_recommendation({
-                "timestamp":      snapshot["timestamp"],
-                "ticker":         ticker,
-                "strategy":       position.get("strategy"),
-                "direction":      position.get("direction"),
-                "strike":         position.get("strike"),
-                "expiration":     position.get("expiration"),
-                "action":         action,
-                "confidence":     confidence,
-                "reasons":        _json_dumps(reasons[:5]),
-                "market_snapshot": _json_dumps(snapshot),
-                "notified_user":  1,
-                "acted_upon":     1 if closed else 0,
-                "position_id":    position_id
-            })
+            # Only insert recommendation if position still exists in DB
+            if db.get_position_by_id(position_id):
+                db.insert_recommendation({
+                    "timestamp":      snapshot["timestamp"],
+                    "ticker":         ticker,
+                    "strategy":       position.get("strategy"),
+                    "direction":      position.get("direction"),
+                    "strike":         position.get("strike"),
+                    "expiration":     position.get("expiration"),
+                    "action":         action,
+                    "confidence":     confidence,
+                    "reasons":        _json_dumps(reasons[:5]),
+                    "market_snapshot": _json_dumps(snapshot),
+                    "notified_user":  1,
+                    "acted_upon":     1 if closed else 0,
+                    "position_id":    position_id
+                })
 
         action_state.update(key, action, confidence)
 
@@ -1227,7 +1335,16 @@ def evaluate_new_candidates(
             short_leg = trade.get("short_leg", {})
             strategy  = trade.get("strategy", "")
             exp       = main_leg.get("exp") or trade.get("exp")
-            opt_label = main_leg.get("option_type", "put").upper()
+
+            # Infer option type from strategy name — more reliable than main_leg data
+            # BEAR strategies use puts, BULL strategies use calls
+            # Fall back to main_leg option_type, then default to put
+            if "BEAR" in strategy.upper() or "PUT" in strategy.upper():
+                opt_label = "PUT"
+            elif "BULL" in strategy.upper() or "CALL" in strategy.upper():
+                opt_label = "CALL"
+            else:
+                opt_label = (main_leg.get("option_type") or "put").upper()
 
             # Build a clear trade description showing both legs for spreads
             if "SPREAD" in strategy and short_leg:
