@@ -1771,7 +1771,11 @@ def print_status(tracker: PositionTracker, agent: DecisionAgent):
     print("═" * W)
 
     # ── Open positions with live P&L
-    print(f"\n  Open positions ({tracker.open_count}/{cfg.MAX_CONCURRENT_POSITIONS}):")
+    # Show correct limit depending on whether auto mode is active
+    import sys
+    is_auto = '--auto' in sys.argv
+    pos_limit = cfg.AUTO_MAX_POSITIONS if is_auto else cfg.MAX_CONCURRENT_POSITIONS
+    print(f"\n  Open positions ({tracker.open_count}/{pos_limit}):")
     if not tracker.open_positions:
         print("    No open positions.")
     else:
