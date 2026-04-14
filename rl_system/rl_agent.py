@@ -346,14 +346,14 @@ def rule_based_exit_score(position: Dict, market_snapshot: Dict,
                            ticks_held: int) -> Tuple[float, List[str]]:
     """
     Rule-based prior for EXIT decisions.
-    Conservative — default to HOLD unless a clear reason to exit.
 
-    Design principles:
-    - No single factor should push score above threshold alone
-    - Need multiple confirming signals to recommend EXIT
-    - P&L-based signals only fire with meaningful moves (not noise)
-    - DTE only matters in final stretch (< 7 days = hard rule anyway)
-    - If no live price data available, score stays near 0
+    Philosophy: don't be greedy, don't be trigger-happy.
+    - Take profits when the move has matured (50%+ gain + confirming signal)
+    - Cut losses before they compound
+    - Respect theta decay — time kills options value
+    - React to momentum shifts, not just P&L levels
+    - A position at 0.50R with deteriorating conditions is better closed
+      than held hoping for 1.0R while theta eats the premium
     """
     score   = 0.0
     reasons = []
@@ -361,48 +361,89 @@ def rule_based_exit_score(position: Dict, market_snapshot: Dict,
     unrealized_r = market_snapshot.get("unrealized_r", 0) or 0
     dte_rem      = market_snapshot.get("dte_remaining") or 30
     entry_dte    = position.get("entry_dte") or 30
+    days_held    = market_snapshot.get("days_since_entry", 0) or 0
+    theta_today  = abs(market_snapshot.get("theta_today", 0) or 0)
+    entry_price  = position.get("entry_price", 1) or 1
+    spy_chg      = market_snapshot.get("spy_change_pct", 0) or 0
+    direction    = position.get("direction", "NEUTRAL")
 
-    # ── Only score P&L signals if we have a meaningful price move
-    # If unrealized_r is exactly 0.0 it almost certainly means no live
-    # price data — don't treat flat as a signal either way
     has_live_price = (
         market_snapshot.get("option_mid") is not None and
         market_snapshot.get("option_mid") != position.get("entry_price")
     )
 
-    if has_live_price:
-        # Strong profit — lean toward taking it (but not aggressively)
-        if unrealized_r >= 0.90:
-            score += 0.35
-            reasons.append(f"Unrealized gain {unrealized_r:.2f}R — near target")
-        elif unrealized_r >= 0.60:
-            score += 0.20
-            reasons.append(f"Unrealized gain {unrealized_r:.2f}R")
-
-        # Significant loss building
-        if unrealized_r <= -0.35:
-            score += 0.25
-            reasons.append(f"Position declining: {unrealized_r:.2f}R")
-        elif unrealized_r <= -0.25:
-            score += 0.10
-            reasons.append(f"Loss building: {unrealized_r:.2f}R")
-    else:
+    if not has_live_price:
         reasons.append("No live price data — holding position")
+        return 0.0, reasons
 
-    # ── DTE urgency — only in final 7 days (before hard rule fires)
-    # Hard rule closes at CLOSE_BEFORE_DTE (7 days) so only score
-    # the 7-14 day window as a soft warning
-    if dte_rem is not None and dte_rem <= 14 and dte_rem > 7:
+    # ── Profit-taking tiers
+    # Each tier gets more aggressive — but still needs a confirming signal
+    if unrealized_r >= 0.75:
+        score += 0.40
+        reasons.append(f"Strong gain {unrealized_r:.2f}R — take profits")
+    elif unrealized_r >= 0.50:
+        score += 0.28
+        reasons.append(f"Solid gain {unrealized_r:.2f}R — consider taking profits")
+    elif unrealized_r >= 0.30:
         score += 0.15
-        reasons.append(f"Only {dte_rem} DTE — approaching force-close threshold")
+        reasons.append(f"Moderate gain {unrealized_r:.2f}R")
 
-    # ── Market reversal against position — needs strong move to matter
-    spy_chg   = market_snapshot.get("spy_change_pct", 0) or 0
-    direction = position.get("direction", "NEUTRAL")
-    if (direction == "BULLISH" and spy_chg < -1.5) or \
-       (direction == "BEARISH" and spy_chg > 1.5):
+    # ── Loss management — exit earlier than the hard stop
+    if unrealized_r <= -0.40:
+        score += 0.42   # strong push to exit before 50% hard stop
+        reasons.append(f"Significant loss {unrealized_r:.2f}R — cut before hard stop")
+    elif unrealized_r <= -0.25:
         score += 0.20
-        reasons.append(f"Strong market reversal against position (SPY {spy_chg:+.2f}%)")
+        reasons.append(f"Loss building {unrealized_r:.2f}R")
+    elif unrealized_r <= -0.15:
+        score += 0.08
+        reasons.append(f"Small loss {unrealized_r:.2f}R — monitoring")
+
+    # ── Theta decay pressure
+    # theta_today is per-share per day (e.g. $0.08 = 8 cents/day)
+    # current_mid is per-share price
+    # A $0.08 daily decay on a $1.50 option = 5.3% per day — significant
+    # A $0.08 daily decay on a $4.00 option = 2.0% per day — moderate
+    current_mid = market_snapshot.get("option_mid") or entry_price
+    if current_mid > 0 and theta_today > 0:
+        theta_pct = theta_today / current_mid   # both per-share, ratio is correct
+        if theta_pct > 0.04 and days_held > 7:
+            # Theta eating >4%/day AND held a week — time is a real enemy now
+            score += 0.18
+            reasons.append(f"Theta eating {theta_pct:.1%}/day — time decay accelerating")
+        elif theta_pct > 0.025 and days_held > 12:
+            # Moderate decay but held a long time
+            score += 0.10
+            reasons.append(f"Theta decay {theta_pct:.1%}/day after {days_held:.0f} days")
+
+    # ── DTE pressure — start pushing earlier than the hard rule
+    if dte_rem <= 21 and dte_rem > 14:
+        score += 0.10
+        reasons.append(f"{dte_rem} DTE — theta decay accelerating")
+    elif dte_rem <= 14 and dte_rem > 7:
+        score += 0.20
+        reasons.append(f"Only {dte_rem} DTE — approaching force-close")
+
+    # ── Time held with no progress — position has stalled
+    # If held 10+ days and still near breakeven, theta is winning
+    if days_held >= 10 and abs(unrealized_r) < 0.15:
+        score += 0.15
+        reasons.append(f"Stalled after {days_held:.0f} days — theta eroding value")
+
+    # ── Market reversal against position
+    if (direction == "BULLISH" and spy_chg < -1.0) or        (direction == "BEARISH" and spy_chg > 1.0):
+        score += 0.15
+        reasons.append(f"Market moving against position (SPY {spy_chg:+.2f}%)")
+    if (direction == "BULLISH" and spy_chg < -2.0) or        (direction == "BEARISH" and spy_chg > 2.0):
+        score += 0.10   # extra weight for strong reversal
+        reasons.append(f"Strong reversal — momentum shift")
+
+    # ── Profit + deteriorating conditions = strong exit signal
+    # This is the key insight: a 0.40R gain with theta pressure and
+    # a market reversal is worth taking even if target is 1.0R
+    if unrealized_r >= 0.30 and score >= 0.35:
+        score += 0.12
+        reasons.append("Multiple exit signals confirming — take the profit")
 
     return min(max(score, 0.0), 1.0), reasons
 

@@ -985,10 +985,12 @@ def evaluate_open_positions(
     agent: DecisionAgent,
     action_state: ActionStateTracker,
     scanner_results: List[Dict],
-    regime: Dict
+    regime: Dict,
+    auto_mode: bool = False
 ) -> List[Dict]:
     """
     Evaluate each open position. Apply hard rules first, then agent scoring.
+    In auto_mode: exits are executed automatically with no user prompt.
     Returns list of action dicts taken this tick.
     """
     actions_taken = []
@@ -1038,21 +1040,27 @@ def evaluate_open_positions(
                     force=True
                 )
 
-            # ── Ask for actual fill price BEFORE closing position
+            # ── Get exit price — auto or manual
             sep = "=" * 64
-            print(f"\n{sep}")
-            print(f"  !! HARD RULE TRIGGERED — CLOSE {ticker} IN THINKORSWIM NOW !!")
-            print(f"  Reason: {hard_reason}")
-            print(sep)
-            fill_str = timed_input(
-                f"  What did you close {ticker} at? (suggested ${current_option_price:.2f}, press enter): ",
-                timeout=60, default=str(round(current_option_price, 2))
-            )
-            try:
-                confirmed_exit_price = float(fill_str) if fill_str else current_option_price
-            except ValueError:
+            if auto_mode:
                 confirmed_exit_price = current_option_price
-            print(sep + "\n")
+                print(f"\n{sep}")
+                print(f"  [AUTO] {hard_reason} — closing {ticker} @ ${confirmed_exit_price:.2f}")
+                print(sep + "\n")
+            else:
+                print(f"\n{sep}")
+                print(f"  !! HARD RULE TRIGGERED — CLOSE {ticker} IN THINKORSWIM NOW !!")
+                print(f"  Reason: {hard_reason}")
+                print(sep)
+                fill_str = timed_input(
+                    f"  What did you close {ticker} at? (suggested ${current_option_price:.2f}, press enter): ",
+                    timeout=60, default=str(round(current_option_price, 2))
+                )
+                try:
+                    confirmed_exit_price = float(fill_str) if fill_str else current_option_price
+                except ValueError:
+                    confirmed_exit_price = current_option_price
+                print(sep + "\n")
 
             # ── Now close with the ACTUAL fill price
             result = tracker.close_position(position_id, confirmed_exit_price, hard_reason)
@@ -1167,15 +1175,26 @@ def evaluate_open_positions(
                 exit_price=current_option_price
             )
 
-            # ── Ask user if they want to close this position (30s timeout → n)
-            closed = ask_close_position(
-                position_id=position_id,
-                position=position,
-                tracker=tracker,
-                current_price=current_option_price,
-                confidence=confidence,
-                reason="AGENT_EXIT"
-            )
+            if auto_mode:
+                # Auto-close at current price
+                pnl = tracker.unrealized_pnl(position_id, current_option_price)
+                r   = tracker.unrealized_r(position_id, current_option_price)
+                sign = "+" if pnl >= 0 else ""
+                print(f"  [AUTO] EXIT {ticker} @ ${current_option_price:.2f} "
+                      f"P&L: {sign}${pnl:.2f} ({r:+.2f}R)")
+                closed = True
+                tracker.close_position(position_id, current_option_price, "AGENT_EXIT")
+                # Note: _clear_price_cache called in the "if closed:" block below
+            else:
+                # ── Ask user if they want to close this position
+                closed = ask_close_position(
+                    position_id=position_id,
+                    position=position,
+                    tracker=tracker,
+                    current_price=current_option_price,
+                    confidence=confidence,
+                    reason="AGENT_EXIT"
+                )
 
             # If user closed it, update agent using ACTUAL realized_r from close
             if closed:
@@ -1235,10 +1254,13 @@ def evaluate_new_candidates(
     agent: DecisionAgent,
     action_state: ActionStateTracker,
     scanner_results: List[Dict],
-    regime: Dict
+    regime: Dict,
+    auto_mode: bool = False
 ) -> List[Dict]:
     """
     Evaluate scanner recommendations for potential new entries.
+    In auto_mode: positions are opened automatically at suggested price.
+    No position limit in auto_mode.
     Hard rules checked first, then agent scores ENTER vs WAIT.
     """
     actions_taken = []
@@ -1267,10 +1289,28 @@ def evaluate_new_candidates(
                 logger.debug(f"  {ticker} on cooldown until {cd.get('cooldown_until', '?')[:16]}")
             continue
 
-        # Skip if max positions reached
-        if tracker.open_count >= cfg.MAX_CONCURRENT_POSITIONS:
-            logger.info(f"Max positions ({cfg.MAX_CONCURRENT_POSITIONS}) reached — skipping {ticker}")
-            break
+        # Position limit check
+        if auto_mode:
+            # Auto mode has its own higher limit and capital guard
+            if tracker.open_count >= cfg.AUTO_MAX_POSITIONS:
+                logger.info(f"[AUTO] Max positions ({cfg.AUTO_MAX_POSITIONS}) reached — skipping {ticker}")
+                break
+            # Capital check — don't deploy more than AUTO_MAX_CAPITAL_PCT of account
+            total_deployed = sum(
+                p.get("entry_cost", 0) for p in tracker.open_positions.values()
+            )
+            max_deploy = cfg.ACCOUNT_SIZE * cfg.AUTO_MAX_CAPITAL_PCT
+            next_cost  = (scanner_result.get("pricing", {}).get("entry", 0) or 0) * 100 *                          (scanner_result.get("pricing", {}).get("contracts", 1) or 1)
+            if total_deployed + next_cost > max_deploy:
+                logger.info(
+                    f"[AUTO] Capital limit reached — deployed ${total_deployed:.0f} / "
+                    f"${max_deploy:.0f} max — skipping {ticker}"
+                )
+                continue
+        else:
+            if tracker.open_count >= cfg.MAX_CONCURRENT_POSITIONS:
+                logger.info(f"Max positions ({cfg.MAX_CONCURRENT_POSITIONS}) reached — skipping {ticker}")
+                break
 
         # Skip if outside market hours entry window
         if not is_market_hours_for_entry():
@@ -1380,12 +1420,76 @@ def evaluate_new_candidates(
                 trade_summary=trade_summary
             )
 
-            # ── Ask user if they want to track this position (30s timeout → n)
-            position_id = ask_track_position(scanner_result, tracker, confidence)
+            # ── Enter position — auto or manual
+            if auto_mode:
+                # Auto-enter at scanner suggested price
+                pricing_  = scanner_result.get("pricing", {})
+                trade_    = scanner_result.get("trade", {})
+                main_     = trade_.get("main_leg", {})
+                short_    = trade_.get("short_leg", {})
+                strategy_ = trade_.get("strategy", "")
+                fill_price_ = pricing_.get("entry", main_.get("mid", 0)) or 0
+                exp_      = main_.get("exp", trade_.get("exp", ""))
+                vol_      = scanner_result.get("vol", {})
 
-            # If user tracked it, immediately flip action_state to HOLD
-            # so the ENTER alert doesn't fire again on the next tick
-            _just_tracked = position_id is not None
+                if fill_price_ > 0:
+                    from datetime import datetime as _dt
+                    import json as _json
+                    from database import insert_position as _ins
+
+                    short_notes = _json.dumps({
+                        "short_strike":      short_.get("strike"),
+                        "short_option_type": short_.get("option_type") or main_.get("option_type"),
+                        "spread": True
+                    }) if "SPREAD" in strategy_ and short_ else "auto mode entry"
+
+                    entry_dte_ = None
+                    try:
+                        entry_dte_ = (_dt.strptime(exp_, "%Y-%m-%d") - _dt.now()).days
+                    except Exception:
+                        pass
+
+                    _pos_data = {
+                        "ticker":           ticker,
+                        "strategy":         strategy_,
+                        "direction":        trade_.get("direction"),
+                        "option_type":      main_.get("option_type"),
+                        "strike":           main_.get("strike"),
+                        "expiration":       exp_,
+                        "entry_price":      fill_price_,
+                        "entry_cost":       fill_price_ * 100 * pricing_.get("contracts", 1),
+                        "contracts":        pricing_.get("contracts", 1),
+                        "stop_price":       round(fill_price_ * (1 - cfg.STOP_LOSS_PCT), 2),
+                        "target_price":     round(fill_price_ * (1 + cfg.PROFIT_TARGET_PCT), 2),
+                        "entry_time":       _dt.now().isoformat(),
+                        "confluence_score": scanner_result.get("confluence", {}).get("score"),
+                        "entry_ivr":        vol_.get("ivr"),
+                        "entry_dte":        entry_dte_,
+                        "notes":            short_notes,
+                        "raw_scanner_data": _json.dumps(scanner_result, default=str)
+                    }
+                    position_id = _ins(_pos_data)
+                    if position_id:
+                        loaded = db.get_position_by_id(position_id)
+                        if loaded:
+                            tracker._open[position_id] = loaded
+                        print(f"  [AUTO] ENTER {ticker} #{position_id} @ ${fill_price_:.2f} "
+                              f"({strategy_}) conf={confidence:.0%}")
+                        db.log_journal_event(
+                            "POSITION_OPENED", ticker=ticker, position_id=position_id,
+                            action="ENTER", confidence=confidence,
+                            reason_summary=f"[AUTO] {ticker} @ ${fill_price_:.2f}",
+                            details={"fill_price": fill_price_, "auto": True}
+                        )
+                else:
+                    position_id = None
+                    logger.warning(f"  [AUTO] {ticker} — no valid entry price, skipping")
+                _just_tracked = position_id is not None
+            else:
+                # ── Ask user if they want to track this position
+                position_id = ask_track_position(scanner_result, tracker, confidence)
+                _just_tracked = position_id is not None
+
             if _just_tracked:
                 action_state.update(key, "HOLD", confidence)
                 logger.info(f"  {ticker} now tracked — action state set to HOLD")
@@ -1884,6 +1988,9 @@ def main():
                         help="Clear all positions, snapshots, cooldowns and recommendations (keeps agent weights)")
     parser.add_argument("--reset-all", action="store_true",
                         help="Wipe entire database including agent weights — full fresh start")
+    parser.add_argument("--auto",    action="store_true",
+                        help="Fully autonomous mode — no user input, auto enters/exits based on signals. "
+                             "No position limit. Use for unattended proof-of-concept runs.")
     args = parser.parse_args()
 
     if args.debug:
@@ -1891,6 +1998,7 @@ def main():
         logging.getLogger().setLevel(logging.DEBUG)
 
     DEBUG_MODE = cfg.DEBUG_MODE
+    AUTO_MODE  = args.auto
 
     # ── Initialize
     db.initialize_database()
@@ -1946,10 +2054,16 @@ def main():
     in_hours = is_market_hours_for_entry()
     notify_info(
         f"RL loop started — "
-        f"{'PAPER' if args.paper else 'LIVE'} mode, "
+        f"{'AUTO' if args.auto else 'PAPER' if args.paper else 'LIVE'} mode, "
         f"{tracker.open_count} positions restored, "
         f"{'within' if in_hours else 'OUTSIDE'} market hours"
     )
+    if args.auto:
+        print("\n" + "█" * 68)
+        print("  ██  AUTO MODE — no user input required  ██")
+        print("  Positions will open and close automatically based on signals.")
+        print("  Position limit removed. Monitor via --status in another terminal.")
+        print("█" * 68 + "\n")
 
     print_status(tracker, agent)
 
@@ -1994,12 +2108,14 @@ def main():
             # ── Evaluate open positions
             if tracker.open_count > 0:
                 evaluate_open_positions(
-                    tracker, agent, action_state, last_scanner_results, regime
+                    tracker, agent, action_state, last_scanner_results, regime,
+                    auto_mode=AUTO_MODE
                 )
 
             # ── Evaluate new entry candidates
             evaluate_new_candidates(
-                tracker, agent, action_state, last_scanner_results, regime
+                tracker, agent, action_state, last_scanner_results, regime,
+                auto_mode=AUTO_MODE
             )
 
             # ── Print compact tick status bar

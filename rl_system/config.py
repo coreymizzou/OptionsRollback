@@ -142,6 +142,12 @@ OI_CHANGE_ENABLED    = True      # Compare OI to previous scan to validate flow
 OI_INCREASE_REQUIRED = True      # Require OI to increase to confirm opening flow
                                   # Set False to treat all flow as valid
 
+# ─── Auto Mode ───────────────────────────────────────────────────────────────
+AUTO_MAX_POSITIONS   = 10         # Max concurrent positions in --auto mode
+AUTO_MAX_CAPITAL_PCT = 0.40       # Max % of account to deploy at once in --auto mode
+                                  # e.g. 0.40 = never risk more than $10,000 simultaneously
+                                  # Each position still respects MAX_RISK_DOLLARS
+
 # ─── Phase 2 Hooks (not active yet) ──────────────────────────────────────────
 # Set to True when broker integration is ready
 BROKER_AUTO_EXECUTE  = False     # Never auto-execute in phase 1
