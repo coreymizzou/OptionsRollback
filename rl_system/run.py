@@ -39,6 +39,11 @@ sys.path.insert(0, str(SCANNER_DIR))
 # ─── Local imports ────────────────────────────────────────────────────────────
 import config as cfg
 import database as db
+try:
+    import broker
+    BROKER_AVAILABLE = True
+except ImportError:
+    BROKER_AVAILABLE = False
 # zoneinfo imported inside is_market_hours_for_entry() for Python 3.9+ compatibility
 from database import _dumps as _json_dumps  # numpy-safe json encoder
 from rl_agent import DecisionAgent
@@ -986,11 +991,15 @@ def evaluate_open_positions(
     action_state: ActionStateTracker,
     scanner_results: List[Dict],
     regime: Dict,
-    auto_mode: bool = False
+    auto_mode: bool = False,
+    bankroll: Optional[list] = None,
+    live_paper: bool = False
 ) -> List[Dict]:
     """
     Evaluate each open position. Apply hard rules first, then agent scoring.
     In auto_mode: exits are executed automatically with no user prompt.
+    In bankroll mode: proceeds from closes are credited back to the bankroll pool.
+    In live_paper: closing orders sent to Tradier sandbox for real fills.
     Returns list of action dicts taken this tick.
     """
     actions_taken = []
@@ -1040,10 +1049,45 @@ def evaluate_open_positions(
                     force=True
                 )
 
-            # ── Get exit price — auto or manual
+            # ── Get exit price — live paper, auto, or manual
             sep = "=" * 64
             if auto_mode:
                 confirmed_exit_price = current_option_price
+
+                # Place real closing order if in live-paper mode
+                if live_paper and BROKER_AVAILABLE and broker._is_configured():
+                    is_spread = "SPREAD" in (position.get("strategy") or "")
+                    try:
+                        notes_data = json.loads(position.get("notes") or "{}")
+                    except Exception:
+                        notes_data = {}
+
+                    if is_spread and notes_data.get("short_strike"):
+                        ok, oid, _ = broker.place_spread_order(
+                            ticker       = ticker,
+                            expiration   = position.get("expiration", ""),
+                            option_type  = position.get("option_type", "call"),
+                            long_strike  = position.get("strike", 0),
+                            short_strike = notes_data["short_strike"],
+                            side         = "sell",
+                            quantity     = position.get("contracts", 1),
+                            net_limit_price = current_option_price
+                        )
+                    else:
+                        ok, oid, _ = broker.place_option_order(
+                            ticker      = ticker,
+                            expiration  = position.get("expiration", ""),
+                            option_type = position.get("option_type", "call"),
+                            strike      = position.get("strike", 0),
+                            side        = "sell_to_close",
+                            quantity    = position.get("contracts", 1),
+                            limit_price = current_option_price
+                        )
+                    if ok:
+                        status, fill = broker.poll_for_fill(oid, timeout_seconds=30)
+                        if fill and fill > 0:
+                            confirmed_exit_price = fill
+
                 print(f"\n{sep}")
                 print(f"  [AUTO] {hard_reason} — closing {ticker} @ ${confirmed_exit_price:.2f}")
                 print(sep + "\n")
@@ -1065,6 +1109,16 @@ def evaluate_open_positions(
             # ── Now close with the ACTUAL fill price
             result = tracker.close_position(position_id, confirmed_exit_price, hard_reason)
             realized_r = result.get("realized_r", 0)
+
+            # ── Credit bankroll with proceeds
+            if bankroll is not None:
+                proceeds = confirmed_exit_price * 100 * position.get("contracts", 1)
+                bankroll[0] = round(bankroll[0] + proceeds, 2)
+                pnl_amt = result.get("realized_pnl", 0) or 0
+                sign = "+" if pnl_amt >= 0 else ""
+                print(f"  [BANKROLL] {hard_reason} closed — proceeds ${proceeds:.2f} "
+                      f"returned. P&L: {sign}${pnl_amt:.2f}. "
+                      f"Bankroll now: ${bankroll[0]:,.2f}")
 
             # Update agent — inject regime into entry snapshot so
             # regime_score feature is populated correctly
@@ -1176,14 +1230,55 @@ def evaluate_open_positions(
             )
 
             if auto_mode:
-                # Auto-close at current price
-                pnl = tracker.unrealized_pnl(position_id, current_option_price)
-                r   = tracker.unrealized_r(position_id, current_option_price)
+                # Determine exit price — live paper gets real fill, otherwise use mid
+                exit_price = current_option_price
+                if live_paper and BROKER_AVAILABLE and broker._is_configured():
+                    is_spread = "SPREAD" in (position.get("strategy") or "")
+                    try:
+                        notes_data = json.loads(position.get("notes") or "{}")
+                    except Exception:
+                        notes_data = {}
+
+                    if is_spread and notes_data.get("short_strike"):
+                        ok, oid, _ = broker.place_spread_order(
+                            ticker       = ticker,
+                            expiration   = position.get("expiration", ""),
+                            option_type  = position.get("option_type", "call"),
+                            long_strike  = position.get("strike", 0),
+                            short_strike = notes_data["short_strike"],
+                            side         = "sell",
+                            quantity     = position.get("contracts", 1),
+                            net_limit_price = current_option_price
+                        )
+                    else:
+                        ok, oid, _ = broker.place_option_order(
+                            ticker      = ticker,
+                            expiration  = position.get("expiration", ""),
+                            option_type = position.get("option_type", "call"),
+                            strike      = position.get("strike", 0),
+                            side        = "sell_to_close",
+                            quantity    = position.get("contracts", 1),
+                            limit_price = current_option_price
+                        )
+                    if ok:
+                        status, fill = broker.poll_for_fill(oid, timeout_seconds=30)
+                        if fill and fill > 0:
+                            exit_price = fill
+
+                pnl  = tracker.unrealized_pnl(position_id, exit_price)
+                r_   = tracker.unrealized_r(position_id, exit_price)
                 sign = "+" if pnl >= 0 else ""
-                print(f"  [AUTO] EXIT {ticker} @ ${current_option_price:.2f} "
-                      f"P&L: {sign}${pnl:.2f} ({r:+.2f}R)")
+                mode_tag = "[LIVE-PAPER]" if live_paper else "[AUTO]"
+                print(f"  {mode_tag} EXIT {ticker} @ ${exit_price:.2f} "
+                      f"P&L: {sign}${pnl:.2f} ({r_:+.2f}R)")
                 closed = True
-                tracker.close_position(position_id, current_option_price, "AGENT_EXIT")
+                tracker.close_position(position_id, exit_price, "AGENT_EXIT")
+                # Credit bankroll with proceeds
+                if bankroll is not None:
+                    proceeds = exit_price * 100 * position.get("contracts", 1)
+                    bankroll[0] = round(bankroll[0] + proceeds, 2)
+                    print(f"  [BANKROLL] Proceeds ${proceeds:.2f} returned. "
+                          f"Bankroll now: ${bankroll[0]:,.2f}")
                 # Note: _clear_price_cache called in the "if closed:" block below
             else:
                 # ── Ask user if they want to close this position
@@ -1255,12 +1350,16 @@ def evaluate_new_candidates(
     action_state: ActionStateTracker,
     scanner_results: List[Dict],
     regime: Dict,
-    auto_mode: bool = False
+    auto_mode: bool = False,
+    bankroll: Optional[list] = None,
+    live_paper: bool = False
 ) -> List[Dict]:
     """
     Evaluate scanner recommendations for potential new entries.
     In auto_mode: positions are opened automatically at suggested price.
-    No position limit in auto_mode.
+    In bankroll mode: entries are funded from the bankroll pool (1 contract max).
+    In live_paper: entry orders sent to Tradier sandbox for real fills.
+    No position limit in auto_mode/bankroll_mode.
     Hard rules checked first, then agent scores ENTER vs WAIT.
     """
     actions_taken = []
@@ -1289,18 +1388,28 @@ def evaluate_new_candidates(
                 logger.debug(f"  {ticker} on cooldown until {cd.get('cooldown_until', '?')[:16]}")
             continue
 
-        # Position limit check
-        if auto_mode:
-            # Auto mode has its own higher limit and capital guard
+        # Position limit and capital check
+        if bankroll is not None:
+            # Bankroll mode — check if pool can cover the next premium (1 contract)
+            next_premium = (scanner_result.get("pricing", {}).get("entry", 0) or 0) * 100
+            if next_premium <= 0:
+                continue
+            if bankroll[0] < next_premium:
+                logger.info(
+                    f"[BANKROLL] Insufficient funds — need ${next_premium:.2f}, "
+                    f"have ${bankroll[0]:.2f} — skipping {ticker}"
+                )
+                continue
+        elif auto_mode:
+            # Auto mode — position and capital limits
             if tracker.open_count >= cfg.AUTO_MAX_POSITIONS:
                 logger.info(f"[AUTO] Max positions ({cfg.AUTO_MAX_POSITIONS}) reached — skipping {ticker}")
                 break
-            # Capital check — don't deploy more than AUTO_MAX_CAPITAL_PCT of account
             total_deployed = sum(
                 p.get("entry_cost", 0) for p in tracker.open_positions.values()
             )
             max_deploy = cfg.ACCOUNT_SIZE * cfg.AUTO_MAX_CAPITAL_PCT
-            next_cost  = (scanner_result.get("pricing", {}).get("entry", 0) or 0) * 100 *                          (scanner_result.get("pricing", {}).get("contracts", 1) or 1)
+            next_cost  = (scanner_result.get("pricing", {}).get("entry", 0) or 0) * 100
             if total_deployed + next_cost > max_deploy:
                 logger.info(
                     f"[AUTO] Capital limit reached — deployed ${total_deployed:.0f} / "
@@ -1437,11 +1546,17 @@ def evaluate_new_candidates(
                     import json as _json
                     from database import insert_position as _ins
 
+                    # Bankroll mode always uses 1 contract
+                    contracts_ = 1 if bankroll is not None else pricing_.get("contracts", 1)
+                    entry_cost_ = fill_price_ * 100 * contracts_
+
                     short_notes = _json.dumps({
                         "short_strike":      short_.get("strike"),
                         "short_option_type": short_.get("option_type") or main_.get("option_type"),
                         "spread": True
-                    }) if "SPREAD" in strategy_ and short_ else "auto mode entry"
+                    }) if "SPREAD" in strategy_ and short_ else (
+                        "bankroll mode entry" if bankroll is not None else "auto mode entry"
+                    )
 
                     entry_dte_ = None
                     try:
@@ -1457,8 +1572,8 @@ def evaluate_new_candidates(
                         "strike":           main_.get("strike"),
                         "expiration":       exp_,
                         "entry_price":      fill_price_,
-                        "entry_cost":       fill_price_ * 100 * pricing_.get("contracts", 1),
-                        "contracts":        pricing_.get("contracts", 1),
+                        "entry_cost":       entry_cost_,
+                        "contracts":        contracts_,
                         "stop_price":       round(fill_price_ * (1 - cfg.STOP_LOSS_PCT), 2),
                         "target_price":     round(fill_price_ * (1 + cfg.PROFIT_TARGET_PCT), 2),
                         "entry_time":       _dt.now().isoformat(),
@@ -1473,13 +1588,77 @@ def evaluate_new_candidates(
                         loaded = db.get_position_by_id(position_id)
                         if loaded:
                             tracker._open[position_id] = loaded
-                        print(f"  [AUTO] ENTER {ticker} #{position_id} @ ${fill_price_:.2f} "
-                              f"({strategy_}) conf={confidence:.0%}")
+
+                        # Place real sandbox order if in live-paper mode
+                        actual_fill = fill_price_
+                        if live_paper and BROKER_AVAILABLE and broker._is_configured():
+                            is_spread = "SPREAD" in strategy_
+                            if is_spread and short_:
+                                ok, oid, _ = broker.place_spread_order(
+                                    ticker       = ticker,
+                                    expiration   = exp_,
+                                    option_type  = main_.get("option_type", "call"),
+                                    long_strike  = main_.get("strike", 0),
+                                    short_strike = short_.get("strike", 0),
+                                    side         = "buy",
+                                    quantity     = contracts_,
+                                    net_limit_price = fill_price_,
+                                    tag          = f"rl_{ticker}_{position_id}"
+                                )
+                            else:
+                                ok, oid, _ = broker.place_option_order(
+                                    ticker       = ticker,
+                                    expiration   = exp_,
+                                    option_type  = main_.get("option_type", "call"),
+                                    strike       = main_.get("strike", 0),
+                                    side         = "buy_to_open",
+                                    quantity     = contracts_,
+                                    limit_price  = fill_price_,
+                                    tag          = f"rl_{ticker}_{position_id}"
+                                )
+                            if ok:
+                                # Poll for fill (30s timeout)
+                                status, fill = broker.poll_for_fill(oid, timeout_seconds=30)
+                                if fill and fill > 0:
+                                    actual_fill = fill
+                                    # Update DB with actual fill price
+                                    import sqlite3
+                                    conn = sqlite3.connect(cfg.DB_PATH)
+                                    conn.execute(
+                                        "UPDATE positions SET entry_price=?, entry_cost=?, "
+                                        "stop_price=?, target_price=? WHERE id=?",
+                                        (actual_fill,
+                                         actual_fill * 100 * contracts_,
+                                         round(actual_fill * (1 - cfg.STOP_LOSS_PCT), 2),
+                                         round(actual_fill * (1 + cfg.PROFIT_TARGET_PCT), 2),
+                                         position_id)
+                                    )
+                                    conn.commit()
+                                    conn.close()
+                                    if loaded:
+                                        loaded["entry_price"] = actual_fill
+                                print(f"  [LIVE-PAPER] ENTER {ticker} #{position_id} "
+                                      f"@ ${actual_fill:.2f} ({strategy_}) "
+                                      f"order={oid} status={status}")
+                            else:
+                                print(f"  [LIVE-PAPER] Order failed for {ticker} — tracked at mid ${fill_price_:.2f}")
+
+                        # Deduct from bankroll
+                        if bankroll is not None:
+                            bankroll[0] = round(bankroll[0] - (actual_fill * 100 * contracts_), 2)
+                            print(f"  [BANKROLL] ENTER {ticker} #{position_id} @ ${actual_fill:.2f} "
+                                  f"({strategy_}) cost=${actual_fill*100*contracts_:.2f} "
+                                  f"remaining=${bankroll[0]:,.2f}")
+                        elif not live_paper:
+                            print(f"  [AUTO] ENTER {ticker} #{position_id} @ ${actual_fill:.2f} "
+                                  f"({strategy_}) conf={confidence:.0%}")
+
                         db.log_journal_event(
                             "POSITION_OPENED", ticker=ticker, position_id=position_id,
                             action="ENTER", confidence=confidence,
-                            reason_summary=f"[AUTO] {ticker} @ ${fill_price_:.2f}",
-                            details={"fill_price": fill_price_, "auto": True}
+                            reason_summary=f"[{'BANKROLL' if bankroll is not None else 'AUTO'}] {ticker} @ ${fill_price_:.2f}",
+                            details={"fill_price": fill_price_, "auto": True,
+                                     "bankroll_remaining": bankroll[0] if bankroll is not None else None}
                         )
                 else:
                     position_id = None
@@ -1771,9 +1950,9 @@ def print_status(tracker: PositionTracker, agent: DecisionAgent):
     print("═" * W)
 
     # ── Open positions with live P&L
-    # Show correct limit depending on whether auto mode is active
+    # Use AUTO limit if more positions open than paper limit (handles --status run separately)
     import sys
-    is_auto = '--auto' in sys.argv
+    is_auto = '--auto' in sys.argv or tracker.open_count > cfg.MAX_CONCURRENT_POSITIONS
     pos_limit = cfg.AUTO_MAX_POSITIONS if is_auto else cfg.MAX_CONCURRENT_POSITIONS
     print(f"\n  Open positions ({tracker.open_count}/{pos_limit}):")
     if not tracker.open_positions:
@@ -1842,6 +2021,27 @@ def print_status(tracker: PositionTracker, agent: DecisionAgent):
         )
         pct_deployed = (total_committed / cfg.ACCOUNT_SIZE * 100) if cfg.ACCOUNT_SIZE > 0 else 0
         print(f"  Capital deployed:      ${total_committed:,.2f} ({pct_deployed:.1f}% of account)")
+
+    # ── Bankroll summary (shown when running in bankroll mode)
+    # Read from DB journal to find starting bankroll and compute current pool
+    try:
+        import json as _json
+        br_start = None
+        br_current = None
+        start_event = db._conn().execute(
+            "SELECT details FROM trade_journal WHERE event_type='SYSTEM_START' "
+            "AND details LIKE '%bankroll%' ORDER BY timestamp DESC LIMIT 1"
+        ).fetchone()
+        if start_event:
+            details = _json.loads(start_event[0] or "{}")
+            br_start = details.get("bankroll_start")
+            br_current = details.get("bankroll_current")
+        if br_start:
+            gain = (br_current or br_start) - br_start
+            sign = "+" if gain >= 0 else ""
+            print(f"\n  Bankroll: ${br_current:,.2f} (started ${br_start:,.2f}, {sign}${gain:,.2f})")
+    except Exception:
+        pass
 
     # ── Today's realized P&L
     daily_pnl = db.get_daily_pnl()
@@ -2003,14 +2203,25 @@ def main():
     parser.add_argument("--auto",    action="store_true",
                         help="Fully autonomous mode — no user input, auto enters/exits based on signals. "
                              "No position limit. Use for unattended proof-of-concept runs.")
+    parser.add_argument("--bankroll", type=float, default=None, metavar="AMOUNT",
+                        help="Bankroll mode — specify a starting dollar amount (e.g. --bankroll 5000). "
+                             "System trades autonomously using only that pool. Profits compound back in. "
+                             "1 contract per trade. Stops entering when bankroll can't cover next premium.")
+    parser.add_argument("--live-paper", action="store_true",
+                        help="Live paper mode — sends real orders to Alpaca paper account. "
+                             "Trades visible at app.alpaca.markets/paper-trading/overview. "
+                             "Use with --bankroll or --auto. Requires ALPACA_API_KEY and ALPACA_SECRET_KEY.")
     args = parser.parse_args()
 
     if args.debug:
         cfg.DEBUG_MODE = True
         logging.getLogger().setLevel(logging.DEBUG)
 
-    DEBUG_MODE = cfg.DEBUG_MODE
-    AUTO_MODE  = args.auto
+    DEBUG_MODE      = cfg.DEBUG_MODE
+    AUTO_MODE       = args.auto or (args.bankroll is not None) or args.live_paper
+    BANKROLL_MODE   = args.bankroll is not None
+    BANKROLL        = [args.bankroll or 0.0]   # mutable list so inner functions can update it
+    LIVE_PAPER_MODE = args.live_paper
 
     # ── Initialize
     db.initialize_database()
@@ -2060,13 +2271,15 @@ def main():
             "open_positions":      tracker.open_count,
             "enter_model_updates": agent.enter_model.n_updates,
             "exit_model_updates":  agent.exit_model.n_updates,
+            "bankroll_start":      args.bankroll,
+            "bankroll_current":    args.bankroll,
         }
     )
 
     in_hours = is_market_hours_for_entry()
     notify_info(
         f"RL loop started — "
-        f"{'AUTO' if args.auto else 'PAPER' if args.paper else 'LIVE'} mode, "
+        f"{'BANKROLL $' + str(int(args.bankroll)) if BANKROLL_MODE else 'AUTO' if args.auto else 'PAPER' if args.paper else 'LIVE'} mode, "
         f"{tracker.open_count} positions restored, "
         f"{'within' if in_hours else 'OUTSIDE'} market hours"
     )
@@ -2075,6 +2288,36 @@ def main():
         print("  ██  AUTO MODE — no user input required  ██")
         print("  Positions will open and close automatically based on signals.")
         print("  Position limit removed. Monitor via --status in another terminal.")
+        print("█" * 68 + "\n")
+
+    if BANKROLL_MODE:
+        print("\n" + "█" * 68)
+        print(f"  ██  BANKROLL MODE — starting pool: ${args.bankroll:,.2f}  ██")
+        print("  System trades autonomously from this fixed pool.")
+        print("  Profits compound back in. 1 contract per trade.")
+        print(f"  Entries stop when remaining bankroll < next premium cost.")
+        print("█" * 68 + "\n")
+
+    if LIVE_PAPER_MODE:
+        print("\n" + "█" * 68)
+        print("  ██  LIVE PAPER MODE — orders sent to Alpaca paper account  ██")
+        print("  Tradier prod key: real-time market data")
+        print("  Alpaca paper key: order execution + web dashboard")
+        print("  Dashboard: https://app.alpaca.markets/paper-trading/overview")
+        if not BROKER_AVAILABLE:
+            print("  ✗ ERROR: broker.py not found — cannot execute orders")
+        elif not broker._is_configured():
+            missing = []
+            if not broker.ALPACA_API_KEY:    missing.append("ALPACA_API_KEY")
+            if not broker.ALPACA_SECRET_KEY: missing.append("ALPACA_SECRET_KEY")
+            print(f"  ✗ ERROR: Missing environment variables: {', '.join(missing)}")
+            print("  Set them and restart.")
+        else:
+            balance = broker.get_account_balance()
+            if balance is not None:
+                print(f"  ✓ Sandbox connected — account balance: ${balance:,.2f}")
+            else:
+                print("  ⚠ Sandbox connected but balance unavailable")
         print("█" * 68 + "\n")
 
     print_status(tracker, agent)
@@ -2121,13 +2364,17 @@ def main():
             if tracker.open_count > 0:
                 evaluate_open_positions(
                     tracker, agent, action_state, last_scanner_results, regime,
-                    auto_mode=AUTO_MODE
+                    auto_mode=AUTO_MODE,
+                    bankroll=BANKROLL if BANKROLL_MODE else None,
+                    live_paper=LIVE_PAPER_MODE
                 )
 
             # ── Evaluate new entry candidates
             evaluate_new_candidates(
                 tracker, agent, action_state, last_scanner_results, regime,
-                auto_mode=AUTO_MODE
+                auto_mode=AUTO_MODE,
+                bankroll=BANKROLL if BANKROLL_MODE else None,
+                live_paper=LIVE_PAPER_MODE
             )
 
             # ── Print compact tick status bar

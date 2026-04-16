@@ -377,13 +377,16 @@ def rule_based_exit_score(position: Dict, market_snapshot: Dict,
         return 0.0, reasons
 
     # ── Profit-taking tiers
-    # Each tier gets more aggressive — but still needs a confirming signal
+    # Single strong gain is enough to exit — don't wait for multiple signals
     if unrealized_r >= 0.75:
-        score += 0.40
+        score += 0.45
         reasons.append(f"Strong gain {unrealized_r:.2f}R — take profits")
     elif unrealized_r >= 0.50:
-        score += 0.28
-        reasons.append(f"Solid gain {unrealized_r:.2f}R — consider taking profits")
+        score += 0.42
+        reasons.append(f"Solid gain {unrealized_r:.2f}R — take profits")
+    elif unrealized_r >= 0.40 and days_held >= 1:
+        score += 0.35
+        reasons.append(f"Good gain {unrealized_r:.2f}R held overnight — lock it in")
     elif unrealized_r >= 0.30:
         score += 0.15
         reasons.append(f"Moderate gain {unrealized_r:.2f}R")
@@ -439,11 +442,16 @@ def rule_based_exit_score(position: Dict, market_snapshot: Dict,
         reasons.append(f"Strong reversal — momentum shift")
 
     # ── Profit + deteriorating conditions = strong exit signal
-    # This is the key insight: a 0.40R gain with theta pressure and
-    # a market reversal is worth taking even if target is 1.0R
     if unrealized_r >= 0.30 and score >= 0.35:
         score += 0.12
         reasons.append("Multiple exit signals confirming — take the profit")
+
+    # ── Overnight profit bonus
+    # A position held overnight with meaningful gains should be exited
+    # next day rather than risking the gain on a gap down
+    if unrealized_r >= 0.50 and days_held >= 1:
+        score += 0.08
+        reasons.append(f"Overnight gain {unrealized_r:.2f}R — protect profits")
 
     return min(max(score, 0.0), 1.0), reasons
 
