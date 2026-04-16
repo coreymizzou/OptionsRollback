@@ -1835,6 +1835,14 @@ def print_status(tracker: PositionTracker, agent: DecisionAgent):
         sign = "+" if total_unrealized >= 0 else ""
         print(f"  Total unrealized P&L: {sign}${total_unrealized:.2f}")
 
+        # ── Capital deployed
+        total_committed = sum(
+            (p.get("entry_price", 0) or 0) * 100 * (p.get("contracts", 1) or 1)
+            for p in tracker.open_positions.values()
+        )
+        pct_deployed = (total_committed / cfg.ACCOUNT_SIZE * 100) if cfg.ACCOUNT_SIZE > 0 else 0
+        print(f"  Capital deployed:      ${total_committed:,.2f} ({pct_deployed:.1f}% of account)")
+
     # ── Today's realized P&L
     daily_pnl = db.get_daily_pnl()
     sign = "+" if daily_pnl >= 0 else ""

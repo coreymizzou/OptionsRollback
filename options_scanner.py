@@ -1309,17 +1309,61 @@ def construct_trade(
 
     # ── Spread: add short leg
     if "SPREAD" in strategy:
-        spread_width = max(round(spot * 0.03 / 5) * 5, 5)  # ~3% OTM width
+        # Short leg must be strictly FURTHER OTM than the long leg
+        # For calls: short_strike > long_strike (higher strike sold against lower bought)
+        # For puts:  short_strike < long_strike (lower strike sold against higher bought)
+        # Width is ~3% of spot, rounded to nearest $5
+        spread_width = max(round(spot * 0.03 / 5) * 5, 5)
         short_strike = (
             main_leg["strike"] + spread_width if opt_type == "call"
             else main_leg["strike"] - spread_width
         )
-        short_leg = find_best_strike(chain_data, best_exp, spot, final_dir,
-                                      delta_target=0.25, option_type=opt_type)
+
+        # Find the short leg by targeting the specific calculated strike
+        # NOT by delta — delta targeting can return a strike on the wrong side
+        short_leg = None
+        if best_exp in chain_data:
+            contracts = chain_data[best_exp].get(opt_type + "s", [])
+            # Find the contract closest to short_strike on the correct side
+            valid_shorts = []
+            for c in contracts:
+                K = float(c.get("strike", 0))
+                bid = float(c.get("bid", 0) or 0)
+                ask = float(c.get("ask", 0) or 0)
+                mid = (bid + ask) / 2 if bid > 0 and ask > 0 else float(c.get("last", 0) or 0)
+                if mid <= 0:
+                    continue
+                # Must be on the correct side — further OTM than long leg
+                if opt_type == "call" and K <= main_leg["strike"]:
+                    continue
+                if opt_type == "put" and K >= main_leg["strike"]:
+                    continue
+                valid_shorts.append((abs(K - short_strike), K, c, mid))
+            if valid_shorts:
+                valid_shorts.sort(key=lambda x: x[0])
+                _, K_found, c_found, mid_found = valid_shorts[0]
+                # Validate: short leg mid must be LESS than long leg mid
+                # (you receive less premium for the further OTM short)
+                if mid_found < main_leg.get("mid", 999):
+                    short_leg = dict(c_found)
+                    short_leg["mid"] = mid_found
+                    short_leg["strike"] = K_found
+                    short_leg["option_type"] = opt_type
+
         if not short_leg:
+            # Fallback: construct synthetic short leg at the calculated strike
             short_leg = dict(main_leg)
             short_leg["strike"] = short_strike
-            short_leg["mid"]    = round(main_leg["mid"] * 0.50, 2)
+            short_leg["mid"]    = round(main_leg["mid"] * 0.45, 2)  # ~45% of long mid
+            short_leg["bid"]    = round(short_leg["mid"] * 0.93, 2)
+            short_leg["ask"]    = round(short_leg["mid"] * 1.07, 2)
+
+        # Final sanity check: net debit must be positive and less than spread width
+        net_debit = main_leg.get("mid", 0) - short_leg.get("mid", 0)
+        if net_debit <= 0 or net_debit >= spread_width:
+            # Bad spread — force short leg mid to be 40-50% of long leg mid
+            short_leg["mid"] = round(main_leg.get("mid", 1) * 0.45, 2)
+
         trade["short_leg"] = short_leg
 
     # ── Straddle: add ATM put leg at the same strike as the call
