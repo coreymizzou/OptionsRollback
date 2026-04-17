@@ -24360,3 +24360,301 @@
 2026-04-17 09:56:38,198 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
 2026-04-17 09:56:38,198 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
 2026-04-17 09:56:38,201 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:56:52,551 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:56:52,553 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-17 09:56:52,553 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:56:52,553 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:56:52,554 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-17 09:56:52,557 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:56:52,592 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:56:53,897 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 09:56:55,296 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:00:08,373 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-17 10:00:08,373 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.8 7 valid candidates
+2026-04-17 10:00:11,126 [INFO] notifier: Alert sent: ENTER MSFT conf=0.70 force=False
+2026-04-17 10:00:11,135 [INFO] broker: Sending order payload: {'symbol': 'MSFT260515C00445000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '19.39', 'time_in_force': 'day', 'client_order_id': 'rl_MSFT_60'}
+2026-04-17 10:00:13,077 [INFO] broker: Order placed: buy_to_open 1x MSFT260515C00445000 @ $19.39 — ID: d0a6e8d5-f002-4c8a-9205-3df50dff2733
+2026-04-17 10:00:15,336 [INFO] broker: Order d0a6e8d5-f002-4c8a-9205-3df50dff2733 filled @ $12.85
+2026-04-17 10:00:15,359 [INFO] run:   MSFT now tracked — action state set to HOLD
+2026-04-17 10:00:15,372 [INFO] run:   Candidate MSFT: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 10:00:16,551 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.60 force=False
+2026-04-17 10:00:16,560 [INFO] broker: Sending order payload: {'symbol': 'GOOGL260515C00345000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '11.04', 'time_in_force': 'day', 'client_order_id': 'rl_GOOGL_61'}
+2026-04-17 10:00:16,715 [INFO] broker: Order placed: buy_to_open 1x GOOGL260515C00345000 @ $11.04 — ID: 83bd7d7c-c82a-4caa-9ff3-82ed51aeccb7
+2026-04-17 10:00:16,849 [INFO] broker: Order 83bd7d7c-c82a-4caa-9ff3-82ed51aeccb7 filled @ $10.55
+2026-04-17 10:00:16,873 [INFO] run:   GOOGL now tracked — action state set to HOLD
+2026-04-17 10:00:16,889 [INFO] run:   Candidate GOOGL: ENTER conf=0.60 (confluence 13pts)
+2026-04-17 10:00:18,011 [INFO] notifier: Alert sent: ENTER META conf=0.70 force=False
+2026-04-17 10:00:18,022 [INFO] broker: Sending order payload: {'symbol': 'META260515C00705000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '21.6', 'time_in_force': 'day', 'client_order_id': 'rl_META_62'}
+2026-04-17 10:00:18,161 [INFO] broker: Order placed: buy_to_open 1x META260515C00705000 @ $21.6 — ID: 30a2a752-1570-48af-bed5-1ab0ea0a66fb
+2026-04-17 10:00:51,837 [WARNING] broker: Order 30a2a752-1570-48af-bed5-1ab0ea0a66fb timed out after 30s
+2026-04-17 10:00:52,069 [INFO] run:   META now tracked — action state set to HOLD
+2026-04-17 10:00:52,081 [INFO] run:   Candidate META: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 10:00:52,083 [INFO] run: [BANKROLL] Insufficient funds — need $3851.00, have $500.00 — skipping MSTR
+2026-04-17 10:00:54,168 [INFO] run:   MSFT #60: HOLD conf=0.00 pnl=$-659.00
+2026-04-17 10:00:54,182 [INFO] run:   GOOGL #61: HOLD conf=0.00 pnl=$-56.00
+2026-04-17 10:00:54,198 [INFO] run:   META #62: HOLD conf=0.00 pnl=$+240.00
+2026-04-17 10:00:54,200 [INFO] run: [BANKROLL] Insufficient funds — need $3851.00, have $500.00 — skipping MSTR
+2026-04-17 10:01:55,120 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:04:59,160 [INFO] run: Scanner complete: 19 scanned, 6 meet threshold
+2026-04-17 10:04:59,160 [INFO] run: Tick 3: Scanner refreshed — regime=TRENDING_UP VIX=17.9 6 valid candidates
+2026-04-17 10:05:00,936 [INFO] run: [BANKROLL] Insufficient funds — need $931.00, have $500.00 — skipping AAPL
+2026-04-17 10:05:00,938 [INFO] run: [BANKROLL] Insufficient funds — need $3830.00, have $500.00 — skipping MSTR
+2026-04-17 10:05:00,939 [INFO] run: [BANKROLL] Insufficient funds — need $853.00, have $500.00 — skipping XOM
+2026-04-17 10:05:01,005 [INFO] run: [BANKROLL] Insufficient funds — need $931.00, have $500.00 — skipping AAPL
+2026-04-17 10:05:01,007 [INFO] run: [BANKROLL] Insufficient funds — need $3830.00, have $500.00 — skipping MSTR
+2026-04-17 10:05:01,008 [INFO] run: [BANKROLL] Insufficient funds — need $853.00, have $500.00 — skipping XOM
+2026-04-17 10:06:03,786 [INFO] run: [BANKROLL] Insufficient funds — need $931.00, have $500.00 — skipping AAPL
+2026-04-17 10:06:03,789 [INFO] run: [BANKROLL] Insufficient funds — need $3830.00, have $500.00 — skipping MSTR
+2026-04-17 10:06:03,790 [INFO] run: [BANKROLL] Insufficient funds — need $853.00, have $500.00 — skipping XOM
+2026-04-17 10:07:01,805 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:10:00,862 [INFO] run: Scanner complete: 19 scanned, 4 meet threshold
+2026-04-17 10:10:00,862 [INFO] run: Tick 6: Scanner refreshed — regime=TRENDING_UP VIX=17.9 4 valid candidates
+2026-04-17 10:10:02,701 [INFO] run: [BANKROLL] Insufficient funds — need $1075.00, have $500.00 — skipping AAPL
+2026-04-17 10:10:02,703 [INFO] run: [BANKROLL] Insufficient funds — need $844.00, have $500.00 — skipping XOM
+2026-04-17 10:10:02,772 [INFO] run: [BANKROLL] Insufficient funds — need $1075.00, have $500.00 — skipping AAPL
+2026-04-17 10:10:02,774 [INFO] run: [BANKROLL] Insufficient funds — need $844.00, have $500.00 — skipping XOM
+2026-04-17 10:11:04,494 [INFO] run: [BANKROLL] Insufficient funds — need $1075.00, have $500.00 — skipping AAPL
+2026-04-17 10:11:04,496 [INFO] run: [BANKROLL] Insufficient funds — need $844.00, have $500.00 — skipping XOM
+2026-04-17 10:12:03,569 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:14:50,753 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 10:14:51,064 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 10:15:04,081 [INFO] run: Scanner complete: 19 scanned, 3 meet threshold
+2026-04-17 10:15:04,081 [INFO] run: Tick 9: Scanner refreshed — regime=TRENDING_UP VIX=17.6 3 valid candidates
+2026-04-17 10:15:06,346 [INFO] run: [BANKROLL] Insufficient funds — need $1690.00, have $500.00 — skipping AMD
+2026-04-17 10:15:06,396 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 10:15:06,396 [INFO] run: Loop stopped after 9 ticks
+2026-04-17 10:15:17,698 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 10:15:17,700 [INFO] position_tracker: Restored 5 open positions from DB
+2026-04-17 10:15:17,701 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 10:15:17,706 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 10:15:17,707 [INFO] position_tracker:   #60 MSFT LONG_CALL entry=$12.85 entered=2026-04-17T10:00
+2026-04-17 10:15:17,708 [INFO] position_tracker:   #61 GOOGL LONG_CALL entry=$10.55 entered=2026-04-17T10:00
+2026-04-17 10:15:17,709 [INFO] position_tracker:   #62 META LONG_CALL entry=$21.6 entered=2026-04-17T10:00
+2026-04-17 10:15:17,709 [INFO] position_tracker: PositionTracker initialized — 5 open positions restored
+2026-04-17 10:15:17,712 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 10:15:17,714 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 10:15:17,714 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 10:15:44,698 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 10:15:44,701 [INFO] position_tracker: Restored 5 open positions from DB
+2026-04-17 10:15:44,704 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 10:15:44,706 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 10:15:44,707 [INFO] position_tracker:   #60 MSFT LONG_CALL entry=$12.85 entered=2026-04-17T10:00
+2026-04-17 10:15:44,708 [INFO] position_tracker:   #61 GOOGL LONG_CALL entry=$10.55 entered=2026-04-17T10:00
+2026-04-17 10:15:44,709 [INFO] position_tracker:   #62 META LONG_CALL entry=$21.6 entered=2026-04-17T10:00
+2026-04-17 10:15:44,709 [INFO] position_tracker: PositionTracker initialized — 5 open positions restored
+2026-04-17 10:15:44,712 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 10:15:44,714 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 10:15:44,715 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 10:16:54,476 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 10:16:54,479 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 10:16:54,482 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 10:16:54,515 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 10:16:54,699 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 10:16:56,003 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:19:47,987 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-17 10:25:10,590 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.5 7 valid candidates
+2026-04-17 10:25:12,463 [INFO] notifier: Alert sent: ENTER MSFT conf=0.70 force=False
+2026-04-17 10:25:12,472 [INFO] broker: Sending order payload: {'symbol': 'MSFT260515C00440000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '15.92', 'time_in_force': 'day', 'client_order_id': 'rl_MSFT_63'}
+2026-04-17 10:25:15,027 [INFO] broker: Order placed: buy_to_open 1x MSFT260515C00440000 @ $15.92 — ID: e18842ea-adb9-4448-a841-5fea362e6ff6
+2026-04-17 10:25:17,022 [INFO] broker: Order e18842ea-adb9-4448-a841-5fea362e6ff6 filled @ $15.35
+2026-04-17 10:25:17,041 [INFO] run:   MSFT now tracked — action state set to HOLD
+2026-04-17 10:25:17,054 [INFO] run:   Candidate MSFT: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 10:25:18,094 [INFO] notifier: Alert sent: ENTER NFLX conf=0.85 force=False
+2026-04-17 10:25:20,492 [INFO] broker: Spread order placed: NFLX260515C00100000/NFLX260515C00105000 @ $4.2 net — ID: 961f1b56-35fd-437d-93dd-55149751b637
+2026-04-17 10:25:20,633 [INFO] broker: Order 961f1b56-35fd-437d-93dd-55149751b637 filled @ $1.30
+2026-04-17 10:25:20,662 [INFO] run:   NFLX now tracked — action state set to HOLD
+2026-04-17 10:25:20,677 [INFO] run:   Candidate NFLX: ENTER conf=0.85 (confluence 13pts)
+2026-04-17 10:25:22,091 [INFO] notifier: Alert sent: ENTER AMZN conf=0.70 force=False
+2026-04-17 10:25:22,101 [INFO] broker: Sending order payload: {'symbol': 'AMZN260515C00260000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '7.11', 'time_in_force': 'day', 'client_order_id': 'rl_AMZN_65'}
+2026-04-17 10:25:22,252 [INFO] broker: Order placed: buy_to_open 1x AMZN260515C00260000 @ $7.11 — ID: 5592df43-b6f9-49e7-8aef-1a225c42faab
+2026-04-17 10:25:52,563 [WARNING] broker: Order 5592df43-b6f9-49e7-8aef-1a225c42faab timed out after 30s
+2026-04-17 10:25:58,823 [INFO] run:   AMZN now tracked — action state set to HOLD
+2026-04-17 10:25:58,834 [INFO] run:   Candidate AMZN: ENTER conf=0.70 (confluence 12pts)
+2026-04-17 10:25:59,851 [INFO] notifier: Alert sent: ENTER COIN conf=0.70 force=False
+2026-04-17 10:25:59,860 [INFO] broker: Sending order payload: {'symbol': 'COIN260515C00220000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '24.51', 'time_in_force': 'day', 'client_order_id': 'rl_COIN_66'}
+2026-04-17 10:26:00,003 [INFO] broker: Order placed: buy_to_open 1x COIN260515C00220000 @ $24.51 — ID: c059d839-550e-4ed5-9774-6c0e49a6286f
+2026-04-17 10:26:00,142 [INFO] broker: Order c059d839-550e-4ed5-9774-6c0e49a6286f filled @ $15.50
+2026-04-17 10:26:00,165 [INFO] run:   COIN now tracked — action state set to HOLD
+2026-04-17 10:26:00,177 [INFO] run:   Candidate COIN: ENTER conf=0.70 (confluence 11pts)
+2026-04-17 10:26:01,247 [INFO] notifier: Alert sent: ENTER CRM conf=0.85 force=False
+2026-04-17 10:26:01,387 [INFO] broker: Spread order placed: CRM260515C00190000/CRM260515C00195000 @ $6.31 net — ID: dbaeeb4b-1827-48a9-b1ec-0d7ffadf0938
+2026-04-17 10:26:04,711 [INFO] broker: Order dbaeeb4b-1827-48a9-b1ec-0d7ffadf0938 filled @ $2.10
+2026-04-17 10:26:04,731 [INFO] run:   CRM now tracked — action state set to HOLD
+2026-04-17 10:26:04,743 [INFO] run:   Candidate CRM: ENTER conf=0.85 (confluence 11pts)
+2026-04-17 10:26:07,973 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:28:57,348 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-17 10:28:57,348 [INFO] run: Tick 2: Scanner refreshed — regime=TRENDING_UP VIX=17.4 7 valid candidates
+2026-04-17 10:28:57,744 [INFO] run:   MSFT #63: HOLD conf=0.00 pnl=$-124.00
+2026-04-17 10:28:58,590 [INFO] run:   NFLX #64: HOLD conf=0.00 pnl=$-290.00
+2026-04-17 10:28:58,854 [INFO] run:   AMZN #65: HOLD conf=0.00 pnl=$+187.00
+2026-04-17 10:28:59,233 [INFO] run:   COIN #66: HOLD conf=0.00 pnl=$-953.00
+2026-04-17 10:29:00,093 [INFO] run:   CRM #67: HOLD conf=0.00 pnl=$-449.00
+2026-04-17 10:29:01,838 [INFO] run:   Candidate AAPL: ENTER conf=0.57 (confluence 13pts)
+2026-04-17 10:29:01,841 [INFO] run: [BANKROLL] Insufficient funds — need $1131.00, have $864.00 — skipping GOOGL
+2026-04-17 10:29:01,847 [INFO] run: [BANKROLL] Insufficient funds — need $2752.00, have $864.00 — skipping META
+2026-04-17 10:29:01,991 [INFO] notifier: Alert sent: ENTER AAPL conf=0.70 force=False
+2026-04-17 10:29:02,022 [INFO] broker: Sending order payload: {'symbol': 'AAPL260515C00280000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '7.58', 'time_in_force': 'day', 'client_order_id': 'rl_AAPL_68'}
+2026-04-17 10:29:02,168 [INFO] broker: Order placed: buy_to_open 1x AAPL260515C00280000 @ $7.58 — ID: 8a507e43-a116-4520-8170-c721132f6648
+2026-04-17 10:29:02,305 [INFO] broker: Order 8a507e43-a116-4520-8170-c721132f6648 filled @ $5.45
+2026-04-17 10:29:02,329 [INFO] run:   AAPL now tracked — action state set to HOLD
+2026-04-17 10:29:02,345 [INFO] run:   Candidate AAPL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 10:29:02,347 [INFO] run: [BANKROLL] Insufficient funds — need $1131.00, have $319.00 — skipping GOOGL
+2026-04-17 10:29:02,349 [INFO] run: [BANKROLL] Insufficient funds — need $2752.00, have $319.00 — skipping META
+2026-04-17 10:30:05,107 [INFO] run:   AAPL #68: HOLD conf=0.00 pnl=$-213.00
+2026-04-17 10:30:05,109 [INFO] run: [BANKROLL] Insufficient funds — need $1131.00, have $319.00 — skipping GOOGL
+2026-04-17 10:30:05,114 [INFO] run: [BANKROLL] Insufficient funds — need $2752.00, have $319.00 — skipping META
+2026-04-17 10:31:04,479 [INFO] run: [BANKROLL] Insufficient funds — need $1131.00, have $319.00 — skipping GOOGL
+2026-04-17 10:31:04,484 [INFO] run: [BANKROLL] Insufficient funds — need $2752.00, have $319.00 — skipping META
+2026-04-17 10:32:02,768 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:32:29,032 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 10:34:59,540 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-17 10:34:59,540 [INFO] run: Tick 6: Scanner refreshed — regime=TRENDING_UP VIX=17.1 7 valid candidates
+2026-04-17 10:35:02,184 [INFO] run: [BANKROLL] Insufficient funds — need $2892.00, have $319.00 — skipping META
+2026-04-17 10:35:02,188 [INFO] run: [BANKROLL] Insufficient funds — need $2211.00, have $319.00 — skipping MU
+2026-04-17 10:35:02,250 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 10:35:02,250 [INFO] run: Loop stopped after 6 ticks
+2026-04-17 10:40:12,189 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 10:40:12,191 [INFO] position_tracker: Restored 6 open positions from DB
+2026-04-17 10:40:12,192 [INFO] position_tracker:   #63 MSFT LONG_CALL entry=$15.35 entered=2026-04-17T10:25
+2026-04-17 10:40:12,192 [INFO] position_tracker:   #64 NFLX BULL_CALL_SPREAD entry=$1.3 entered=2026-04-17T10:25
+2026-04-17 10:40:12,192 [INFO] position_tracker:   #65 AMZN LONG_CALL entry=$7.11 entered=2026-04-17T10:25
+2026-04-17 10:40:12,192 [INFO] position_tracker:   #66 COIN LONG_CALL entry=$15.5 entered=2026-04-17T10:25
+2026-04-17 10:40:12,192 [INFO] position_tracker:   #67 CRM BULL_CALL_SPREAD entry=$2.1 entered=2026-04-17T10:26
+2026-04-17 10:40:12,192 [INFO] position_tracker:   #68 AAPL LONG_CALL entry=$5.45 entered=2026-04-17T10:29
+2026-04-17 10:40:12,192 [INFO] position_tracker: PositionTracker initialized — 6 open positions restored
+2026-04-17 10:40:12,194 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 10:40:12,196 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 10:40:12,196 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 10:40:17,338 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 10:40:17,341 [INFO] position_tracker: Restored 6 open positions from DB
+2026-04-17 10:40:17,341 [INFO] position_tracker:   #63 MSFT LONG_CALL entry=$15.35 entered=2026-04-17T10:25
+2026-04-17 10:40:17,341 [INFO] position_tracker:   #64 NFLX BULL_CALL_SPREAD entry=$1.3 entered=2026-04-17T10:25
+2026-04-17 10:40:17,341 [INFO] position_tracker:   #65 AMZN LONG_CALL entry=$7.11 entered=2026-04-17T10:25
+2026-04-17 10:40:17,341 [INFO] position_tracker:   #66 COIN LONG_CALL entry=$15.5 entered=2026-04-17T10:25
+2026-04-17 10:40:17,342 [INFO] position_tracker:   #67 CRM BULL_CALL_SPREAD entry=$2.1 entered=2026-04-17T10:26
+2026-04-17 10:40:17,342 [INFO] position_tracker:   #68 AAPL LONG_CALL entry=$5.45 entered=2026-04-17T10:29
+2026-04-17 10:40:17,342 [INFO] position_tracker: PositionTracker initialized — 6 open positions restored
+2026-04-17 10:40:17,344 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 10:40:17,345 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 10:40:17,345 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 10:40:40,966 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 10:40:40,970 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 10:40:40,973 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 10:40:41,006 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 10:40:42,710 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 10:40:44,060 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:43:37,508 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-17 10:43:37,508 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.0 8 valid candidates
+2026-04-17 10:43:39,296 [INFO] notifier: Alert sent: ENTER AAPL conf=0.60 force=False
+2026-04-17 10:43:39,327 [INFO] broker: Sending order payload: {'symbol': 'AAPL260515C00280000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '7.57', 'time_in_force': 'day', 'client_order_id': 'rl_AAPL_69'}
+2026-04-17 10:43:39,481 [INFO] broker: Order placed: buy_to_open 1x AAPL260515C00280000 @ $7.57 — ID: 8e1383e3-4692-4a4e-98d6-44f5e2a88686
+2026-04-17 10:43:41,308 [INFO] broker: Order 8e1383e3-4692-4a4e-98d6-44f5e2a88686 filled @ $5.15
+2026-04-17 10:43:41,331 [INFO] run:   AAPL now tracked — action state set to HOLD
+2026-04-17 10:43:41,344 [INFO] run:   Candidate AAPL: ENTER conf=0.60 (confluence 13pts)
+2026-04-17 10:43:42,456 [INFO] notifier: Alert sent: ENTER MSFT conf=0.70 force=False
+2026-04-17 10:43:42,467 [INFO] broker: Sending order payload: {'symbol': 'MSFT260515C00440000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '14.26', 'time_in_force': 'day', 'client_order_id': 'rl_MSFT_70'}
+2026-04-17 10:43:42,627 [INFO] broker: Order placed: buy_to_open 1x MSFT260515C00440000 @ $14.26 — ID: eecbf607-8078-46a8-b561-7a3178493ea5
+2026-04-17 10:43:42,755 [INFO] broker: Order eecbf607-8078-46a8-b561-7a3178493ea5 filled @ $13.65
+2026-04-17 10:43:42,779 [INFO] run:   MSFT now tracked — action state set to HOLD
+2026-04-17 10:43:42,793 [INFO] run:   Candidate MSFT: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 10:43:43,954 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.70 force=False
+2026-04-17 10:43:43,963 [INFO] broker: Sending order payload: {'symbol': 'GOOGL260515C00345000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '9.46', 'time_in_force': 'day', 'client_order_id': 'rl_GOOGL_71'}
+2026-04-17 10:43:46,883 [INFO] broker: Order placed: buy_to_open 1x GOOGL260515C00345000 @ $9.46 — ID: e58994d7-6023-4939-bc26-4aed56bd45c5
+2026-04-17 10:44:18,562 [WARNING] broker: Order e58994d7-6023-4939-bc26-4aed56bd45c5 timed out after 30s
+2026-04-17 10:44:18,577 [INFO] run:   GOOGL now tracked — action state set to HOLD
+2026-04-17 10:44:18,591 [INFO] run:   Candidate GOOGL: ENTER conf=0.70 (confluence 12pts)
+2026-04-17 10:44:18,593 [INFO] run: [BANKROLL] Insufficient funds — need $2498.00, have $2174.00 — skipping META
+2026-04-17 10:44:19,646 [INFO] notifier: Alert sent: ENTER AMZN conf=0.70 force=False
+2026-04-17 10:44:19,655 [INFO] broker: Sending order payload: {'symbol': 'AMZN260515C00260000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '6.95', 'time_in_force': 'day', 'client_order_id': 'rl_AMZN_72'}
+2026-04-17 10:44:19,802 [INFO] broker: Order placed: buy_to_open 1x AMZN260515C00260000 @ $6.95 — ID: 6249094f-9f44-4b78-99ee-284db0ee41a6
+2026-04-17 10:44:50,240 [WARNING] broker: Order 6249094f-9f44-4b78-99ee-284db0ee41a6 timed out after 30s
+2026-04-17 10:44:50,290 [INFO] run:   AMZN now tracked — action state set to HOLD
+2026-04-17 10:44:50,308 [INFO] run:   Candidate AMZN: ENTER conf=0.70 (confluence 12pts)
+2026-04-17 10:44:51,807 [INFO] run:   AAPL #69: HOLD conf=0.00 pnl=$-245.00
+2026-04-17 10:44:51,821 [INFO] run:   MSFT #70: HOLD conf=0.00 pnl=$-76.00
+2026-04-17 10:44:51,836 [INFO] run:   GOOGL #71: HOLD conf=0.00 pnl=$+136.00
+2026-04-17 10:44:51,850 [INFO] run:   AMZN #72: HOLD conf=0.00 pnl=$+190.00
+2026-04-17 10:44:51,852 [INFO] run: [BANKROLL] Insufficient funds — need $2498.00, have $1479.00 — skipping META
+2026-04-17 10:45:52,662 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:48:46,440 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-17 10:48:46,440 [INFO] run: Tick 3: Scanner refreshed — regime=TRENDING_UP VIX=17.0 7 valid candidates
+2026-04-17 10:48:47,861 [INFO] run: [BANKROLL] Insufficient funds — need $2341.00, have $1479.00 — skipping COIN
+2026-04-17 10:48:47,918 [INFO] run: [BANKROLL] Insufficient funds — need $2341.00, have $1479.00 — skipping COIN
+2026-04-17 10:49:49,364 [INFO] run: [BANKROLL] Insufficient funds — need $2341.00, have $1479.00 — skipping COIN
+2026-04-17 10:50:49,421 [INFO] run: [BANKROLL] Insufficient funds — need $2341.00, have $1479.00 — skipping COIN
+2026-04-17 10:51:48,665 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 10:54:37,852 [INFO] run: Scanner complete: 19 scanned, 5 meet threshold
+2026-04-17 10:54:37,852 [INFO] run: Tick 7: Scanner refreshed — regime=TRENDING_UP VIX=17.1 5 valid candidates
+2026-04-17 10:54:39,072 [INFO] run: [BANKROLL] Insufficient funds — need $2898.00, have $1479.00 — skipping MSTR
+2026-04-17 10:54:40,767 [INFO] notifier: Alert sent: ENTER XOM conf=0.60 force=False
+2026-04-17 10:54:40,779 [INFO] broker: Sending order payload: {'symbol': 'XOM260515C00150000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '7.63', 'time_in_force': 'day', 'client_order_id': 'rl_XOM_73'}
+2026-04-17 10:54:43,948 [INFO] broker: Order placed: buy_to_open 1x XOM260515C00150000 @ $7.63 — ID: 1d7a57d2-3cfd-45fc-8ad8-6461e4f20afd
+2026-04-17 10:54:45,794 [INFO] broker: Order 1d7a57d2-3cfd-45fc-8ad8-6461e4f20afd filled @ $2.72
+2026-04-17 10:54:45,815 [INFO] run:   XOM now tracked — action state set to HOLD
+2026-04-17 10:54:45,829 [INFO] run:   Candidate XOM: ENTER conf=0.60 (confluence 11pts)
+2026-04-17 10:54:47,310 [INFO] run:   XOM #73: HOLD conf=0.00 pnl=$-497.00
+2026-04-17 10:54:47,312 [INFO] run: [BANKROLL] Insufficient funds — need $2898.00, have $1207.00 — skipping MSTR
+2026-04-17 10:54:47,328 [INFO] run:   Candidate PLTR: ENTER conf=0.55 (confluence 9pts)
+2026-04-17 10:55:49,080 [INFO] run: [BANKROLL] Insufficient funds — need $2898.00, have $1207.00 — skipping MSTR
+2026-04-17 10:56:48,946 [INFO] run: [BANKROLL] Insufficient funds — need $2898.00, have $1207.00 — skipping MSTR
+2026-04-17 10:57:48,003 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 11:00:33,548 [INFO] run: Scanner complete: 19 scanned, 6 meet threshold
+2026-04-17 11:00:33,548 [INFO] run: Tick 11: Scanner refreshed — regime=TRENDING_UP VIX=17.2 6 valid candidates
+2026-04-17 11:00:35,186 [INFO] run: [BANKROLL] Insufficient funds — need $2616.00, have $1207.00 — skipping META
+2026-04-17 11:00:35,188 [INFO] run: [BANKROLL] Insufficient funds — need $2885.00, have $1207.00 — skipping MSTR
+2026-04-17 11:00:35,282 [INFO] run: [BANKROLL] Insufficient funds — need $2616.00, have $1207.00 — skipping META
+2026-04-17 11:00:35,284 [INFO] run: [BANKROLL] Insufficient funds — need $2885.00, have $1207.00 — skipping MSTR
+2026-04-17 11:01:36,717 [INFO] run: [BANKROLL] Insufficient funds — need $2616.00, have $1207.00 — skipping META
+2026-04-17 11:01:46,082 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 11:01:46,084 [INFO] position_tracker: Restored 5 open positions from DB
+2026-04-17 11:01:46,084 [INFO] position_tracker:   #69 AAPL LONG_CALL entry=$5.15 entered=2026-04-17T10:43
+2026-04-17 11:01:46,084 [INFO] position_tracker:   #70 MSFT LONG_CALL entry=$13.65 entered=2026-04-17T10:43
+2026-04-17 11:01:46,084 [INFO] position_tracker:   #71 GOOGL LONG_CALL entry=$9.46 entered=2026-04-17T10:43
+2026-04-17 11:01:46,084 [INFO] position_tracker:   #72 AMZN LONG_CALL entry=$6.95 entered=2026-04-17T10:44
+2026-04-17 11:01:46,084 [INFO] position_tracker:   #73 XOM LONG_CALL entry=$2.72 entered=2026-04-17T10:54
+2026-04-17 11:01:46,084 [INFO] position_tracker: PositionTracker initialized — 5 open positions restored
+2026-04-17 11:01:46,086 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 11:01:46,087 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 11:01:46,088 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 11:02:15,626 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 11:02:15,628 [INFO] position_tracker: Restored 5 open positions from DB
+2026-04-17 11:02:15,629 [INFO] position_tracker:   #69 AAPL LONG_CALL entry=$5.15 entered=2026-04-17T10:43
+2026-04-17 11:02:15,629 [INFO] position_tracker:   #70 MSFT LONG_CALL entry=$13.65 entered=2026-04-17T10:43
+2026-04-17 11:02:15,629 [INFO] position_tracker:   #71 GOOGL LONG_CALL entry=$9.46 entered=2026-04-17T10:43
+2026-04-17 11:02:15,629 [INFO] position_tracker:   #72 AMZN LONG_CALL entry=$6.95 entered=2026-04-17T10:44
+2026-04-17 11:02:15,629 [INFO] position_tracker:   #73 XOM LONG_CALL entry=$2.72 entered=2026-04-17T10:54
+2026-04-17 11:02:15,629 [INFO] position_tracker: PositionTracker initialized — 5 open positions restored
+2026-04-17 11:02:15,631 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:15,632 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:15,632 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 11:02:21,435 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 11:02:35,147 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 11:02:35,150 [INFO] position_tracker: Restored 5 open positions from DB
+2026-04-17 11:02:35,150 [INFO] position_tracker:   #69 AAPL LONG_CALL entry=$5.15 entered=2026-04-17T10:43
+2026-04-17 11:02:35,150 [INFO] position_tracker:   #70 MSFT LONG_CALL entry=$13.65 entered=2026-04-17T10:43
+2026-04-17 11:02:35,151 [INFO] position_tracker:   #71 GOOGL LONG_CALL entry=$9.46 entered=2026-04-17T10:43
+2026-04-17 11:02:35,151 [INFO] position_tracker:   #72 AMZN LONG_CALL entry=$6.95 entered=2026-04-17T10:44
+2026-04-17 11:02:35,152 [INFO] position_tracker:   #73 XOM LONG_CALL entry=$2.72 entered=2026-04-17T10:54
+2026-04-17 11:02:35,152 [INFO] position_tracker: PositionTracker initialized — 5 open positions restored
+2026-04-17 11:02:35,154 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:35,156 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:35,156 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 11:02:43,015 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 11:02:43,018 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-17 11:02:43,018 [INFO] position_tracker:   #69 AAPL LONG_CALL entry=$5.15 entered=2026-04-17T10:43
+2026-04-17 11:02:43,019 [INFO] position_tracker:   #70 MSFT LONG_CALL entry=$13.65 entered=2026-04-17T10:43
+2026-04-17 11:02:43,019 [INFO] position_tracker:   #72 AMZN LONG_CALL entry=$6.95 entered=2026-04-17T10:44
+2026-04-17 11:02:43,019 [INFO] position_tracker:   #73 XOM LONG_CALL entry=$2.72 entered=2026-04-17T10:54
+2026-04-17 11:02:43,020 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-17 11:02:43,022 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:43,024 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:43,024 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 11:02:53,225 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 11:02:53,228 [INFO] position_tracker: Restored 3 open positions from DB
+2026-04-17 11:02:53,228 [INFO] position_tracker:   #69 AAPL LONG_CALL entry=$5.15 entered=2026-04-17T10:43
+2026-04-17 11:02:53,228 [INFO] position_tracker:   #70 MSFT LONG_CALL entry=$13.65 entered=2026-04-17T10:43
+2026-04-17 11:02:53,228 [INFO] position_tracker:   #73 XOM LONG_CALL entry=$2.72 entered=2026-04-17T10:54
+2026-04-17 11:02:53,228 [INFO] position_tracker: PositionTracker initialized — 3 open positions restored
+2026-04-17 11:02:53,230 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:53,232 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 11:02:53,232 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
