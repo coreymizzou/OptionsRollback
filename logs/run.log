@@ -23812,3 +23812,551 @@
 2026-04-16 17:40:56,574 [INFO] run:   COIN skipped â€” outside market hours entry window (10am-3:30pm ET)
 2026-04-16 17:41:57,377 [INFO] run: Running options scanner on 19 tickers...
 2026-04-16 17:42:39,027 [INFO] run: Shutdown signal received â€” finishing current tick...
+2026-04-16 18:27:20,597 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-16 18:27:20,599 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-16 18:27:20,601 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-16 18:27:20,602 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-16 18:27:20,603 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-16 18:27:20,741 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-16 18:27:20,935 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-16 18:27:22,371 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 18:29:59,181 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 18:29:59,181 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 18:29:59,183 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,185 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,186 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,188 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,190 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,191 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,193 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,194 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,196 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:29:59,198 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:30:59,192 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:30:59,194 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:30:59,196 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:30:59,197 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:30:59,199 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:31:59,198 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:31:59,200 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:31:59,201 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:31:59,203 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:31:59,204 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:32:23,703 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-16 18:32:23,891 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-16 18:32:24,062 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-16 18:32:24,326 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-16 18:34:32,178 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-16 18:34:32,180 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-16 18:34:32,182 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-16 18:34:32,184 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-16 18:34:32,184 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-16 18:34:32,221 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-16 18:34:32,389 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-16 18:34:33,808 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 18:37:15,821 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 18:37:15,821 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 18:37:15,824 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,827 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,828 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,831 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,833 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,835 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,837 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,839 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,842 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:37:15,843 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:38:15,850 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:38:15,852 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:38:15,854 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:38:15,856 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:38:15,858 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:39:15,863 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:39:15,866 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:39:15,870 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:39:15,873 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:39:15,877 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:40:16,737 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 18:42:55,334 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 18:42:55,334 [INFO] run: Tick 5: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 18:42:55,336 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,338 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,340 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,342 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,344 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,346 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,349 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,351 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,353 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:42:55,355 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:43:55,361 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:43:55,363 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:43:55,366 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:43:55,368 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:43:55,371 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:44:55,368 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:44:55,370 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:44:55,372 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:44:55,374 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:44:55,375 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:45:56,202 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 18:48:33,970 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 18:48:33,970 [INFO] run: Tick 9: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 18:48:33,972 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,974 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,976 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,978 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,979 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,981 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,984 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,987 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,989 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:48:33,991 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:49:33,990 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:49:33,992 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:49:33,994 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:49:33,995 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:49:33,997 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:50:34,001 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:50:34,003 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:50:34,005 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:50:34,007 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:50:34,009 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:51:34,775 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 18:54:11,858 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 18:54:11,858 [INFO] run: Tick 13: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 18:54:11,861 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,863 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,866 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,868 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,870 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,872 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,875 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,877 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,879 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:54:11,881 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:55:11,878 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:55:11,880 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:55:11,882 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:55:11,883 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:55:11,885 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:56:11,889 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:56:11,891 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:56:11,893 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:56:11,894 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:56:11,896 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:57:12,711 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 18:59:52,297 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 18:59:52,297 [INFO] run: Tick 17: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 18:59:52,300 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,302 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,303 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,306 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,308 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,310 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,312 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,314 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,316 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 18:59:52,318 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:00:52,321 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:00:52,323 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:00:52,325 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:00:52,326 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:00:52,328 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:01:52,335 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:01:52,337 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:01:52,339 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:01:52,340 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:01:52,342 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:02:53,041 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 19:05:25,937 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 19:05:25,937 [INFO] run: Tick 21: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 19:05:25,940 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,942 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,943 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,946 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,949 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,951 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,954 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,956 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,958 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:05:25,960 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:06:25,960 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:06:25,962 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:06:25,964 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:06:25,965 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:06:25,967 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:07:25,975 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:07:25,977 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:07:25,980 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:07:25,982 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:07:25,984 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:08:26,709 [INFO] run: Running options scanner on 19 tickers...
+2026-04-16 19:10:55,629 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-16 19:10:55,629 [INFO] run: Tick 25: Scanner refreshed — regime=TRENDING_UP VIX=17.9 7 valid candidates
+2026-04-16 19:10:55,631 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,633 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,635 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,636 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,638 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,640 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,643 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,645 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,647 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:10:55,649 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:11:55,656 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:11:55,658 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:11:55,660 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:11:55,662 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:11:55,663 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:12:55,666 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:12:55,668 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:12:55,670 [INFO] run:   MSTR skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:12:55,672 [INFO] run:   META skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:12:55,674 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-16 19:13:11,729 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-16 19:13:11,915 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-16 19:13:55,703 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-16 19:13:55,704 [INFO] run: Loop stopped after 28 ticks
+2026-04-17 08:54:37,347 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 08:54:37,350 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 08:54:37,352 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 08:54:37,354 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 08:54:37,355 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 08:54:37,417 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 08:54:37,642 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 08:54:39,203 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 08:57:39,903 [ERROR] yfinance: $GS: possibly delisted; no price data found  (period=5d)
+2026-04-17 08:57:39,915 [ERROR] yfinance: 
+1 Failed download:
+2026-04-17 08:57:39,915 [ERROR] yfinance: ['GS']: possibly delisted; no price data found  (period=5d)
+2026-04-17 08:58:27,476 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-17 08:58:27,476 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.7 8 valid candidates
+2026-04-17 08:58:27,478 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,480 [INFO] run:   MSFT skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,482 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,485 [INFO] run:   AMD skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,488 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,490 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,492 [INFO] run:   MSFT skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,494 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,496 [INFO] run:   AMD skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:58:27,498 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:59:27,501 [INFO] run:   AAPL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:59:27,503 [INFO] run:   MSFT skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:59:27,505 [INFO] run:   GOOGL skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:59:27,507 [INFO] run:   AMD skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 08:59:27,509 [INFO] run:   COIN skipped — outside market hours entry window (10am-3:30pm ET)
+2026-04-17 09:00:28,281 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:04:06,518 [INFO] run: Scanner complete: 19 scanned, 6 meet threshold
+2026-04-17 09:04:06,518 [INFO] run: Tick 4: Scanner refreshed — regime=TRENDING_UP VIX=17.8 6 valid candidates
+2026-04-17 09:04:08,499 [INFO] notifier: Alert sent: ENTER MSFT conf=0.70 force=False
+2026-04-17 09:04:08,663 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:04:08,678 [INFO] run:   MSFT now tracked — action state set to HOLD
+2026-04-17 09:04:08,691 [INFO] run:   Candidate MSFT: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:04:09,742 [INFO] notifier: Alert sent: ENTER META conf=0.70 force=False
+2026-04-17 09:04:09,898 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:04:09,913 [INFO] run:   META now tracked — action state set to HOLD
+2026-04-17 09:04:09,925 [INFO] run:   Candidate META: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:04:12,466 [INFO] notifier: Alert sent: ENTER COIN conf=0.70 force=False
+2026-04-17 09:04:15,231 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:04:15,245 [INFO] run:   COIN now tracked — action state set to HOLD
+2026-04-17 09:04:15,258 [INFO] run:   Candidate COIN: ENTER conf=0.70 (confluence 11pts)
+2026-04-17 09:04:18,729 [INFO] run:   MSFT #37: HOLD conf=0.00 pnl=$+281.00
+2026-04-17 09:04:18,741 [INFO] run:   META #38: HOLD conf=0.00 pnl=$+2057.00
+2026-04-17 09:04:20,195 [INFO] run:   COIN #39: HOLD conf=0.00 pnl=$+0.00
+2026-04-17 09:04:20,229 [INFO] notifier: Alert sent: ENTER AMZN conf=0.70 force=False
+2026-04-17 09:04:20,388 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:04:20,402 [INFO] run:   AMZN now tracked — action state set to HOLD
+2026-04-17 09:04:20,415 [INFO] run:   Candidate AMZN: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:04:20,417 [INFO] run: [BANKROLL] Insufficient funds — need $671.00, have $104.00 — skipping PLTR
+2026-04-17 09:05:21,084 [INFO] run:   AMZN #40: HOLD conf=0.00 pnl=$-488.00
+2026-04-17 09:05:21,086 [INFO] run: [BANKROLL] Insufficient funds — need $671.00, have $104.00 — skipping PLTR
+2026-04-17 09:06:19,506 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:08:04,582 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:08:15,452 [ERROR] yfinance: $NFLX: possibly delisted; no price data found  (period=5d)
+2026-04-17 09:08:15,454 [ERROR] yfinance: 
+1 Failed download:
+2026-04-17 09:08:15,454 [ERROR] yfinance: ['NFLX']: possibly delisted; no price data found  (period=5d)
+2026-04-17 09:08:41,914 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:08:42,126 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:08:42,336 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:08:42,683 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:08:42,777 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:09:22,410 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:09:22,415 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-17 09:09:22,416 [INFO] position_tracker:   #37 MSFT LONG_CALL entry=$10.81 entered=2026-04-17T09:04
+2026-04-17 09:09:22,416 [INFO] position_tracker:   #38 META LONG_CALL entry=$7.66 entered=2026-04-17T09:04
+2026-04-17 09:09:22,416 [INFO] position_tracker:   #39 COIN LONG_CALL entry=$16.66 entered=2026-04-17T09:04
+2026-04-17 09:09:22,416 [INFO] position_tracker:   #40 AMZN LONG_CALL entry=$13.83 entered=2026-04-17T09:04
+2026-04-17 09:09:22,417 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-17 09:09:22,419 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 09:09:22,422 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 09:09:22,423 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:09:22,468 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:09:28,226 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:09:28,307 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 09:09:28,350 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:09:28,350 [INFO] run: Loop stopped after 0 ticks
+2026-04-17 09:09:37,963 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:09:37,966 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-17 09:09:37,967 [INFO] position_tracker:   #37 MSFT LONG_CALL entry=$10.81 entered=2026-04-17T09:04
+2026-04-17 09:09:37,967 [INFO] position_tracker:   #38 META LONG_CALL entry=$7.66 entered=2026-04-17T09:04
+2026-04-17 09:09:37,967 [INFO] position_tracker:   #39 COIN LONG_CALL entry=$16.66 entered=2026-04-17T09:04
+2026-04-17 09:09:37,967 [INFO] position_tracker:   #40 AMZN LONG_CALL entry=$13.83 entered=2026-04-17T09:04
+2026-04-17 09:09:37,968 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-17 09:09:37,970 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 09:09:37,973 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 09:09:37,973 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:09:45,549 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:09:45,552 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 09:09:45,556 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:09:45,593 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:09:45,764 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 09:09:47,265 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:13:23,794 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-17 09:13:23,794 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.8 9 valid candidates
+2026-04-17 09:13:25,525 [INFO] notifier: Alert sent: ENTER MSFT conf=0.70 force=False
+2026-04-17 09:13:25,679 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:13:25,694 [INFO] run:   MSFT now tracked — action state set to HOLD
+2026-04-17 09:13:25,709 [INFO] run:   Candidate MSFT: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:13:28,488 [INFO] notifier: Alert sent: ENTER META conf=0.70 force=False
+2026-04-17 09:13:28,631 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:13:28,647 [INFO] run:   META now tracked — action state set to HOLD
+2026-04-17 09:13:28,660 [INFO] run:   Candidate META: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:13:29,746 [INFO] notifier: Alert sent: ENTER AMZN conf=0.70 force=False
+2026-04-17 09:13:31,847 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:13:31,863 [INFO] run:   AMZN now tracked — action state set to HOLD
+2026-04-17 09:13:31,877 [INFO] run:   Candidate AMZN: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:13:33,047 [INFO] notifier: Alert sent: ENTER XOM conf=0.60 force=False
+2026-04-17 09:13:35,484 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:13:35,498 [INFO] run:   XOM now tracked — action state set to HOLD
+2026-04-17 09:13:35,510 [INFO] run:   Candidate XOM: ENTER conf=0.60 (confluence 12pts)
+2026-04-17 09:13:36,901 [INFO] run:   MSFT #41: HOLD conf=0.00 pnl=$+281.00
+2026-04-17 09:13:36,914 [INFO] run:   META #42: HOLD conf=0.00 pnl=$+2106.00
+2026-04-17 09:13:36,929 [INFO] run:   AMZN #43: HOLD conf=0.00 pnl=$-467.00
+2026-04-17 09:13:36,943 [INFO] run:   XOM #44: HOLD conf=0.00 pnl=$-461.00
+2026-04-17 09:13:36,983 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.70 force=False
+2026-04-17 09:13:37,122 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:13:37,138 [INFO] run:   GOOGL now tracked — action state set to HOLD
+2026-04-17 09:13:37,153 [INFO] run:   Candidate GOOGL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:14:29,527 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:14:29,734 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:14:29,913 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:14:30,110 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:16:47,795 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:16:47,797 [INFO] position_tracker: Restored 5 open positions from DB
+2026-04-17 09:16:47,797 [INFO] position_tracker:   #41 MSFT LONG_CALL entry=$10.74 entered=2026-04-17T09:13
+2026-04-17 09:16:47,797 [INFO] position_tracker:   #42 META LONG_CALL entry=$7.32 entered=2026-04-17T09:13
+2026-04-17 09:16:47,797 [INFO] position_tracker:   #43 AMZN LONG_CALL entry=$13.74 entered=2026-04-17T09:13
+2026-04-17 09:16:47,797 [INFO] position_tracker:   #44 XOM LONG_CALL entry=$7.11 entered=2026-04-17T09:13
+2026-04-17 09:16:47,798 [INFO] position_tracker:   #45 GOOGL LONG_CALL entry=$7.8 entered=2026-04-17T09:13
+2026-04-17 09:16:47,798 [INFO] position_tracker: PositionTracker initialized — 5 open positions restored
+2026-04-17 09:16:47,801 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:17:04,920 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:17:04,924 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 09:17:04,930 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:17:05,000 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:17:05,255 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 09:17:06,676 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:20:35,472 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-17 09:20:35,472 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.6 7 valid candidates
+2026-04-17 09:20:37,171 [INFO] notifier: Alert sent: ENTER AAPL conf=0.70 force=False
+2026-04-17 09:20:37,335 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:20:37,377 [INFO] run:   AAPL now tracked — action state set to HOLD
+2026-04-17 09:20:37,391 [INFO] run:   Candidate AAPL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:20:38,585 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.70 force=False
+2026-04-17 09:20:40,839 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:20:40,855 [INFO] run:   GOOGL now tracked — action state set to HOLD
+2026-04-17 09:20:40,868 [INFO] run:   Candidate GOOGL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:20:42,057 [INFO] notifier: Alert sent: ENTER XOM conf=0.60 force=False
+2026-04-17 09:20:42,199 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:20:42,215 [INFO] run:   XOM now tracked — action state set to HOLD
+2026-04-17 09:20:42,229 [INFO] run:   Candidate XOM: ENTER conf=0.60 (confluence 12pts)
+2026-04-17 09:20:43,309 [INFO] notifier: Alert sent: ENTER AMD conf=0.60 force=False
+2026-04-17 09:20:45,198 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:20:45,214 [INFO] run:   AMD now tracked — action state set to HOLD
+2026-04-17 09:20:45,227 [INFO] run:   Candidate AMD: ENTER conf=0.60 (confluence 11pts)
+2026-04-17 09:20:45,230 [INFO] run: [BANKROLL] Insufficient funds — need $1658.00, have $807.00 — skipping COIN
+2026-04-17 09:20:46,424 [INFO] run:   AAPL #46: HOLD conf=0.00 pnl=$-235.00
+2026-04-17 09:20:46,438 [INFO] run:   GOOGL #47: HOLD conf=0.00 pnl=$+286.00
+2026-04-17 09:20:46,452 [INFO] run:   XOM #48: HOLD conf=0.00 pnl=$-461.00
+2026-04-17 09:20:46,466 [INFO] run:   AMD #49: HOLD conf=0.00 pnl=$-546.00
+2026-04-17 09:20:46,469 [INFO] run: [BANKROLL] Insufficient funds — need $1658.00, have $807.00 — skipping COIN
+2026-04-17 09:21:12,355 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:21:12,567 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:21:46,460 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:21:46,460 [INFO] run: Loop stopped after 2 ticks
+2026-04-17 09:22:08,747 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:22:08,749 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-17 09:22:08,749 [INFO] position_tracker:   #46 AAPL LONG_CALL entry=$8.4 entered=2026-04-17T09:20
+2026-04-17 09:22:08,749 [INFO] position_tracker:   #47 GOOGL LONG_CALL entry=$7.62 entered=2026-04-17T09:20
+2026-04-17 09:22:08,749 [INFO] position_tracker:   #48 XOM LONG_CALL entry=$7.13 entered=2026-04-17T09:20
+2026-04-17 09:22:08,750 [INFO] position_tracker:   #49 AMD LONG_CALL entry=$18.78 entered=2026-04-17T09:20
+2026-04-17 09:22:08,750 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-17 09:22:08,751 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-17 09:22:08,753 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-17 09:22:08,753 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:23:50,519 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:23:50,522 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 09:23:50,525 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:23:59,921 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:23:59,925 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 09:23:59,932 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:23:59,973 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:24:00,188 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 09:24:01,537 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:27:24,032 [INFO] run: Scanner complete: 19 scanned, 5 meet threshold
+2026-04-17 09:27:24,032 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.6 5 valid candidates
+2026-04-17 09:27:25,938 [INFO] notifier: Alert sent: ENTER AAPL conf=0.70 force=False
+2026-04-17 09:27:26,124 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:27:26,145 [INFO] run:   AAPL now tracked — action state set to HOLD
+2026-04-17 09:27:26,162 [INFO] run:   Candidate AAPL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:27:27,347 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.70 force=False
+2026-04-17 09:27:27,495 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:27:27,519 [INFO] run:   GOOGL now tracked — action state set to HOLD
+2026-04-17 09:27:27,534 [INFO] run:   Candidate GOOGL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:27:28,792 [INFO] notifier: Alert sent: ENTER AMZN conf=0.70 force=False
+2026-04-17 09:27:28,949 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:27:28,973 [INFO] run:   AMZN now tracked — action state set to HOLD
+2026-04-17 09:27:28,988 [INFO] run:   Candidate AMZN: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:27:30,286 [INFO] notifier: Alert sent: ENTER XOM conf=0.70 force=False
+2026-04-17 09:27:30,437 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:27:30,458 [INFO] run:   XOM now tracked — action state set to HOLD
+2026-04-17 09:27:30,474 [INFO] run:   Candidate XOM: ENTER conf=0.70 (confluence 12pts)
+2026-04-17 09:27:30,476 [INFO] run: [BANKROLL] Insufficient funds — need $3843.00, have $1567.00 — skipping MSTR
+2026-04-17 09:27:32,804 [INFO] run:   AAPL #50: HOLD conf=0.00 pnl=$-240.00
+2026-04-17 09:27:32,819 [INFO] run:   GOOGL #51: HOLD conf=0.00 pnl=$+277.00
+2026-04-17 09:27:32,836 [INFO] run:   AMZN #52: HOLD conf=0.00 pnl=$-38.00
+2026-04-17 09:27:32,852 [INFO] run:   XOM #53: HOLD conf=0.00 pnl=$-639.00
+2026-04-17 09:27:32,854 [INFO] run: [BANKROLL] Insufficient funds — need $3843.00, have $1567.00 — skipping MSTR
+2026-04-17 09:28:34,201 [INFO] run: [BANKROLL] Insufficient funds — need $3843.00, have $1567.00 — skipping MSTR
+2026-04-17 09:28:52,964 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:28:53,206 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:28:53,424 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:28:53,629 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:28:53,821 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:29:32,444 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:29:32,447 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-17 09:29:32,447 [INFO] position_tracker:   #50 AAPL LONG_CALL entry=$8.48 entered=2026-04-17T09:27
+2026-04-17 09:29:32,447 [INFO] position_tracker:   #51 GOOGL LONG_CALL entry=$7.61 entered=2026-04-17T09:27
+2026-04-17 09:29:32,448 [INFO] position_tracker:   #52 AMZN LONG_CALL entry=$9.48 entered=2026-04-17T09:27
+2026-04-17 09:29:32,448 [INFO] position_tracker:   #53 XOM LONG_CALL entry=$8.76 entered=2026-04-17T09:27
+2026-04-17 09:29:32,448 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-17 09:29:32,451 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:29:39,933 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:29:39,935 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 09:29:39,938 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:29:39,972 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:29:40,175 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 09:29:41,479 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:33:22,998 [INFO] run: Scanner complete: 19 scanned, 6 meet threshold
+2026-04-17 09:33:22,998 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.6 6 valid candidates
+2026-04-17 09:33:24,741 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.70 force=False
+2026-04-17 09:33:24,754 [INFO] broker: Sending order payload: {'symbol': 'GOOGL260515C00345000', 'qty': '1', 'side': 'buy_to_open', 'type': 'limit', 'limit_price': '7.65', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_GOOGL_54'}
+2026-04-17 09:33:24,898 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:33:24,915 [INFO] run:   GOOGL now tracked — action state set to HOLD
+2026-04-17 09:33:24,929 [INFO] run:   Candidate GOOGL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:33:26,128 [INFO] notifier: Alert sent: ENTER AMZN conf=0.60 force=False
+2026-04-17 09:33:26,138 [INFO] broker: Sending order payload: {'symbol': 'AMZN260515C00260000', 'qty': '1', 'side': 'buy_to_open', 'type': 'limit', 'limit_price': '9.76', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_AMZN_55'}
+2026-04-17 09:33:26,264 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:33:26,280 [INFO] run:   AMZN now tracked — action state set to HOLD
+2026-04-17 09:33:26,292 [INFO] run:   Candidate AMZN: ENTER conf=0.60 (confluence 13pts)
+2026-04-17 09:33:27,512 [INFO] notifier: Alert sent: ENTER AMD conf=0.60 force=False
+2026-04-17 09:33:27,521 [INFO] broker: Sending order payload: {'symbol': 'AMD260515C00290000', 'qty': '1', 'side': 'buy_to_open', 'type': 'limit', 'limit_price': '20.75', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_AMD_56'}
+2026-04-17 09:33:27,655 [ERROR] broker: Order failed 422: {"code":40010001,"message":"invalid side"}
+2026-04-17 09:33:27,669 [INFO] run:   AMD now tracked — action state set to HOLD
+2026-04-17 09:33:27,683 [INFO] run:   Candidate AMD: ENTER conf=0.60 (confluence 11pts)
+2026-04-17 09:33:27,685 [INFO] run: [BANKROLL] Insufficient funds — need $3883.00, have $1184.00 — skipping MSTR
+2026-04-17 09:33:28,944 [INFO] run:   Candidate PLTR: ENTER conf=0.55 (confluence 9pts)
+2026-04-17 09:33:30,283 [INFO] run:   GOOGL #54: HOLD conf=0.00 pnl=$+295.00
+2026-04-17 09:33:30,298 [INFO] run:   AMZN #55: HOLD conf=0.00 pnl=$-16.00
+2026-04-17 09:33:30,311 [INFO] run:   AMD #56: HOLD conf=0.00 pnl=$-737.00
+2026-04-17 09:33:30,314 [INFO] run: [BANKROLL] Insufficient funds — need $3883.00, have $1184.00 — skipping MSTR
+2026-04-17 09:34:31,575 [INFO] run: [BANKROLL] Insufficient funds — need $3883.00, have $1184.00 — skipping MSTR
+2026-04-17 09:35:03,450 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:35:03,714 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:36:48,072 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:36:48,074 [INFO] position_tracker: Restored 3 open positions from DB
+2026-04-17 09:36:48,074 [INFO] position_tracker:   #54 GOOGL LONG_CALL entry=$7.65 entered=2026-04-17T09:33
+2026-04-17 09:36:48,075 [INFO] position_tracker:   #55 AMZN LONG_CALL entry=$9.76 entered=2026-04-17T09:33
+2026-04-17 09:36:48,075 [INFO] position_tracker:   #56 AMD LONG_CALL entry=$20.75 entered=2026-04-17T09:33
+2026-04-17 09:36:48,075 [INFO] position_tracker: PositionTracker initialized — 3 open positions restored
+2026-04-17 09:36:48,078 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:37:31,796 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:37:31,799 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-17 09:37:31,803 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:37:31,848 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-17 09:37:32,986 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-17 09:37:34,292 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:40:58,007 [INFO] run: Scanner complete: 19 scanned, 5 meet threshold
+2026-04-17 09:40:58,008 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=17.7 5 valid candidates
+2026-04-17 09:40:59,699 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.70 force=False
+2026-04-17 09:40:59,712 [INFO] broker: Sending order payload: {'symbol': 'GOOGL260515C00345000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '7.7', 'time_in_force': 'day', 'client_order_id': 'rl_GOOGL_57'}
+2026-04-17 09:40:59,894 [INFO] broker: Order placed: buy_to_open 1x GOOGL260515C00345000 @ $7.7 — ID: d86e538e-2ce4-47da-8340-f09a899646fd
+2026-04-17 09:41:32,934 [WARNING] broker: Order d86e538e-2ce4-47da-8340-f09a899646fd timed out after 30s
+2026-04-17 09:41:32,948 [INFO] run:   GOOGL now tracked — action state set to HOLD
+2026-04-17 09:41:32,961 [INFO] run:   Candidate GOOGL: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:41:34,036 [INFO] notifier: Alert sent: ENTER AMZN conf=0.70 force=False
+2026-04-17 09:41:34,045 [INFO] broker: Sending order payload: {'symbol': 'AMZN260515C00260000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '9.96', 'time_in_force': 'day', 'client_order_id': 'rl_AMZN_58'}
+2026-04-17 09:41:34,186 [INFO] broker: Order placed: buy_to_open 1x AMZN260515C00260000 @ $9.96 — ID: 4bf55182-faa1-4f75-bc8f-586ea9589cec
+2026-04-17 09:41:34,311 [INFO] broker: Order 4bf55182-faa1-4f75-bc8f-586ea9589cec filled @ $9.85
+2026-04-17 09:41:34,333 [INFO] run:   AMZN now tracked — action state set to HOLD
+2026-04-17 09:41:34,348 [INFO] run:   Candidate AMZN: ENTER conf=0.70 (confluence 13pts)
+2026-04-17 09:41:35,591 [INFO] notifier: Alert sent: ENTER COIN conf=0.70 force=False
+2026-04-17 09:41:35,602 [INFO] broker: Sending order payload: {'symbol': 'COIN260515C00220000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '28.16', 'time_in_force': 'day', 'client_order_id': 'rl_COIN_59'}
+2026-04-17 09:41:35,742 [INFO] broker: Order placed: buy_to_open 1x COIN260515C00220000 @ $28.16 — ID: bedb8750-0d3b-47e7-b031-cc7d3ea13ec4
+2026-04-17 09:41:35,877 [INFO] broker: Order bedb8750-0d3b-47e7-b031-cc7d3ea13ec4 filled @ $16.50
+2026-04-17 09:41:35,900 [INFO] run:   COIN now tracked — action state set to HOLD
+2026-04-17 09:41:35,914 [INFO] run:   Candidate COIN: ENTER conf=0.70 (confluence 11pts)
+2026-04-17 09:41:35,916 [INFO] run: [BANKROLL] Insufficient funds — need $3787.00, have $1595.00 — skipping MSTR
+2026-04-17 09:41:37,966 [INFO] run:   GOOGL #57: HOLD conf=0.00 pnl=$+298.00
+2026-04-17 09:41:37,979 [INFO] run:   AMZN #58: HOLD conf=0.00 pnl=$-24.00
+2026-04-17 09:41:37,992 [INFO] run:   COIN #59: HOLD conf=0.00 pnl=$-1181.00
+2026-04-17 09:41:37,994 [INFO] run: [BANKROLL] Insufficient funds — need $3787.00, have $1595.00 — skipping MSTR
+2026-04-17 09:42:38,803 [INFO] run: Running options scanner on 19 tickers...
+2026-04-17 09:43:28,670 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:43:28,673 [INFO] position_tracker: Restored 3 open positions from DB
+2026-04-17 09:43:28,673 [INFO] position_tracker:   #57 GOOGL LONG_CALL entry=$7.7 entered=2026-04-17T09:40
+2026-04-17 09:43:28,673 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:43:28,673 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:43:28,673 [INFO] position_tracker: PositionTracker initialized — 3 open positions restored
+2026-04-17 09:43:28,676 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:45:07,241 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:45:07,244 [INFO] position_tracker: Restored 3 open positions from DB
+2026-04-17 09:45:07,244 [INFO] position_tracker:   #57 GOOGL LONG_CALL entry=$7.7 entered=2026-04-17T09:40
+2026-04-17 09:45:07,245 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:45:07,245 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:45:07,246 [INFO] position_tracker: PositionTracker initialized — 3 open positions restored
+2026-04-17 09:45:07,250 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:45:32,788 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:45:32,791 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-17 09:45:32,791 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:45:32,792 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:45:32,792 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-17 09:45:32,795 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:47:41,946 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:47:41,948 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-17 09:47:41,948 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:47:41,949 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:47:41,949 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-17 09:47:41,953 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:50:03,626 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:50:03,629 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-17 09:50:03,629 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:50:03,630 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:50:03,630 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-17 09:50:03,633 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:55:16,709 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-17 09:56:29,405 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:56:29,407 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-17 09:56:29,407 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:56:29,408 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:56:29,408 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-17 09:56:29,411 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-17 09:56:38,196 [INFO] database: Database initialized at ./scanner_data.db
+2026-04-17 09:56:38,198 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-17 09:56:38,198 [INFO] position_tracker:   #58 AMZN LONG_CALL entry=$9.85 entered=2026-04-17T09:41
+2026-04-17 09:56:38,198 [INFO] position_tracker:   #59 COIN LONG_CALL entry=$16.5 entered=2026-04-17T09:41
+2026-04-17 09:56:38,198 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-17 09:56:38,201 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
