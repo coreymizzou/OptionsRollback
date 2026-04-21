@@ -1,6 +1,6 @@
 """
 =============================================================================
-run.py — Main Orchestration Loop
+run_live.py — Live Trading Mode (mid-price limits, separate Alpaca account)
 =============================================================================
 Runs the 60-second decision loop:
   1. Every SCANNER_RUN_INTERVAL seconds: run full options scanner
@@ -38,6 +38,7 @@ sys.path.insert(0, str(SCANNER_DIR))
 
 # ─── Local imports ────────────────────────────────────────────────────────────
 import config as cfg
+cfg.DB_PATH = "./scanner_data_live.db"  # Separate DB for mid-price live simulation
 import database as db
 try:
     import broker
@@ -1606,13 +1607,12 @@ def evaluate_new_candidates(
                                     ticker, exp_, main_.get("option_type", "call"), main_.get("strike", 0)
                                 )
                                 fresh = get_live_option_quote(occ_symbol) if get_live_option_quote else {}
-                                # Paper: use ask for immediate fills; live: use mid for price discipline
-                                use_price = fresh.get("ask", 0) if (args.paper or LIVE_PAPER_MODE) else fresh.get("mid", 0)
+                                # run_live.py always uses mid for price discipline
+                                use_price = fresh.get("mid", 0)
                                 if use_price > 0:
                                     stale_price = fill_price_
                                     fill_price_ = use_price
-                                    mode_label = "ask" if (args.paper or LIVE_PAPER_MODE) else "mid"
-                                    logger.info(f"  {ticker} price refreshed: ${stale_price:.2f} -> {mode_label} ${fill_price_:.2f} (bid=${fresh['bid']:.2f} ask=${fresh['ask']:.2f})")
+                                    logger.info(f"  {ticker} price refreshed: ${stale_price:.2f} -> mid ${fill_price_:.2f} (bid=${fresh['bid']:.2f} ask=${fresh['ask']:.2f})")
                             except Exception as e:
                                 logger.warning(f"  {ticker} price refresh failed: {e} — using cached price")
 
@@ -2251,21 +2251,21 @@ def _prompt_and_store_keys():
             db.set_state("tradier_api_key", tradier_key)
             changed = True
 
-    # ── Alpaca (ask account)
-    alpaca_key = db.get_state("alpaca_api_key", "")
+    # ── Alpaca (mid account)
+    alpaca_key = db.get_state("alpaca_api_key_live", "")
     if not alpaca_key:
-        print("\n  Alpaca API key not set (ask account).")
+        print("\n  Alpaca API key not set (mid account).")
         alpaca_key = input("  Enter Alpaca API key: ").strip()
         if alpaca_key:
-            db.set_state("alpaca_api_key", alpaca_key)
+            db.set_state("alpaca_api_key_live", alpaca_key)
             changed = True
 
-    alpaca_secret = db.get_state("alpaca_secret_key", "")
+    alpaca_secret = db.get_state("alpaca_secret_key_live", "")
     if not alpaca_secret:
-        print("\n  Alpaca secret key not set (ask account).")
+        print("\n  Alpaca secret key not set (mid account).")
         alpaca_secret = input("  Enter Alpaca secret key: ").strip()
         if alpaca_secret:
-            db.set_state("alpaca_secret_key", alpaca_secret)
+            db.set_state("alpaca_secret_key_live", alpaca_secret)
             changed = True
 
     if changed:
@@ -2300,11 +2300,11 @@ def _prompt_and_store_keys():
         if ar.status_code == 200:
             acct = ar.json()
             cash = float(acct.get("cash", 0))
-            print(f"  Alpaca (ask account): OK — cash ${cash:,.2f}")
+            print(f"  Alpaca (mid account): OK — cash ${cash:,.2f}")
         else:
-            print(f"  Alpaca (ask account): FAILED (HTTP {ar.status_code}) — check your keys")
+            print(f"  Alpaca (mid account): FAILED (HTTP {ar.status_code}) — check your keys")
     except Exception as e:
-        print(f"  Alpaca (ask account): FAILED ({e})")
+        print(f"  Alpaca (mid account): FAILED ({e})")
 
     print()
 
@@ -2360,8 +2360,8 @@ def main():
     # ── Handle --reset-keys
     if args.reset_keys:
         db.set_state("tradier_api_key", "")
-        db.set_state("alpaca_api_key", "")
-        db.set_state("alpaca_secret_key", "")
+        db.set_state("alpaca_api_key_live", "")
+        db.set_state("alpaca_secret_key_live", "")
         print("  API keys cleared — you will be prompted on next run.")
         return
 

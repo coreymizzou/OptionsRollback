@@ -122,9 +122,15 @@ def place_option_order(
     if not symbol:
         return False, None, None
 
-    # Alpaca single-leg options: side is simply "buy" or "sell"
-    # position_intent is NOT used for single-leg orders (only for mleg legs)
-    alpaca_side = "buy" if side in ("buy", "buy_to_open") else "sell"
+    # Alpaca single-leg options
+    # For closing orders, must include position_intent="sell_to_close"
+    # so Alpaca knows it's closing an existing long, not opening a naked short
+    if side in ("buy", "buy_to_open"):
+        alpaca_side     = "buy"
+        position_intent = "buy_to_open"
+    else:
+        alpaca_side     = "sell"
+        position_intent = "sell_to_close"
 
     payload = {
         "symbol":          symbol,
@@ -133,6 +139,7 @@ def place_option_order(
         "type":            "limit",
         "limit_price":     str(round(limit_price, 2)),
         "time_in_force":   "day",
+        "position_intent": position_intent,
         "client_order_id": tag or f"rl_{ticker}_{datetime.now().strftime('%H%M%S')}"
     }
 

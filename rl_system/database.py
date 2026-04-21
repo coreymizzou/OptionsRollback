@@ -535,3 +535,21 @@ def get_daily_pnl() -> float:
             (f"{today}%",)
         ).fetchone()
     return float(row["pnl"]) if row else 0.0
+
+# =============================================================================
+#  PENDING ORDERS PERSISTENCE
+# =============================================================================
+
+PENDING_ORDERS_KEY = "pending_orders"
+
+def save_pending_orders(pending: dict):
+    """Persist pending order dict to system_state so restarts don't lose them."""
+    set_state(PENDING_ORDERS_KEY, pending)
+
+def load_pending_orders() -> dict:
+    """Load pending orders from system_state on startup."""
+    return get_state(PENDING_ORDERS_KEY, default={})
+
+def clear_pending_orders():
+    """Wipe pending orders from system_state."""
+    set_state(PENDING_ORDERS_KEY, {})
