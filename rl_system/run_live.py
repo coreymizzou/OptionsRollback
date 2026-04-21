@@ -1613,6 +1613,11 @@ def evaluate_new_candidates(
                                     stale_price = fill_price_
                                     fill_price_ = use_price
                                     logger.info(f"  {ticker} price refreshed: ${stale_price:.2f} -> mid ${fill_price_:.2f} (bid=${fresh['bid']:.2f} ask=${fresh['ask']:.2f})")
+                                    # Re-check bankroll against actual live price
+                                    if bankroll is not None and fill_price_ * 100 > bankroll[0]:
+                                        logger.info(f"  [BANKROLL] Insufficient funds after price refresh — need ${fill_price_*100:.2f}, have ${bankroll[0]:.2f} — skipping {ticker}")
+                                        _just_tracked = False
+                                        continue
                             except Exception as e:
                                 logger.warning(f"  {ticker} price refresh failed: {e} — using cached price")
 
@@ -1651,37 +1656,13 @@ def evaluate_new_candidates(
                                 )
 
                             if ok:
-                                # Poll for fill — only write to DB if actually filled
-                                fill_status, fill = broker.poll_for_fill(oid, timeout_seconds=120)
-                                if fill_status == "filled" and fill and fill > 0:
-                                    actual_fill = fill
-                                    _pos_data["entry_price"]  = actual_fill
-                                    _pos_data["entry_cost"]   = actual_fill * 100 * contracts_
-                                    _pos_data["stop_price"]   = round(actual_fill * (1 - cfg.STOP_LOSS_PCT), 2)
-                                    _pos_data["target_price"] = round(actual_fill * (1 + cfg.PROFIT_TARGET_PCT), 2)
-                                    position_id = _ins(_pos_data)
-                                    if position_id:
-                                        loaded = db.get_position_by_id(position_id)
-                                        if loaded:
-                                            tracker._open[position_id] = loaded
-                                    print(f"  [LIVE-PAPER] ENTER {ticker} #{position_id} "
-                                          f"@ ${actual_fill:.2f} ({strategy_}) "
-                                          f"order={oid} status={fill_status}")
-                                    # Deduct from bankroll on confirmed fill
-                                    if bankroll is not None:
-                                        bankroll[0] = round(bankroll[0] - (actual_fill * 100 * contracts_), 2)
-                                        db.set_state("bankroll_remaining", bankroll[0])
-                                        print(f"  [BANKROLL] ENTER {ticker} #{position_id} @ ${actual_fill:.2f} "
-                                              f"({strategy_}) cost=${actual_fill*100*contracts_:.2f} "
-                                              f"remaining=${bankroll[0]:,.2f}")
-                                else:
-                                    print(f"  [LIVE-PAPER] Order {oid} not filled (status={fill_status}) "
-                                          f"— {ticker} NOT tracked, registering for reconciliation")
-                                    logger.warning(f"  {ticker} order {oid} status={fill_status} — queued for reconciliation")
-                                    if fill_status == "timeout":
-                                        if pending_orders is not None:
-                                            pending_orders[oid] = _pos_data.copy()
-                                            save_pending_orders(pending_orders)
+                                # Order placed — queue for reconciliation, don't block the loop
+                                print(f"  [LIVE-PAPER] Order {oid} placed for {ticker} @ ${fill_price_:.2f} — queued for reconciliation")
+                                if pending_orders is not None:
+                                    pdata = _pos_data.copy()
+                                    pdata["limit_price"] = fill_price_  # actual placed limit, not cached scanner price
+                                    pending_orders[oid] = pdata
+                                    save_pending_orders(pending_orders)
                             else:
                                 print(f"  [LIVE-PAPER] Order placement failed for {ticker} — not tracked")
 
@@ -2357,6 +2338,17 @@ def main():
     # ── Initialize
     db.initialize_database()
 
+    # ── One-shot pre-init commands (no keys needed)
+    if args.reset:
+        db.initialize_database()
+        _cmd_reset(keep_weights=True)
+        return
+
+    if args.reset_all:
+        db.initialize_database()
+        _cmd_reset(keep_weights=False)
+        return
+
     # ── Handle --reset-keys
     if args.reset_keys:
         db.set_state("tradier_api_key", "")
@@ -2410,14 +2402,6 @@ def main():
 
     if args.delete:
         _cmd_delete_position(args.delete)
-        return
-
-    if args.reset:
-        _cmd_reset(keep_weights=True)
-        return
-
-    if args.reset_all:
-        _cmd_reset(keep_weights=False)
         return
 
     # ── Startup log
@@ -2601,6 +2585,50 @@ def main():
                     filled_oids = []
                     for oid, pos_data in list(_pending_orders.items()):
                         import requests as _req
+
+                        # ── Staleness check: cancel if order too old or price drifted too far
+                        queued_at = pos_data.get("entry_time", "")
+                        try:
+                            from datetime import datetime as _dtc
+                            queued_dt = _dtc.fromisoformat(queued_at)
+                            age_hours = (_dtc.now() - queued_dt).total_seconds() / 3600
+                            # Cancel if older than market close (6.5 hours from open)
+                            if age_hours > 6.5:
+                                broker.cancel_order(oid)
+                                logger.info(f"  [RECONCILE] Cancelled stale order {oid} ({pos_data.get('ticker')} aged {age_hours:.1f}h)")
+                                ticker_r = pos_data.get("ticker", "")
+                                if ticker_r:
+                                    from datetime import timedelta
+                                    cooldown_until = (datetime.now() + timedelta(hours=4)).isoformat()
+                                    db.set_cooldown(ticker_r, cooldown_until, reason="order_age_cancelled")
+                                filled_oids.append(oid)
+                                continue
+                        except Exception:
+                            pass
+
+                        # ── Price drift check: cancel if live price > 20% above actual limit
+                        try:
+                            ticker_r = pos_data.get("ticker", "")
+                            occ_sym = broker.build_option_symbol(
+                                ticker_r, pos_data.get("expiration",""),
+                                pos_data.get("option_type","call"), pos_data.get("strike",0)
+                            )
+                            if get_live_option_quote and occ_sym:
+                                live_q = get_live_option_quote(occ_sym)
+                                live_ask = live_q.get("ask", 0)
+                                limit_price = pos_data.get("limit_price", pos_data.get("entry_price", 0))
+                                if live_ask > 0 and limit_price > 0 and live_ask > limit_price * 1.20:
+                                    broker.cancel_order(oid)
+                                    logger.info(f"  [RECONCILE] Cancelled {ticker_r} order {oid} — price drifted too far (limit=${limit_price:.2f} ask=${live_ask:.2f})")
+                                    # Cooldown ticker so it doesn't re-enter this session
+                                    from datetime import timedelta
+                                    cooldown_until = (datetime.now() + timedelta(hours=4)).isoformat()
+                                    db.set_cooldown(ticker_r, cooldown_until, reason="order_drift_cancelled")
+                                    filled_oids.append(oid)
+                                    continue
+                        except Exception:
+                            pass
+
                         r = _req.get(
                             f"{broker.ALPACA_BASE}/orders/{oid}",
                             headers=broker._headers(), timeout=8
