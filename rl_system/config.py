@@ -14,8 +14,8 @@ MAX_RISK_DOLLARS     = ACCOUNT_SIZE * MAX_RISK_PCT   # = $500
 MAX_CONCURRENT_POSITIONS = 3      # Hard cap on simultaneous open positions
 
 # ─── Position Management ─────────────────────────────────────────────────────
-STOP_LOSS_PCT        = 0.50       # Close position if down this fraction of entry cost
-PROFIT_TARGET_PCT    = 1.00       # Take profit at this fraction gain (100% = 2x)
+STOP_LOSS_PCT        = 0.33       # Close position if down this fraction of entry cost
+PROFIT_TARGET_PCT    = 0.66       # Take profit at this fraction gain (100% = 2x)
 MAX_DTE_AT_ENTRY     = 60         # Never enter with more than this many days to expiry
 MIN_DTE_AT_ENTRY     = 21         # Never enter with fewer than this many days to expiry
 CLOSE_BEFORE_DTE     = 7          # Force-close any position within this many DTE

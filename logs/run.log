@@ -43793,3 +43793,914 @@
 2026-04-21 12:11:30,846 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
 2026-04-21 12:11:30,848 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
 2026-04-21 12:11:30,848 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 12:12:15,194 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 12:12:15,194 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=20.0 8 valid candidates
+2026-04-21 12:12:15,459 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:12:15,834 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:12:16,215 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:12:16,579 [INFO] run: [BANKROLL] Insufficient funds — need $465.00, have $305.00 — skipping XOM
+2026-04-21 12:12:16,581 [INFO] run: [BANKROLL] Insufficient funds — need $1715.00, have $305.00 — skipping AMD
+2026-04-21 12:12:16,589 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:12:16,604 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:12:16,617 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:12:18,805 [INFO] run: [BANKROLL] Insufficient funds — need $465.00, have $305.00 — skipping XOM
+2026-04-21 12:12:18,808 [INFO] run: [BANKROLL] Insufficient funds — need $1715.00, have $305.00 — skipping AMD
+2026-04-21 12:13:16,860 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:13:17,243 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:13:17,642 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:13:17,963 [INFO] run: [BANKROLL] Insufficient funds — need $465.00, have $305.00 — skipping XOM
+2026-04-21 12:13:17,965 [INFO] run: [BANKROLL] Insufficient funds — need $1715.00, have $305.00 — skipping AMD
+2026-04-21 12:14:16,916 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:14:17,329 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:14:17,685 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:14:20,468 [INFO] run: [BANKROLL] Insufficient funds — need $465.00, have $305.00 — skipping XOM
+2026-04-21 12:14:20,470 [INFO] run: [BANKROLL] Insufficient funds — need $1715.00, have $305.00 — skipping AMD
+2026-04-21 12:15:17,422 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:17:56,784 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 12:17:56,784 [INFO] run: Tick 5: Scanner refreshed — regime=TRENDING_UP VIX=20.1 8 valid candidates
+2026-04-21 12:17:57,043 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:17:57,386 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:17:57,747 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:17:58,437 [INFO] run: [BANKROLL] Insufficient funds — need $459.00, have $305.00 — skipping XOM
+2026-04-21 12:17:58,439 [INFO] run: [BANKROLL] Insufficient funds — need $1305.00, have $305.00 — skipping AMD
+2026-04-21 12:17:58,447 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:17:58,461 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:17:58,476 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:17:59,358 [INFO] run: [BANKROLL] Insufficient funds — need $459.00, have $305.00 — skipping XOM
+2026-04-21 12:17:59,360 [INFO] run: [BANKROLL] Insufficient funds — need $1305.00, have $305.00 — skipping AMD
+2026-04-21 12:18:58,766 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:18:59,095 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:18:59,582 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:18:59,915 [INFO] run: [BANKROLL] Insufficient funds — need $459.00, have $305.00 — skipping XOM
+2026-04-21 12:18:59,917 [INFO] run: [BANKROLL] Insufficient funds — need $1305.00, have $305.00 — skipping AMD
+2026-04-21 12:19:58,714 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:19:59,121 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:19:59,517 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:20:01,546 [INFO] run: [BANKROLL] Insufficient funds — need $459.00, have $305.00 — skipping XOM
+2026-04-21 12:20:01,548 [INFO] run: [BANKROLL] Insufficient funds — need $1305.00, have $305.00 — skipping AMD
+2026-04-21 12:20:59,219 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:23:37,844 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 12:23:37,844 [INFO] run: Tick 9: Scanner refreshed — regime=TRENDING_UP VIX=20.2 9 valid candidates
+2026-04-21 12:23:38,100 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:23:38,408 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:23:38,734 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:23:39,042 [INFO] run: [BANKROLL] Insufficient funds — need $461.00, have $305.00 — skipping XOM
+2026-04-21 12:23:39,050 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:23:39,066 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:23:39,081 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:23:41,623 [INFO] run: [BANKROLL] Insufficient funds — need $461.00, have $305.00 — skipping XOM
+2026-04-21 12:24:39,319 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:24:39,624 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:24:39,972 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:24:40,766 [INFO] run: [BANKROLL] Insufficient funds — need $461.00, have $305.00 — skipping XOM
+2026-04-21 12:25:39,356 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:25:39,868 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:25:40,472 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:25:40,795 [INFO] run: [BANKROLL] Insufficient funds — need $461.00, have $305.00 — skipping XOM
+2026-04-21 12:26:39,899 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:29:16,909 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 12:29:16,909 [INFO] run: Tick 13: Scanner refreshed — regime=TRENDING_UP VIX=20.4 7 valid candidates
+2026-04-21 12:29:17,174 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:29:17,487 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:29:17,863 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:29:18,331 [INFO] run: [BANKROLL] Insufficient funds — need $1347.00, have $305.00 — skipping AMD
+2026-04-21 12:29:18,340 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:29:18,355 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:29:18,370 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:29:22,060 [INFO] run: [BANKROLL] Insufficient funds — need $1347.00, have $305.00 — skipping AMD
+2026-04-21 12:30:18,663 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:30:19,128 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:30:19,771 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:30:20,082 [INFO] run: [BANKROLL] Insufficient funds — need $1347.00, have $305.00 — skipping AMD
+2026-04-21 12:31:18,685 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:31:19,025 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:31:19,410 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:31:20,515 [INFO] run: [BANKROLL] Insufficient funds — need $1347.00, have $305.00 — skipping AMD
+2026-04-21 12:32:19,203 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:34:57,524 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 12:34:57,524 [INFO] run: Tick 17: Scanner refreshed — regime=TRENDING_UP VIX=20.5 8 valid candidates
+2026-04-21 12:34:57,819 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:34:58,137 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:34:58,472 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:34:59,833 [INFO] run: [BANKROLL] Insufficient funds — need $1340.00, have $305.00 — skipping AMD
+2026-04-21 12:34:59,842 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:34:59,857 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:34:59,871 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:35:00,170 [INFO] run: [BANKROLL] Insufficient funds — need $1340.00, have $305.00 — skipping AMD
+2026-04-21 12:36:00,112 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:36:00,557 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:36:01,139 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:36:01,437 [INFO] run: [BANKROLL] Insufficient funds — need $1340.00, have $305.00 — skipping AMD
+2026-04-21 12:37:00,206 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:37:00,533 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:37:00,867 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:37:01,967 [INFO] run: [BANKROLL] Insufficient funds — need $1340.00, have $305.00 — skipping AMD
+2026-04-21 12:38:00,726 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:40:36,228 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 12:40:36,228 [INFO] run: Tick 21: Scanner refreshed — regime=TRENDING_UP VIX=20.6 9 valid candidates
+2026-04-21 12:40:36,480 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:40:36,784 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:40:37,151 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:40:39,180 [INFO] run: [BANKROLL] Insufficient funds — need $955.00, have $305.00 — skipping GOOGL
+2026-04-21 12:40:39,189 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:40:39,203 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:40:39,218 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:40:39,508 [INFO] run: [BANKROLL] Insufficient funds — need $955.00, have $305.00 — skipping GOOGL
+2026-04-21 12:41:39,500 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:41:39,812 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:41:40,167 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:41:40,541 [INFO] run: [BANKROLL] Insufficient funds — need $955.00, have $305.00 — skipping GOOGL
+2026-04-21 12:42:39,468 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:42:39,913 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:42:40,465 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:42:40,770 [INFO] run: [BANKROLL] Insufficient funds — need $955.00, have $305.00 — skipping GOOGL
+2026-04-21 12:43:40,029 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:46:15,874 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 12:46:15,874 [INFO] run: Tick 25: Scanner refreshed — regime=TRENDING_UP VIX=20.5 7 valid candidates
+2026-04-21 12:46:16,429 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:46:16,817 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:46:17,153 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:46:17,464 [INFO] run: [BANKROLL] Insufficient funds — need $1906.00, have $305.00 — skipping AMD
+2026-04-21 12:46:17,466 [INFO] run: [BANKROLL] Insufficient funds — need $1713.00, have $305.00 — skipping COIN
+2026-04-21 12:46:17,474 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:46:17,488 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:46:17,503 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:46:17,794 [INFO] run: [BANKROLL] Insufficient funds — need $1906.00, have $305.00 — skipping AMD
+2026-04-21 12:46:17,796 [INFO] run: [BANKROLL] Insufficient funds — need $1713.00, have $305.00 — skipping COIN
+2026-04-21 12:47:17,763 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:47:18,087 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:47:18,438 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:47:18,752 [INFO] run: [BANKROLL] Insufficient funds — need $1906.00, have $305.00 — skipping AMD
+2026-04-21 12:47:18,754 [INFO] run: [BANKROLL] Insufficient funds — need $1713.00, have $305.00 — skipping COIN
+2026-04-21 12:48:17,773 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:48:18,162 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:48:18,571 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:48:18,899 [INFO] run: [BANKROLL] Insufficient funds — need $1906.00, have $305.00 — skipping AMD
+2026-04-21 12:48:18,902 [INFO] run: [BANKROLL] Insufficient funds — need $1713.00, have $305.00 — skipping COIN
+2026-04-21 12:49:18,377 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:51:56,031 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 12:51:56,031 [INFO] run: Tick 29: Scanner refreshed — regime=TRENDING_UP VIX=20.4 9 valid candidates
+2026-04-21 12:51:56,308 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:51:56,635 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:51:56,979 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:51:57,286 [INFO] run: [BANKROLL] Insufficient funds — need $1157.00, have $305.00 — skipping GOOGL
+2026-04-21 12:51:57,288 [INFO] run: [BANKROLL] Insufficient funds — need $1301.00, have $305.00 — skipping AMD
+2026-04-21 12:51:57,297 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:51:57,310 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:51:57,324 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:51:57,614 [INFO] run: [BANKROLL] Insufficient funds — need $1157.00, have $305.00 — skipping GOOGL
+2026-04-21 12:51:57,616 [INFO] run: [BANKROLL] Insufficient funds — need $1301.00, have $305.00 — skipping AMD
+2026-04-21 12:52:57,577 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:52:57,898 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:52:58,222 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:52:58,527 [INFO] run: [BANKROLL] Insufficient funds — need $1157.00, have $305.00 — skipping GOOGL
+2026-04-21 12:52:58,529 [INFO] run: [BANKROLL] Insufficient funds — need $1301.00, have $305.00 — skipping AMD
+2026-04-21 12:53:57,572 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:53:57,874 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:53:58,229 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:54:01,032 [INFO] run: [BANKROLL] Insufficient funds — need $1157.00, have $305.00 — skipping GOOGL
+2026-04-21 12:54:01,034 [INFO] run: [BANKROLL] Insufficient funds — need $1301.00, have $305.00 — skipping AMD
+2026-04-21 12:54:58,229 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:57:35,298 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 12:57:35,298 [INFO] run: Tick 33: Scanner refreshed — regime=TRENDING_UP VIX=20.0 7 valid candidates
+2026-04-21 12:57:35,551 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:57:35,893 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:57:36,236 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:57:38,583 [INFO] run: [BANKROLL] Insufficient funds — need $1318.00, have $305.00 — skipping AMD
+2026-04-21 12:57:38,591 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:57:38,605 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:57:38,627 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:57:38,916 [INFO] run: [BANKROLL] Insufficient funds — need $1318.00, have $305.00 — skipping AMD
+2026-04-21 12:58:38,866 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:58:39,215 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:58:39,612 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:58:39,928 [INFO] run: [BANKROLL] Insufficient funds — need $1318.00, have $305.00 — skipping AMD
+2026-04-21 12:59:38,983 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:59:39,288 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:59:39,694 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:59:40,143 [INFO] run: [BANKROLL] Insufficient funds — need $1318.00, have $305.00 — skipping AMD
+2026-04-21 13:00:39,484 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:03:16,276 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 13:03:16,276 [INFO] run: Tick 37: Scanner refreshed — regime=TRENDING_UP VIX=20.0 8 valid candidates
+2026-04-21 13:03:16,570 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:03:17,059 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:03:17,411 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:03:17,728 [INFO] run:   Reconciled late fill: PLTR #21 order=de5f711b-f405-4bf4-8e2a-6004b8467677
+2026-04-21 13:03:17,742 [INFO] run: [BANKROLL] Insufficient funds — need $1175.00, have $-405.00 — skipping GOOGL
+2026-04-21 13:03:17,744 [INFO] run: [BANKROLL] Insufficient funds — need $1282.00, have $-405.00 — skipping AMD
+2026-04-21 13:03:18,002 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:03:18,016 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:03:18,029 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:03:18,043 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 13:03:18,049 [INFO] run:   PLTR #21: HOLD conf=0.00 pnl=$-2.00
+2026-04-21 13:03:18,051 [INFO] run: [BANKROLL] Insufficient funds — need $1175.00, have $-405.00 — skipping GOOGL
+2026-04-21 13:03:18,053 [INFO] run: [BANKROLL] Insufficient funds — need $1282.00, have $-405.00 — skipping AMD
+2026-04-21 13:04:18,415 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:04:18,746 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:04:19,223 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:04:19,520 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:04:19,528 [INFO] run: [BANKROLL] Insufficient funds — need $1175.00, have $-405.00 — skipping GOOGL
+2026-04-21 13:04:19,530 [INFO] run: [BANKROLL] Insufficient funds — need $1282.00, have $-405.00 — skipping AMD
+2026-04-21 13:05:18,285 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:05:18,634 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:05:18,954 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:05:19,243 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:05:19,252 [INFO] run: [BANKROLL] Insufficient funds — need $1175.00, have $-405.00 — skipping GOOGL
+2026-04-21 13:05:19,255 [INFO] run: [BANKROLL] Insufficient funds — need $1282.00, have $-405.00 — skipping AMD
+2026-04-21 13:06:18,833 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:08:56,230 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 13:08:56,230 [INFO] run: Tick 41: Scanner refreshed — regime=TRENDING_UP VIX=19.9 8 valid candidates
+2026-04-21 13:08:56,571 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:56,985 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:57,368 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:57,643 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:57,652 [INFO] run: [BANKROLL] Insufficient funds — need $503.00, have $-405.00 — skipping XOM
+2026-04-21 13:08:57,660 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:57,673 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:57,687 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:57,717 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:08:57,725 [INFO] run: [BANKROLL] Insufficient funds — need $503.00, have $-405.00 — skipping XOM
+2026-04-21 13:09:57,929 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:09:58,246 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:09:58,579 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:09:58,852 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:09:58,859 [INFO] run: [BANKROLL] Insufficient funds — need $503.00, have $-405.00 — skipping XOM
+2026-04-21 13:10:57,935 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:10:58,349 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:10:58,706 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:10:58,975 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:10:58,982 [INFO] run: [BANKROLL] Insufficient funds — need $503.00, have $-405.00 — skipping XOM
+2026-04-21 13:11:58,545 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:14:33,652 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 13:14:33,652 [INFO] run: Tick 45: Scanner refreshed — regime=TRENDING_UP VIX=19.9 9 valid candidates
+2026-04-21 13:14:33,907 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,223 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,573 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,837 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,846 [INFO] run: [BANKROLL] Insufficient funds — need $1227.00, have $-405.00 — skipping AMD
+2026-04-21 13:14:34,855 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,868 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,890 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,905 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:14:34,913 [INFO] run: [BANKROLL] Insufficient funds — need $1227.00, have $-405.00 — skipping AMD
+2026-04-21 13:15:35,173 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:15:35,646 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:15:36,217 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:15:36,608 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:15:36,614 [INFO] run: [BANKROLL] Insufficient funds — need $1227.00, have $-405.00 — skipping AMD
+2026-04-21 13:16:35,195 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:16:35,536 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:16:35,906 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:16:36,175 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:16:36,183 [INFO] run: [BANKROLL] Insufficient funds — need $1227.00, have $-405.00 — skipping AMD
+2026-04-21 13:17:35,624 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:20:13,082 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 13:20:13,082 [INFO] run: Tick 49: Scanner refreshed — regime=TRENDING_UP VIX=19.7 9 valid candidates
+2026-04-21 13:20:13,353 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:13,660 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:14,030 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:14,299 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:14,306 [INFO] run: [BANKROLL] Insufficient funds — need $451.00, have $-405.00 — skipping XOM
+2026-04-21 13:20:14,309 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 13:20:14,318 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:14,331 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:14,345 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:14,359 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:20:14,367 [INFO] run: [BANKROLL] Insufficient funds — need $451.00, have $-405.00 — skipping XOM
+2026-04-21 13:20:14,370 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 13:21:14,570 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:21:14,930 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:21:15,261 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:21:15,526 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:21:15,534 [INFO] run: [BANKROLL] Insufficient funds — need $451.00, have $-405.00 — skipping XOM
+2026-04-21 13:21:15,536 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 13:22:14,625 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:22:14,947 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:22:15,288 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:22:15,557 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:22:15,565 [INFO] run: [BANKROLL] Insufficient funds — need $451.00, have $-405.00 — skipping XOM
+2026-04-21 13:22:15,566 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 13:23:15,186 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:25:53,936 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 13:25:53,936 [INFO] run: Tick 53: Scanner refreshed — regime=TRENDING_UP VIX=19.8 7 valid candidates
+2026-04-21 13:25:54,194 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:54,497 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:54,856 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:55,145 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:55,153 [INFO] run: [BANKROLL] Insufficient funds — need $1226.00, have $-405.00 — skipping AMD
+2026-04-21 13:25:55,162 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:55,175 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:55,189 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:55,203 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:25:55,211 [INFO] run: [BANKROLL] Insufficient funds — need $1226.00, have $-405.00 — skipping AMD
+2026-04-21 13:26:55,426 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:26:55,744 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:26:56,089 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:26:56,350 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:26:56,357 [INFO] run: [BANKROLL] Insufficient funds — need $1226.00, have $-405.00 — skipping AMD
+2026-04-21 13:27:55,500 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:27:55,821 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:27:56,285 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:27:56,549 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:27:56,556 [INFO] run: [BANKROLL] Insufficient funds — need $1226.00, have $-405.00 — skipping AMD
+2026-04-21 13:28:55,906 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:31:33,682 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 13:31:33,682 [INFO] run: Tick 57: Scanner refreshed — regime=TRENDING_UP VIX=19.9 7 valid candidates
+2026-04-21 13:31:33,947 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,254 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,577 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,846 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,856 [INFO] run: [BANKROLL] Insufficient funds — need $1231.00, have $-405.00 — skipping AMD
+2026-04-21 13:31:34,866 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,881 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,896 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,910 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:31:34,918 [INFO] run: [BANKROLL] Insufficient funds — need $1231.00, have $-405.00 — skipping AMD
+2026-04-21 13:32:35,118 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:32:35,437 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:32:35,779 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:32:36,040 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:32:36,048 [INFO] run: [BANKROLL] Insufficient funds — need $1231.00, have $-405.00 — skipping AMD
+2026-04-21 13:33:35,140 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:33:35,516 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:33:35,845 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:33:36,124 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:33:36,132 [INFO] run: [BANKROLL] Insufficient funds — need $1231.00, have $-405.00 — skipping AMD
+2026-04-21 13:34:35,672 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:37:15,419 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 13:37:15,419 [INFO] run: Tick 61: Scanner refreshed — regime=TRENDING_UP VIX=20.0 7 valid candidates
+2026-04-21 13:37:15,740 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,054 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,434 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,751 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,760 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 13:37:16,770 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,786 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,803 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,819 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:37:16,827 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 13:38:17,107 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:38:17,470 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:38:17,810 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:38:18,107 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:38:18,115 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 13:39:17,068 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:39:17,432 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:39:17,809 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:39:18,069 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:39:18,077 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 13:40:17,640 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:42:54,978 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 13:42:54,978 [INFO] run: Tick 65: Scanner refreshed — regime=TRENDING_UP VIX=20.0 8 valid candidates
+2026-04-21 13:42:55,232 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:55,532 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:55,898 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:56,186 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:56,193 [INFO] run: [BANKROLL] Insufficient funds — need $1246.00, have $-405.00 — skipping AMD
+2026-04-21 13:42:56,202 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:56,216 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:56,230 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:56,244 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:42:56,251 [INFO] run: [BANKROLL] Insufficient funds — need $1246.00, have $-405.00 — skipping AMD
+2026-04-21 13:43:56,459 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:43:56,775 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:43:57,096 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:43:57,392 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:43:57,400 [INFO] run: [BANKROLL] Insufficient funds — need $1246.00, have $-405.00 — skipping AMD
+2026-04-21 13:44:56,599 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:44:56,928 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:44:57,281 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:44:57,571 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:44:57,580 [INFO] run: [BANKROLL] Insufficient funds — need $1246.00, have $-405.00 — skipping AMD
+2026-04-21 13:45:57,071 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:48:33,739 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 13:48:33,739 [INFO] run: Tick 69: Scanner refreshed — regime=TRENDING_UP VIX=20.1 8 valid candidates
+2026-04-21 13:48:34,004 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:34,354 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:34,711 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:34,989 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:34,997 [INFO] run: [BANKROLL] Insufficient funds — need $1278.00, have $-405.00 — skipping AMD
+2026-04-21 13:48:35,006 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:35,021 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:35,035 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:35,050 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:48:35,057 [INFO] run: [BANKROLL] Insufficient funds — need $1278.00, have $-405.00 — skipping AMD
+2026-04-21 13:49:35,277 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:49:35,645 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:49:36,107 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:49:36,474 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:49:36,483 [INFO] run: [BANKROLL] Insufficient funds — need $1278.00, have $-405.00 — skipping AMD
+2026-04-21 13:50:35,267 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:50:35,583 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:50:35,938 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:50:36,334 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:50:36,343 [INFO] run: [BANKROLL] Insufficient funds — need $1278.00, have $-405.00 — skipping AMD
+2026-04-21 13:51:35,864 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:54:12,211 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 13:54:12,211 [INFO] run: Tick 73: Scanner refreshed — regime=TRENDING_UP VIX=20.0 7 valid candidates
+2026-04-21 13:54:12,490 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:12,877 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:13,217 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:13,478 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:13,486 [INFO] run: [BANKROLL] Insufficient funds — need $1277.00, have $-405.00 — skipping AMD
+2026-04-21 13:54:13,501 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:13,514 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:13,529 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:13,543 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:54:13,550 [INFO] run: [BANKROLL] Insufficient funds — need $1277.00, have $-405.00 — skipping AMD
+2026-04-21 13:55:14,353 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:55:14,734 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:55:15,078 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:55:15,353 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:55:15,360 [INFO] run: [BANKROLL] Insufficient funds — need $1277.00, have $-405.00 — skipping AMD
+2026-04-21 13:56:13,807 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:56:14,128 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:56:14,492 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:56:14,834 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:56:14,842 [INFO] run: [BANKROLL] Insufficient funds — need $1277.00, have $-405.00 — skipping AMD
+2026-04-21 13:57:14,262 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 13:59:51,501 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 13:59:51,501 [INFO] run: Tick 77: Scanner refreshed — regime=TRENDING_UP VIX=20.0 9 valid candidates
+2026-04-21 13:59:51,761 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,080 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,427 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,726 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,734 [INFO] run: [BANKROLL] Insufficient funds — need $1256.00, have $-405.00 — skipping AMD
+2026-04-21 13:59:52,742 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,756 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,770 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,784 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 13:59:52,792 [INFO] run: [BANKROLL] Insufficient funds — need $1256.00, have $-405.00 — skipping AMD
+2026-04-21 14:00:52,995 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:00:53,419 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:00:53,795 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:00:54,088 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:00:54,096 [INFO] run: [BANKROLL] Insufficient funds — need $1256.00, have $-405.00 — skipping AMD
+2026-04-21 14:01:53,012 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:01:53,356 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:01:53,720 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:01:54,026 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:01:54,035 [INFO] run: [BANKROLL] Insufficient funds — need $1256.00, have $-405.00 — skipping AMD
+2026-04-21 14:02:53,580 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:05:31,057 [INFO] run: Scanner complete: 19 scanned, 10 meet threshold
+2026-04-21 14:05:31,057 [INFO] run: Tick 81: Scanner refreshed — regime=TRENDING_UP VIX=20.0 10 valid candidates
+2026-04-21 14:05:31,319 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:31,711 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:32,087 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:32,371 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:32,379 [INFO] run: [BANKROLL] Insufficient funds — need $1248.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:05:32,380 [INFO] run: [BANKROLL] Insufficient funds — need $1718.00, have $-405.00 — skipping COIN
+2026-04-21 14:05:32,388 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:32,402 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:32,415 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:32,429 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:05:32,436 [INFO] run: [BANKROLL] Insufficient funds — need $1248.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:05:32,438 [INFO] run: [BANKROLL] Insufficient funds — need $1718.00, have $-405.00 — skipping COIN
+2026-04-21 14:06:32,666 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:06:32,983 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:06:33,306 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:06:33,570 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:06:33,578 [INFO] run: [BANKROLL] Insufficient funds — need $1248.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:06:33,580 [INFO] run: [BANKROLL] Insufficient funds — need $1718.00, have $-405.00 — skipping COIN
+2026-04-21 14:07:32,672 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:07:32,993 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:07:33,346 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:07:33,608 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:07:33,615 [INFO] run: [BANKROLL] Insufficient funds — need $1248.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:07:33,617 [INFO] run: [BANKROLL] Insufficient funds — need $1718.00, have $-405.00 — skipping COIN
+2026-04-21 14:08:33,307 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:11:14,646 [INFO] run: Scanner complete: 19 scanned, 10 meet threshold
+2026-04-21 14:11:14,646 [INFO] run: Tick 85: Scanner refreshed — regime=TRENDING_UP VIX=20.0 10 valid candidates
+2026-04-21 14:11:14,903 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,218 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,541 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,915 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,923 [INFO] run: [BANKROLL] Insufficient funds — need $1255.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:11:15,924 [INFO] run: [BANKROLL] Insufficient funds — need $1677.00, have $-405.00 — skipping COIN
+2026-04-21 14:11:15,933 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,947 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,961 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,991 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:11:15,999 [INFO] run: [BANKROLL] Insufficient funds — need $1255.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:11:16,001 [INFO] run: [BANKROLL] Insufficient funds — need $1677.00, have $-405.00 — skipping COIN
+2026-04-21 14:12:16,236 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:12:16,752 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:12:17,127 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:12:17,401 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:12:17,409 [INFO] run: [BANKROLL] Insufficient funds — need $1255.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:12:17,411 [INFO] run: [BANKROLL] Insufficient funds — need $1677.00, have $-405.00 — skipping COIN
+2026-04-21 14:13:16,255 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:13:16,739 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:13:17,162 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:13:17,478 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:13:17,485 [INFO] run: [BANKROLL] Insufficient funds — need $1255.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:13:17,487 [INFO] run: [BANKROLL] Insufficient funds — need $1677.00, have $-405.00 — skipping COIN
+2026-04-21 14:14:16,774 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:16:54,908 [INFO] run: Scanner complete: 19 scanned, 10 meet threshold
+2026-04-21 14:16:54,908 [INFO] run: Tick 89: Scanner refreshed — regime=TRENDING_UP VIX=19.7 10 valid candidates
+2026-04-21 14:16:55,169 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:55,495 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:55,851 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:56,114 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:56,121 [INFO] run: [BANKROLL] Insufficient funds — need $1245.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:16:56,129 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:56,143 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:56,157 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:56,172 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:16:56,180 [INFO] run: [BANKROLL] Insufficient funds — need $1245.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:17:56,378 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:17:56,704 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:17:57,056 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:17:57,426 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:17:57,434 [INFO] run: [BANKROLL] Insufficient funds — need $1245.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:18:56,458 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:18:56,771 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:18:57,120 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:18:57,510 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:18:57,518 [INFO] run: [BANKROLL] Insufficient funds — need $1245.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:19:56,960 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:22:34,672 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 14:22:34,672 [INFO] run: Tick 93: Scanner refreshed — regime=TRENDING_UP VIX=19.6 9 valid candidates
+2026-04-21 14:22:34,941 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,299 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,635 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,905 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,913 [INFO] run: [BANKROLL] Insufficient funds — need $1155.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:22:35,914 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 14:22:35,916 [INFO] run: [BANKROLL] Insufficient funds — need $1622.00, have $-405.00 — skipping COIN
+2026-04-21 14:22:35,924 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,937 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,951 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,965 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:22:35,973 [INFO] run: [BANKROLL] Insufficient funds — need $1155.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:22:35,975 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 14:22:35,977 [INFO] run: [BANKROLL] Insufficient funds — need $1622.00, have $-405.00 — skipping COIN
+2026-04-21 14:23:36,245 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:23:36,575 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:23:37,393 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:23:37,661 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:23:37,669 [INFO] run: [BANKROLL] Insufficient funds — need $1155.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:23:37,671 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 14:23:37,673 [INFO] run: [BANKROLL] Insufficient funds — need $1622.00, have $-405.00 — skipping COIN
+2026-04-21 14:24:36,217 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:24:36,620 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:24:37,009 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:24:37,289 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:24:37,297 [INFO] run: [BANKROLL] Insufficient funds — need $1155.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:24:37,299 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping AMD
+2026-04-21 14:24:37,300 [INFO] run: [BANKROLL] Insufficient funds — need $1622.00, have $-405.00 — skipping COIN
+2026-04-21 14:25:36,723 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:28:13,204 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 14:28:13,204 [INFO] run: Tick 97: Scanner refreshed — regime=TRENDING_UP VIX=19.6 9 valid candidates
+2026-04-21 14:28:13,468 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:13,792 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:14,140 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:14,462 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:14,470 [INFO] run: [BANKROLL] Insufficient funds — need $1171.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:28:14,472 [INFO] run: [BANKROLL] Insufficient funds — need $1410.00, have $-405.00 — skipping AMD
+2026-04-21 14:28:14,481 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:14,495 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:14,509 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:14,523 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:28:14,530 [INFO] run: [BANKROLL] Insufficient funds — need $1171.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:28:14,533 [INFO] run: [BANKROLL] Insufficient funds — need $1410.00, have $-405.00 — skipping AMD
+2026-04-21 14:29:14,740 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:29:15,189 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:29:15,587 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:29:15,969 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:29:15,976 [INFO] run: [BANKROLL] Insufficient funds — need $1171.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:29:15,978 [INFO] run: [BANKROLL] Insufficient funds — need $1410.00, have $-405.00 — skipping AMD
+2026-04-21 14:30:14,748 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:30:15,074 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:30:15,512 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:30:15,844 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:30:15,851 [INFO] run: [BANKROLL] Insufficient funds — need $1171.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:30:15,853 [INFO] run: [BANKROLL] Insufficient funds — need $1410.00, have $-405.00 — skipping AMD
+2026-04-21 14:31:15,328 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:33:58,818 [INFO] run: Scanner complete: 19 scanned, 10 meet threshold
+2026-04-21 14:33:58,818 [INFO] run: Tick 101: Scanner refreshed — regime=TRENDING_UP VIX=19.6 10 valid candidates
+2026-04-21 14:33:59,082 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:33:59,396 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:33:59,720 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:33:59,988 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:33:59,998 [INFO] run: [BANKROLL] Insufficient funds — need $1176.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:34:00,001 [INFO] run: [BANKROLL] Insufficient funds — need $1406.00, have $-405.00 — skipping AMD
+2026-04-21 14:34:00,003 [INFO] run: [BANKROLL] Insufficient funds — need $1721.00, have $-405.00 — skipping COIN
+2026-04-21 14:34:00,013 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:34:00,073 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:34:00,115 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:34:00,148 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:34:00,158 [INFO] run: [BANKROLL] Insufficient funds — need $1176.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:34:00,160 [INFO] run: [BANKROLL] Insufficient funds — need $1406.00, have $-405.00 — skipping AMD
+2026-04-21 14:34:00,162 [INFO] run: [BANKROLL] Insufficient funds — need $1721.00, have $-405.00 — skipping COIN
+2026-04-21 14:35:00,285 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:35:00,602 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:35:00,989 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:35:01,270 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:35:01,279 [INFO] run: [BANKROLL] Insufficient funds — need $1176.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:35:01,281 [INFO] run: [BANKROLL] Insufficient funds — need $1406.00, have $-405.00 — skipping AMD
+2026-04-21 14:35:01,283 [INFO] run: [BANKROLL] Insufficient funds — need $1721.00, have $-405.00 — skipping COIN
+2026-04-21 14:36:00,293 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:36:00,659 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:36:01,050 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:36:01,329 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:36:01,337 [INFO] run: [BANKROLL] Insufficient funds — need $1176.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:36:01,339 [INFO] run: [BANKROLL] Insufficient funds — need $1406.00, have $-405.00 — skipping AMD
+2026-04-21 14:36:01,341 [INFO] run: [BANKROLL] Insufficient funds — need $1721.00, have $-405.00 — skipping COIN
+2026-04-21 14:37:00,755 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:39:36,113 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 14:39:36,113 [INFO] run: Tick 105: Scanner refreshed — regime=TRENDING_UP VIX=19.6 8 valid candidates
+2026-04-21 14:39:36,395 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:36,710 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:37,069 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:37,328 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:37,336 [INFO] run: [BANKROLL] Insufficient funds — need $1164.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:39:37,338 [INFO] run: [BANKROLL] Insufficient funds — need $1822.00, have $-405.00 — skipping AMD
+2026-04-21 14:39:37,347 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:37,361 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:37,375 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:37,389 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:39:37,397 [INFO] run: [BANKROLL] Insufficient funds — need $1164.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:39:37,399 [INFO] run: [BANKROLL] Insufficient funds — need $1822.00, have $-405.00 — skipping AMD
+2026-04-21 14:40:37,618 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:40:37,952 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:40:38,273 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:40:38,533 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:40:38,541 [INFO] run: [BANKROLL] Insufficient funds — need $1164.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:40:38,543 [INFO] run: [BANKROLL] Insufficient funds — need $1822.00, have $-405.00 — skipping AMD
+2026-04-21 14:41:37,624 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:41:37,949 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:41:38,281 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:41:38,552 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:41:38,560 [INFO] run: [BANKROLL] Insufficient funds — need $1164.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:41:38,562 [INFO] run: [BANKROLL] Insufficient funds — need $1822.00, have $-405.00 — skipping AMD
+2026-04-21 14:42:38,138 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:45:13,493 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 14:45:13,493 [INFO] run: Tick 109: Scanner refreshed — regime=TRENDING_UP VIX=19.5 7 valid candidates
+2026-04-21 14:45:13,768 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,093 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,432 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,709 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,717 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:45:14,718 [INFO] run: [BANKROLL] Insufficient funds — need $1348.00, have $-405.00 — skipping AMD
+2026-04-21 14:45:14,727 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,740 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,754 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,768 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:45:14,776 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:45:14,778 [INFO] run: [BANKROLL] Insufficient funds — need $1348.00, have $-405.00 — skipping AMD
+2026-04-21 14:46:15,116 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:46:15,431 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:46:15,805 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:46:16,107 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:46:16,115 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:46:16,117 [INFO] run: [BANKROLL] Insufficient funds — need $1348.00, have $-405.00 — skipping AMD
+2026-04-21 14:47:15,018 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:47:15,333 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:47:15,659 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:47:15,920 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:47:15,929 [INFO] run: [BANKROLL] Insufficient funds — need $1240.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:47:15,930 [INFO] run: [BANKROLL] Insufficient funds — need $1348.00, have $-405.00 — skipping AMD
+2026-04-21 14:48:15,527 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:50:55,486 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 14:50:55,486 [INFO] run: Tick 113: Scanner refreshed — regime=TRENDING_UP VIX=19.5 8 valid candidates
+2026-04-21 14:50:55,747 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,056 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,454 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,727 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,734 [INFO] run: [BANKROLL] Insufficient funds — need $1253.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:50:56,744 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,757 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,771 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,785 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:50:56,793 [INFO] run: [BANKROLL] Insufficient funds — need $1253.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:51:57,008 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:51:57,318 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:51:57,679 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:51:57,971 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:51:57,980 [INFO] run: [BANKROLL] Insufficient funds — need $1253.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:52:57,012 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:52:57,416 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:52:57,752 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:52:58,019 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:52:58,028 [INFO] run: [BANKROLL] Insufficient funds — need $1253.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:53:57,624 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 14:56:33,089 [INFO] run: Scanner complete: 19 scanned, 9 meet threshold
+2026-04-21 14:56:33,089 [INFO] run: Tick 117: Scanner refreshed — regime=TRENDING_UP VIX=20.0 9 valid candidates
+2026-04-21 14:56:33,366 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:33,680 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:34,013 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:34,286 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:34,294 [INFO] run: [BANKROLL] Insufficient funds — need $491.00, have $-405.00 — skipping XOM
+2026-04-21 14:56:34,296 [INFO] run: [BANKROLL] Insufficient funds — need $1217.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:56:34,305 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:34,320 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:34,335 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:34,350 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:56:34,358 [INFO] run: [BANKROLL] Insufficient funds — need $491.00, have $-405.00 — skipping XOM
+2026-04-21 14:56:34,360 [INFO] run: [BANKROLL] Insufficient funds — need $1217.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:57:34,573 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:57:34,908 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:57:35,248 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:57:35,520 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:57:35,527 [INFO] run: [BANKROLL] Insufficient funds — need $491.00, have $-405.00 — skipping XOM
+2026-04-21 14:57:35,529 [INFO] run: [BANKROLL] Insufficient funds — need $1217.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:58:34,576 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:58:34,888 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:58:35,303 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:58:35,568 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 14:58:35,575 [INFO] run: [BANKROLL] Insufficient funds — need $491.00, have $-405.00 — skipping XOM
+2026-04-21 14:58:35,577 [INFO] run: [BANKROLL] Insufficient funds — need $1217.00, have $-405.00 — skipping GOOGL
+2026-04-21 14:59:35,078 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 15:02:03,561 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 15:02:03,561 [INFO] run: Tick 121: Scanner refreshed — regime=TRENDING_UP VIX=20.6 7 valid candidates
+2026-04-21 15:02:03,828 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,132 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,501 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,766 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,773 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:02:04,775 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:02:04,784 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,798 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,812 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,826 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:02:04,834 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:02:04,835 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:03:05,042 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:03:05,411 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:03:05,771 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:03:06,026 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:03:06,033 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:03:06,035 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:04:05,053 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:04:05,373 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:04:05,708 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:04:05,977 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:04:05,984 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:04:05,986 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:05:05,606 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 15:07:42,460 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 15:07:42,460 [INFO] run: Tick 125: Scanner refreshed — regime=TRENDING_UP VIX=20.4 7 valid candidates
+2026-04-21 15:07:42,710 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,032 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,379 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,638 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,646 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:07:43,648 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:07:43,656 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,669 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,682 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,696 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:07:43,703 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:07:43,705 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:08:43,904 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:08:44,215 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:08:44,546 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:08:44,808 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:08:44,815 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:08:44,817 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:09:43,925 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:09:44,331 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:09:44,882 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:09:45,214 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:09:45,223 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:09:45,225 [INFO] run: [BANKROLL] Insufficient funds — need $1258.00, have $-405.00 — skipping AMD
+2026-04-21 15:10:44,505 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 15:13:16,666 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 15:13:16,666 [INFO] run: Tick 129: Scanner refreshed — regime=TRENDING_UP VIX=20.3 7 valid candidates
+2026-04-21 15:13:16,924 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:17,235 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:17,784 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:18,114 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:18,121 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:13:18,123 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:13:18,131 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:18,145 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:18,160 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:18,175 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:13:18,182 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:13:18,184 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:14:18,619 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:14:18,954 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:14:19,471 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:14:19,740 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:14:19,749 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:14:19,751 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:15:18,403 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:15:18,728 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:15:19,071 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:15:19,355 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:15:19,363 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:15:19,365 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:16:19,059 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 15:18:51,967 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 15:18:51,967 [INFO] run: Tick 133: Scanner refreshed — regime=TRENDING_UP VIX=20.5 7 valid candidates
+2026-04-21 15:18:52,223 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:52,522 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:52,833 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:53,091 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:53,099 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:18:53,101 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:18:53,109 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:53,123 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:53,137 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:53,150 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:18:53,158 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:18:53,160 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:19:53,365 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:19:53,675 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:19:53,997 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:19:54,273 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:19:54,281 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:19:54,283 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:20:53,375 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:20:53,723 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:20:54,069 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:20:54,343 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:20:54,351 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:20:54,353 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:21:53,934 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 15:23:29,712 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 15:23:30,216 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-21 15:23:30,216 [INFO] position_tracker:   #20 MSFT LONG_CALL entry=$14.7 entered=2026-04-21T11:38
+2026-04-21 15:23:30,217 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 15:23:30,217 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 15:23:30,217 [INFO] position_tracker:   #21 PLTR LONG_PUT entry=$7.1 entered=2026-04-21T11:49
+2026-04-21 15:23:30,218 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-21 15:23:30,220 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 15:23:30,222 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 15:23:30,222 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 15:24:27,060 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 15:24:27,060 [INFO] run: Tick 137: Scanner refreshed — regime=TRENDING_UP VIX=20.6 7 valid candidates
+2026-04-21 15:24:27,321 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:27,636 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:27,969 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:28,236 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:28,244 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:24:28,247 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:24:28,257 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:28,272 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:28,288 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:28,303 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:24:28,312 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:24:28,314 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:25:28,533 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:25:28,846 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:25:29,181 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:25:29,445 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:25:29,455 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:25:29,457 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:26:28,557 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:26:28,876 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:26:29,193 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:26:29,470 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:26:29,477 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:26:29,479 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:27:29,159 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 15:30:04,410 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 15:30:04,410 [INFO] run: Tick 141: Scanner refreshed — regime=TRENDING_UP VIX=19.4 7 valid candidates
+2026-04-21 15:30:04,677 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,079 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,470 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,739 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,747 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:30:05,750 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:30:05,759 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,773 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,789 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,803 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:30:05,813 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:30:05,815 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:31:06,006 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:31:06,326 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:31:06,708 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:31:06,965 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:31:06,974 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:31:06,976 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:32:03,104 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 15:32:03,555 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-21 15:32:03,555 [INFO] position_tracker:   #20 MSFT LONG_CALL entry=$14.7 entered=2026-04-21T11:38
+2026-04-21 15:32:03,556 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 15:32:03,556 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 15:32:03,556 [INFO] position_tracker:   #21 PLTR LONG_PUT entry=$7.1 entered=2026-04-21T11:49
+2026-04-21 15:32:03,556 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-21 15:32:03,560 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 15:32:03,563 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 15:32:03,563 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 15:32:06,034 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:32:06,358 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:32:06,667 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:32:06,927 [INFO] run:   PLTR #21 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 15:32:06,936 [INFO] run: [BANKROLL] Insufficient funds — need $1300.00, have $-405.00 — skipping GOOGL
+2026-04-21 15:32:06,938 [INFO] run: [BANKROLL] Insufficient funds — need $1249.00, have $-405.00 — skipping AMD
+2026-04-21 15:33:06,593 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 15:34:03,004 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 15:34:03,328 [INFO] position_tracker: Restored 4 open positions from DB
+2026-04-21 15:34:03,328 [INFO] position_tracker:   #20 MSFT LONG_CALL entry=$14.7 entered=2026-04-21T11:38
+2026-04-21 15:34:03,329 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 15:34:03,329 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 15:34:03,329 [INFO] position_tracker:   #21 PLTR LONG_PUT entry=$7.1 entered=2026-04-21T11:49
+2026-04-21 15:34:03,329 [INFO] position_tracker: PositionTracker initialized — 4 open positions restored
+2026-04-21 15:34:03,331 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 15:34:03,333 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 15:34:03,334 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
