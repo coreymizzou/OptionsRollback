@@ -2649,23 +2649,6 @@ def main():
                                     fill_cost = fill_price * 100 * pos_data.get("contracts", 1)
                                     ticker_r  = pos_data.get("ticker", "?")
 
-                                    # ── Bankroll check — if fill would overdraw, close the position at Alpaca
-                                    if BANKROLL_MODE and fill_cost > BANKROLL[0]:
-                                        logger.warning(f"  [RECONCILE] {ticker_r} filled @ ${fill_price:.2f} but bankroll insufficient "
-                                                       f"(need ${fill_cost:.2f}, have ${BANKROLL[0]:.2f}) — closing position")
-                                        # Close at Alpaca immediately
-                                        try:
-                                            sym = order.get("symbol", "")
-                                            _req.delete(
-                                                f"{broker.ALPACA_BASE}/positions/{sym}",
-                                                headers=broker._headers(), timeout=8
-                                            )
-                                            print(f"  [BANKROLL] Overdraft prevented — {ticker_r} position closed at Alpaca")
-                                        except Exception as _e:
-                                            logger.warning(f"  Failed to close overdraft position: {_e}")
-                                        filled_oids.append(oid)
-                                        continue
-
                                     pos_data["entry_price"]  = fill_price
                                     pos_data["entry_cost"]   = fill_cost
                                     pos_data["stop_price"]   = round(fill_price * (1 - cfg.STOP_LOSS_PCT), 2)
@@ -2682,6 +2665,15 @@ def main():
                                             BANKROLL[0] = round(BANKROLL[0] - fill_cost, 2)
                                             db.set_state("bankroll_remaining", BANKROLL[0])
                                             print(f"  [BANKROLL] Reconciled deduction — remaining=${BANKROLL[0]:,.2f}")
+                                            # Cancel any remaining pending orders that would overdraw bankroll
+                                            for other_oid, other_data in list(_pending_orders.items()):
+                                                if other_oid == oid:
+                                                    continue
+                                                other_cost = other_data.get("entry_price", 0) * 100 * other_data.get("contracts", 1)
+                                                if other_cost > BANKROLL[0]:
+                                                    broker.cancel_order(other_oid)
+                                                    filled_oids.append(other_oid)
+                                                    print(f"  [BANKROLL] Cancelled pending {other_data.get('ticker')} order {other_oid} — would overdraw bankroll (need ${other_cost:.2f}, have ${BANKROLL[0]:.2f})")
                                 filled_oids.append(oid)
                             elif status in ("canceled", "cancelled", "rejected", "expired"):
                                 logger.info(f"  Pending order {oid} {status} — removing from reconciliation queue")

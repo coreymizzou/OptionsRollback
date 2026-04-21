@@ -43630,3 +43630,166 @@
 2026-04-21 11:33:22,141 [INFO] database: Database initialized at ./scanner_data_live.db
 2026-04-21 11:34:20,268 [INFO] run: Shutdown signal received — finishing current tick...
 2026-04-21 11:34:33,255 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:34:51,967 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:35:31,155 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-21 11:35:31,159 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 11:35:31,169 [INFO] run: Bankroll initialized: $5,000.00
+2026-04-21 11:35:31,205 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-21 11:35:31,356 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-21 11:35:31,356 [INFO] run: Syncing open positions from Alpaca on startup...
+2026-04-21 11:35:31,494 [INFO] run: Startup sync complete — all Alpaca positions accounted for
+2026-04-21 11:35:32,849 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:38:08,722 [INFO] run: Scanner complete: 19 scanned, 5 meet threshold
+2026-04-21 11:38:08,722 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=20.0 5 valid candidates
+2026-04-21 11:38:10,595 [INFO] notifier: Alert sent: ENTER MSFT conf=0.60 force=False
+2026-04-21 11:38:10,769 [INFO] run:   MSFT price refreshed: $13.94 -> mid $14.73 (bid=$14.40 ask=$15.05)
+2026-04-21 11:38:10,935 [INFO] broker: Sending order payload: {'symbol': 'MSFT260522C00435000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '14.73', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_MSFT_1776789490'}
+2026-04-21 11:38:12,231 [INFO] broker: Order placed: buy_to_open 1x MSFT260522C00435000 @ $14.73 — ID: eca57045-8443-4965-86ca-403f8c6cdb20
+2026-04-21 11:38:12,252 [INFO] run:   Candidate MSFT: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:38:13,250 [INFO] run:   Candidate META: ENTER conf=0.78 (confluence 11pts)
+2026-04-21 11:38:14,229 [INFO] notifier: Alert sent: ENTER AMD conf=0.70 force=False
+2026-04-21 11:38:14,400 [INFO] run:   AMD price refreshed: $12.59 -> mid $12.45 (bid=$12.15 ask=$12.75)
+2026-04-21 11:38:14,534 [INFO] broker: Sending order payload: {'symbol': 'AMD260522P00265000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '12.45', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_AMD_1776789494'}
+2026-04-21 11:38:14,694 [INFO] broker: Order placed: buy_to_open 1x AMD260522P00265000 @ $12.45 — ID: 25f66391-fade-4be8-963b-1d53d4830dc6
+2026-04-21 11:38:14,716 [INFO] run:   Candidate AMD: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:38:15,715 [INFO] notifier: Alert sent: ENTER MSTR conf=0.70 force=False
+2026-04-21 11:38:15,886 [INFO] run:   MSTR price refreshed: $8.89 -> mid $6.93 (bid=$6.70 ask=$7.15)
+2026-04-21 11:38:16,032 [INFO] broker: Sending order payload: {'symbol': 'MSTR260522P00150000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '6.93', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_MSTR_1776789496'}
+2026-04-21 11:38:16,166 [INFO] broker: Order placed: buy_to_open 1x MSTR260522P00150000 @ $6.93 — ID: 24dfa99c-bccb-43e4-aa8b-c9a79e188427
+2026-04-21 11:38:16,187 [INFO] run:   Candidate MSTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:38:17,362 [INFO] run:   Candidate AMZN: ENTER conf=0.55 (confluence 9pts)
+2026-04-21 11:38:18,299 [INFO] notifier: Alert sent: ENTER META conf=0.60 force=False
+2026-04-21 11:38:18,474 [INFO] run:   META price refreshed: $20.73 -> mid $25.48 (bid=$25.25 ask=$25.70)
+2026-04-21 11:38:18,618 [INFO] broker: Sending order payload: {'symbol': 'META260522C00690000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '25.48', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_META_1776789498'}
+2026-04-21 11:38:18,750 [INFO] broker: Order placed: buy_to_open 1x META260522C00690000 @ $25.48 — ID: c50bca7a-6d55-47be-afcb-d7b115a01f78
+2026-04-21 11:38:18,771 [INFO] run:   Candidate META: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:41:18,267 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:43:58,128 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 11:43:58,128 [INFO] run: Tick 5: Scanner refreshed — regime=TRENDING_UP VIX=19.9 7 valid candidates
+2026-04-21 11:43:59,995 [INFO] run:   Reconciled late fill: MSTR #18 order=24dfa99c-bccb-43e4-aa8b-c9a79e188427
+2026-04-21 11:44:01,437 [INFO] run:   Reconciled late fill: META #19 order=c50bca7a-6d55-47be-afcb-d7b115a01f78
+2026-04-21 11:44:03,157 [INFO] run:   Candidate AAPL: ENTER conf=0.55 (confluence 9pts)
+2026-04-21 11:44:04,145 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 11:44:04,151 [INFO] run:   MSTR #18: HOLD conf=0.00 pnl=$+12.00
+2026-04-21 11:44:04,160 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 11:44:04,166 [INFO] run:   META #19: HOLD conf=0.00 pnl=$-25.00
+2026-04-21 11:45:04,463 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:45:04,897 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:46:04,476 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:46:04,828 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:47:04,941 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:49:43,704 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 11:49:43,704 [INFO] run: Tick 9: Scanner refreshed — regime=TRENDING_UP VIX=19.9 8 valid candidates
+2026-04-21 11:49:44,021 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:49:44,402 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:49:46,683 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:49:46,847 [INFO] run:   PLTR price refreshed: $6.12 -> mid $7.12 (bid=$7.05 ask=$7.20)
+2026-04-21 11:49:48,744 [INFO] broker: Sending order payload: {'symbol': 'PLTR260522P00140000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '7.12', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_PLTR_1776790188'}
+2026-04-21 11:49:48,879 [INFO] broker: Order placed: buy_to_open 1x PLTR260522P00140000 @ $7.12 — ID: de5f711b-f405-4bf4-8e2a-6004b8467677
+2026-04-21 11:49:48,900 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 11pts)
+2026-04-21 11:49:48,909 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:49:48,921 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:50:49,248 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:50:49,637 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:51:49,225 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:51:49,565 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:52:49,773 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:55:31,764 [INFO] run: Scanner complete: 19 scanned, 7 meet threshold
+2026-04-21 11:55:31,764 [INFO] run: Tick 13: Scanner refreshed — regime=TRENDING_UP VIX=19.9 7 valid candidates
+2026-04-21 11:55:32,073 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:55:32,643 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:55:33,545 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:55:33,558 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:56:20,355 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:56:20,699 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-21 11:56:20,700 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 11:56:20,700 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 11:56:20,700 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-21 11:56:20,702 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 11:56:20,704 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 11:56:20,704 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 11:56:33,840 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:56:34,174 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:56:39,005 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:56:39,679 [INFO] position_tracker: Restored 2 open positions from DB
+2026-04-21 11:56:39,679 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 11:56:39,679 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 11:56:39,680 [INFO] position_tracker: PositionTracker initialized — 2 open positions restored
+2026-04-21 11:56:39,681 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 11:56:39,684 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 11:56:39,684 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 11:57:33,853 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:57:34,194 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:58:34,363 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:01:12,763 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 12:01:12,763 [INFO] run: Tick 17: Scanner refreshed — regime=TRENDING_UP VIX=20.1 8 valid candidates
+2026-04-21 12:01:13,086 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:01:13,833 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:01:16,335 [INFO] run:   Reconciled late fill: MSFT #20 order=eca57045-8443-4965-86ca-403f8c6cdb20
+2026-04-21 12:01:18,539 [WARNING] run:   [RECONCILE] AMD filled @ $12.45 but bankroll insufficient (need $1245.00, have $305.00) — closing position
+2026-04-21 12:01:18,993 [INFO] run: [BANKROLL] Insufficient funds — need $1259.00, have $305.00 — skipping AMD
+2026-04-21 12:01:19,278 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:01:19,292 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:01:19,308 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 12:01:19,314 [INFO] run:   MSFT #20: HOLD conf=0.00 pnl=$-50.00
+2026-04-21 12:01:19,609 [INFO] run: [BANKROLL] Insufficient funds — need $1259.00, have $305.00 — skipping AMD
+2026-04-21 12:01:56,568 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 12:01:56,946 [INFO] position_tracker: Restored 3 open positions from DB
+2026-04-21 12:01:56,946 [INFO] position_tracker:   #20 MSFT LONG_CALL entry=$14.7 entered=2026-04-21T11:38
+2026-04-21 12:01:56,946 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 12:01:56,946 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 12:01:56,947 [INFO] position_tracker: PositionTracker initialized — 3 open positions restored
+2026-04-21 12:01:56,949 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 12:01:56,951 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 12:01:56,951 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 12:02:20,001 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:02:20,442 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:02:20,808 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:02:22,342 [INFO] run: [BANKROLL] Insufficient funds — need $1259.00, have $305.00 — skipping AMD
+2026-04-21 12:03:19,631 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:03:20,082 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:03:20,340 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:03:20,669 [INFO] run: [BANKROLL] Insufficient funds — need $1259.00, have $305.00 — skipping AMD
+2026-04-21 12:04:20,043 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:06:58,168 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 12:06:58,168 [INFO] run: Tick 21: Scanner refreshed — regime=TRENDING_UP VIX=19.9 8 valid candidates
+2026-04-21 12:06:58,477 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:06:58,797 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:06:59,057 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:07:02,042 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $305.00 — skipping AMD
+2026-04-21 12:07:02,051 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:07:02,065 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:07:02,081 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:07:02,386 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $305.00 — skipping AMD
+2026-04-21 12:08:02,396 [INFO] run:   MSTR #18 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:08:02,727 [INFO] run:   META #19 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:08:02,991 [INFO] run:   MSFT #20 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 12:08:03,299 [INFO] run: [BANKROLL] Insufficient funds — need $1247.00, have $305.00 — skipping AMD
+2026-04-21 12:08:25,389 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-21 12:09:02,100 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-21 12:09:02,100 [INFO] run: Loop stopped after 23 ticks
+2026-04-21 12:09:26,360 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 12:09:28,615 [INFO] position_tracker: Restored 3 open positions from DB
+2026-04-21 12:09:28,615 [INFO] position_tracker:   #20 MSFT LONG_CALL entry=$14.7 entered=2026-04-21T11:38
+2026-04-21 12:09:28,615 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 12:09:28,616 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 12:09:28,616 [INFO] position_tracker: PositionTracker initialized — 3 open positions restored
+2026-04-21 12:09:28,618 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 12:09:28,620 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 12:09:28,620 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 12:09:28,624 [INFO] run: Bankroll restored from DB: $305.00 remaining (started at $5,000.00)
+2026-04-21 12:09:28,656 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-21 12:09:30,638 [INFO] run: Restored 1 pending order(s) from previous session
+2026-04-21 12:09:30,638 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-21 12:09:30,638 [INFO] run: Syncing open positions from Alpaca on startup...
+2026-04-21 12:09:32,988 [INFO] run: Startup sync complete — all Alpaca positions accounted for
+2026-04-21 12:09:34,272 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 12:11:28,428 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 12:11:30,843 [INFO] position_tracker: Restored 3 open positions from DB
+2026-04-21 12:11:30,843 [INFO] position_tracker:   #20 MSFT LONG_CALL entry=$14.7 entered=2026-04-21T11:38
+2026-04-21 12:11:30,844 [INFO] position_tracker:   #18 MSTR LONG_PUT entry=$6.85 entered=2026-04-21T11:38
+2026-04-21 12:11:30,844 [INFO] position_tracker:   #19 META LONG_CALL entry=$25.4 entered=2026-04-21T11:38
+2026-04-21 12:11:30,844 [INFO] position_tracker: PositionTracker initialized — 3 open positions restored
+2026-04-21 12:11:30,846 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 12:11:30,848 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 12:11:30,848 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
