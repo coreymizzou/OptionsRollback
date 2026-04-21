@@ -43420,3 +43420,213 @@
 2026-04-21 11:06:29,165 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
 2026-04-21 11:06:29,165 [INFO] run: Loop stopped after 1 ticks
 2026-04-21 11:07:25,431 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:07:32,052 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:09:55,894 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-21 11:09:55,896 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 11:09:55,898 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 11:09:55,898 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 11:09:55,902 [INFO] run: Bankroll restored from DB: $5,000.00 remaining (started at $5,000.00)
+2026-04-21 11:09:55,934 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-21 11:09:56,083 [INFO] run: Starting 60-second loop (LIVE mode)
+2026-04-21 11:09:56,083 [INFO] run: Syncing open positions from Alpaca on startup...
+2026-04-21 11:09:56,217 [INFO] run: Startup sync complete — all Alpaca positions accounted for
+2026-04-21 11:09:57,387 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:12:32,473 [INFO] run: Scanner complete: 19 scanned, 6 meet threshold
+2026-04-21 11:12:32,473 [INFO] run: Tick 1: Scanner refreshed — regime=TRENDING_UP VIX=19.8 6 valid candidates
+2026-04-21 11:12:34,114 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.60 force=False
+2026-04-21 11:12:34,282 [INFO] run:   GOOGL price refreshed: $10.07 -> mid $10.82 (bid=$10.65 ask=$11.00)
+2026-04-21 11:12:34,428 [INFO] broker: Sending order payload: {'symbol': 'GOOGL260522C00345000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '10.82', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_GOOGL_1776787954'}
+2026-04-21 11:12:36,047 [INFO] broker: Order placed: buy_to_open 1x GOOGL260522C00345000 @ $10.82 — ID: 2365017a-8136-4e2d-bb5f-d445f56b11bc
+2026-04-21 11:12:36,071 [INFO] run:   Candidate GOOGL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:12:37,247 [INFO] run:   Candidate AMZN: ENTER conf=0.62 (confluence 11pts)
+2026-04-21 11:12:38,336 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:12:38,508 [INFO] run:   PLTR price refreshed: $6.00 -> mid $6.92 (bid=$6.85 ask=$7.00)
+2026-04-21 11:12:38,664 [INFO] broker: Sending order payload: {'symbol': 'PLTR260522P00140000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '6.92', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_PLTR_1776787958'}
+2026-04-21 11:12:39,890 [INFO] broker: Order placed: buy_to_open 1x PLTR260522P00140000 @ $6.92 — ID: c4f76b10-7ace-40b4-9904-778cb43ee4a1
+2026-04-21 11:12:39,913 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:12:41,133 [INFO] run:   Candidate AMD: ENTER conf=0.55 (confluence 9pts)
+2026-04-21 11:12:42,794 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.60 force=False
+2026-04-21 11:12:42,963 [INFO] run:   GOOGL price refreshed: $10.07 -> mid $10.82 (bid=$10.65 ask=$11.00)
+2026-04-21 11:12:43,094 [INFO] run:   GOOGL already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:12:43,108 [INFO] run:   Candidate GOOGL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:12:43,141 [INFO] notifier: Alert sent: ENTER AMZN conf=0.60 force=False
+2026-04-21 11:12:43,300 [INFO] run:   AMZN price refreshed: $7.99 -> mid $9.10 (bid=$8.80 ask=$9.40)
+2026-04-21 11:12:43,448 [INFO] broker: Sending order payload: {'symbol': 'AMZN260522C00260000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '9.1', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_AMZN_1776787963'}
+2026-04-21 11:12:44,723 [INFO] broker: Order placed: buy_to_open 1x AMZN260522C00260000 @ $9.1 — ID: d68815a7-a438-4469-a99b-28ae5747a394
+2026-04-21 11:12:44,745 [INFO] run:   Candidate AMZN: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:12:44,780 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:12:44,944 [INFO] run:   PLTR price refreshed: $6.00 -> mid $6.92 (bid=$6.85 ask=$7.00)
+2026-04-21 11:12:45,076 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:12:45,091 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:12:45,106 [INFO] run:   Candidate MSTR: ENTER conf=0.55 (confluence 9pts)
+2026-04-21 11:13:43,133 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.60 force=False
+2026-04-21 11:13:43,298 [INFO] run:   GOOGL price refreshed: $10.07 -> mid $10.82 (bid=$10.65 ask=$11.00)
+2026-04-21 11:13:43,429 [INFO] run:   GOOGL already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:13:43,443 [INFO] run:   Candidate GOOGL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:13:43,476 [INFO] notifier: Alert sent: ENTER AMZN conf=0.60 force=False
+2026-04-21 11:13:43,657 [INFO] run:   AMZN price refreshed: $7.99 -> mid $9.12 (bid=$8.90 ask=$9.35)
+2026-04-21 11:13:43,788 [INFO] run:   AMZN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:13:43,803 [INFO] run:   Candidate AMZN: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:13:43,838 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:13:44,014 [INFO] run:   PLTR price refreshed: $6.00 -> mid $6.97 (bid=$6.90 ask=$7.05)
+2026-04-21 11:13:46,062 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:13:46,075 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:14:44,716 [INFO] notifier: Alert sent: ENTER GOOGL conf=0.60 force=False
+2026-04-21 11:14:44,880 [INFO] run:   GOOGL price refreshed: $10.07 -> mid $10.82 (bid=$10.65 ask=$11.00)
+2026-04-21 11:14:47,686 [INFO] run:   GOOGL already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:14:47,702 [INFO] run:   Candidate GOOGL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:14:47,733 [INFO] notifier: Alert sent: ENTER AMZN conf=0.60 force=False
+2026-04-21 11:14:47,931 [INFO] run:   AMZN price refreshed: $7.99 -> mid $9.10 (bid=$8.85 ask=$9.35)
+2026-04-21 11:14:48,075 [INFO] run:   AMZN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:14:48,089 [INFO] run:   Candidate AMZN: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:14:48,123 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:14:48,308 [INFO] run:   PLTR price refreshed: $6.00 -> mid $7.00 (bid=$6.90 ask=$7.10)
+2026-04-21 11:14:48,468 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:14:48,482 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:15:42,989 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:17:36,216 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:17:38,783 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
+2026-04-21 11:17:38,785 [INFO] rl_agent: Agent weights loaded: enter_weights (0 updates, mean_R=0.000)
+2026-04-21 11:17:38,788 [INFO] rl_agent: Agent weights loaded: exit_weights (0 updates, mean_R=0.000)
+2026-04-21 11:17:38,788 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
+2026-04-21 11:18:12,498 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 11:18:12,498 [INFO] run: Tick 5: Scanner refreshed — regime=TRENDING_UP VIX=19.8 8 valid candidates
+2026-04-21 11:18:18,725 [INFO] notifier: Alert sent: ENTER AAPL conf=0.60 force=False
+2026-04-21 11:18:18,902 [INFO] run:   AAPL price refreshed: $7.92 -> mid $7.50 (bid=$7.40 ask=$7.60)
+2026-04-21 11:18:19,037 [INFO] broker: Sending order payload: {'symbol': 'AAPL260522C00270000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '7.5', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_AAPL_1776788299'}
+2026-04-21 11:18:19,186 [INFO] broker: Order placed: buy_to_open 1x AAPL260522C00270000 @ $7.5 — ID: ede3f0ac-5f46-411b-94fd-98ce674026f4
+2026-04-21 11:18:19,207 [INFO] run:   Candidate AAPL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:18:20,269 [INFO] notifier: Alert sent: ENTER META conf=0.60 force=False
+2026-04-21 11:18:20,446 [INFO] run:   META price refreshed: $21.08 -> mid $25.77 (bid=$25.50 ask=$26.05)
+2026-04-21 11:18:20,577 [INFO] broker: Sending order payload: {'symbol': 'META260522C00690000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '25.77', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_META_1776788300'}
+2026-04-21 11:18:20,714 [INFO] broker: Order placed: buy_to_open 1x META260522C00690000 @ $25.77 — ID: a18399ee-5d54-40d6-81f4-514325f5e6b8
+2026-04-21 11:18:20,736 [INFO] run:   Candidate META: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:18:20,772 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:18:20,951 [INFO] run:   PLTR price refreshed: $6.07 -> mid $7.03 (bid=$6.95 ask=$7.10)
+2026-04-21 11:18:23,384 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:18:23,397 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:18:24,353 [INFO] notifier: Alert sent: ENTER COIN conf=0.60 force=False
+2026-04-21 11:18:24,529 [INFO] run:   COIN price refreshed: $16.23 -> mid $15.17 (bid=$14.20 ask=$16.15)
+2026-04-21 11:18:26,896 [INFO] broker: Sending order payload: {'symbol': 'COIN260522C00210000', 'qty': '1', 'side': 'buy', 'type': 'limit', 'limit_price': '15.17', 'time_in_force': 'day', 'position_intent': 'buy_to_open', 'client_order_id': 'rl_COIN_1776788306'}
+2026-04-21 11:18:28,348 [INFO] broker: Order placed: buy_to_open 1x COIN260522C00210000 @ $15.17 — ID: e1de9013-b54a-4c1f-b73b-d66950daa1fe
+2026-04-21 11:18:28,369 [INFO] run:   Candidate COIN: ENTER conf=0.60 (confluence 10pts)
+2026-04-21 11:18:35,250 [INFO] notifier: Alert sent: ENTER AAPL conf=0.60 force=False
+2026-04-21 11:18:35,406 [INFO] run:   AAPL price refreshed: $7.92 -> mid $7.47 (bid=$7.40 ask=$7.55)
+2026-04-21 11:18:35,901 [INFO] run:   AAPL already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:18:35,915 [INFO] run:   Candidate AAPL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:18:35,959 [INFO] notifier: Alert sent: ENTER META conf=0.60 force=False
+2026-04-21 11:18:36,129 [INFO] run:   META price refreshed: $21.08 -> mid $25.77 (bid=$25.50 ask=$26.05)
+2026-04-21 11:18:36,607 [INFO] run:   META already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:18:36,620 [INFO] run:   Candidate META: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:18:36,649 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:18:36,859 [INFO] run:   PLTR price refreshed: $6.07 -> mid $7.03 (bid=$6.95 ask=$7.10)
+2026-04-21 11:18:37,030 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:18:37,044 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:18:37,080 [INFO] notifier: Alert sent: ENTER COIN conf=0.60 force=False
+2026-04-21 11:18:37,239 [INFO] run:   COIN price refreshed: $16.23 -> mid $15.17 (bid=$14.20 ask=$16.15)
+2026-04-21 11:18:37,371 [INFO] run:   COIN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:18:37,386 [INFO] run:   Candidate COIN: ENTER conf=0.60 (confluence 10pts)
+2026-04-21 11:19:32,608 [INFO] notifier: Alert sent: ENTER AAPL conf=0.60 force=False
+2026-04-21 11:19:32,795 [INFO] run:   AAPL price refreshed: $7.92 -> mid $7.50 (bid=$7.40 ask=$7.60)
+2026-04-21 11:19:32,938 [INFO] run:   AAPL already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:19:32,952 [INFO] run:   Candidate AAPL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:19:33,003 [INFO] notifier: Alert sent: ENTER META conf=0.60 force=False
+2026-04-21 11:19:33,163 [INFO] run:   META price refreshed: $21.08 -> mid $25.55 (bid=$25.30 ask=$25.80)
+2026-04-21 11:19:33,295 [INFO] run:   META already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:19:33,309 [INFO] run:   Candidate META: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:19:33,343 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:19:33,507 [INFO] run:   PLTR price refreshed: $6.07 -> mid $7.05 (bid=$7.00 ask=$7.10)
+2026-04-21 11:19:34,032 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:19:34,045 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:19:34,076 [INFO] notifier: Alert sent: ENTER COIN conf=0.60 force=False
+2026-04-21 11:19:34,258 [INFO] run:   COIN price refreshed: $16.23 -> mid $15.17 (bid=$14.20 ask=$16.15)
+2026-04-21 11:19:34,395 [INFO] run:   COIN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:19:34,409 [INFO] run:   Candidate COIN: ENTER conf=0.60 (confluence 10pts)
+2026-04-21 11:20:32,068 [INFO] run:   Reconciled late fill: META #14 order=a18399ee-5d54-40d6-81f4-514325f5e6b8
+2026-04-21 11:20:32,405 [INFO] notifier: Alert sent: ENTER AAPL conf=0.60 force=False
+2026-04-21 11:20:32,567 [INFO] run:   AAPL price refreshed: $7.92 -> mid $7.45 (bid=$7.35 ask=$7.55)
+2026-04-21 11:20:33,878 [INFO] run:   AAPL already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:20:33,890 [INFO] run:   Candidate AAPL: ENTER conf=0.60 (confluence 11pts)
+2026-04-21 11:20:33,954 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:20:34,134 [INFO] run:   PLTR price refreshed: $6.07 -> mid $7.17 (bid=$7.10 ask=$7.25)
+2026-04-21 11:20:34,271 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:20:34,286 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:20:34,320 [INFO] notifier: Alert sent: ENTER COIN conf=0.60 force=False
+2026-04-21 11:20:34,493 [INFO] run:   COIN price refreshed: $16.23 -> mid $15.17 (bid=$14.20 ask=$16.15)
+2026-04-21 11:20:34,629 [INFO] run:   COIN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:20:34,643 [INFO] run:   Candidate COIN: ENTER conf=0.60 (confluence 10pts)
+2026-04-21 11:21:29,166 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:23:59,669 [INFO] run: Scanner complete: 19 scanned, 8 meet threshold
+2026-04-21 11:23:59,669 [INFO] run: Tick 9: Scanner refreshed — regime=TRENDING_UP VIX=19.8 8 valid candidates
+2026-04-21 11:24:00,032 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 11:24:00,040 [INFO] run:   META #14: HOLD conf=0.00 pnl=$-53.00
+2026-04-21 11:24:00,460 [INFO] run:   Reconciled late fill: GOOGL #15 order=2365017a-8136-4e2d-bb5f-d445f56b11bc
+2026-04-21 11:24:01,833 [INFO] notifier: Alert sent: ENTER AMZN conf=0.60 force=False
+2026-04-21 11:24:01,996 [INFO] run:   AMZN price refreshed: $7.84 -> mid $8.95 (bid=$8.65 ask=$9.25)
+2026-04-21 11:24:02,136 [INFO] run:   AMZN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:24:02,152 [INFO] run:   Candidate AMZN: ENTER conf=0.60 (confluence 12pts)
+2026-04-21 11:24:02,164 [INFO] run: [BANKROLL] Insufficient funds — need $1614.00, have $1350.00 — skipping COIN
+2026-04-21 11:24:02,438 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:24:02,454 [INFO] run:   GOOGL #15 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 11:24:02,460 [INFO] run:   GOOGL #15: HOLD conf=0.00 pnl=$-20.00
+2026-04-21 11:24:06,628 [INFO] notifier: Alert sent: ENTER AMZN conf=0.60 force=False
+2026-04-21 11:24:06,797 [INFO] run:   AMZN price refreshed: $7.84 -> mid $8.93 (bid=$8.65 ask=$9.20)
+2026-04-21 11:24:07,225 [INFO] run:   AMZN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:24:07,237 [INFO] run:   Candidate AMZN: ENTER conf=0.60 (confluence 12pts)
+2026-04-21 11:24:07,269 [INFO] notifier: Alert sent: ENTER PLTR conf=0.70 force=False
+2026-04-21 11:24:07,463 [INFO] run:   PLTR price refreshed: $6.20 -> mid $7.22 (bid=$7.15 ask=$7.30)
+2026-04-21 11:24:07,598 [INFO] run:   PLTR already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:24:07,612 [INFO] run:   Candidate PLTR: ENTER conf=0.70 (confluence 10pts)
+2026-04-21 11:24:07,615 [INFO] run: [BANKROLL] Insufficient funds — need $1614.00, have $1350.00 — skipping COIN
+2026-04-21 11:25:02,854 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:25:03,120 [INFO] run:   GOOGL #15 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:25:08,924 [INFO] notifier: Alert sent: ENTER AMZN conf=0.60 force=False
+2026-04-21 11:25:09,113 [INFO] run:   AMZN price refreshed: $7.84 -> mid $8.78 (bid=$8.40 ask=$9.15)
+2026-04-21 11:25:09,247 [INFO] run:   AMZN already has open order at Alpaca — skipping duplicate entry
+2026-04-21 11:25:09,261 [INFO] run:   Candidate AMZN: ENTER conf=0.60 (confluence 12pts)
+2026-04-21 11:25:09,272 [INFO] run: [BANKROLL] Insufficient funds — need $1614.00, have $1350.00 — skipping COIN
+2026-04-21 11:26:02,782 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:26:03,114 [INFO] run:   GOOGL #15 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:26:03,706 [INFO] run:   Reconciled late fill: AMZN #16 order=d68815a7-a438-4469-a99b-28ae5747a394
+2026-04-21 11:26:04,317 [INFO] run: [BANKROLL] Insufficient funds — need $620.00, have $440.00 — skipping PLTR
+2026-04-21 11:26:04,319 [INFO] run: [BANKROLL] Insufficient funds — need $1614.00, have $440.00 — skipping COIN
+2026-04-21 11:27:03,293 [INFO] run: Running options scanner on 19 tickers...
+2026-04-21 11:29:40,214 [INFO] run: Scanner complete: 19 scanned, 6 meet threshold
+2026-04-21 11:29:40,214 [INFO] run: Tick 13: Scanner refreshed — regime=TRENDING_UP VIX=19.9 6 valid candidates
+2026-04-21 11:29:40,631 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:29:40,915 [INFO] run:   GOOGL #15 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:29:41,196 [INFO] run:   AMZN #16 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 11:29:41,203 [INFO] run:   AMZN #16: HOLD conf=0.00 pnl=$-35.00
+2026-04-21 11:29:41,799 [INFO] run:   Reconciled late fill: AAPL #17 order=ede3f0ac-5f46-411b-94fd-98ce674026f4
+2026-04-21 11:29:43,340 [INFO] run: [BANKROLL] Insufficient funds — need $1186.00, have $-310.00 — skipping MSFT
+2026-04-21 11:29:43,628 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:29:43,642 [INFO] run:   GOOGL #15 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:29:43,657 [INFO] run:   AMZN #16 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:29:43,672 [INFO] run:   AAPL #17 exit scoring: action=HOLD conf=0.000 changed=True score_threshold=0.55
+2026-04-21 11:29:43,678 [INFO] run:   AAPL #17: HOLD conf=0.00 pnl=$-22.00
+2026-04-21 11:29:46,477 [INFO] run: [BANKROLL] Insufficient funds — need $1186.00, have $-310.00 — skipping MSFT
+2026-04-21 11:30:43,971 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:30:44,322 [INFO] run:   GOOGL #15 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:30:44,657 [INFO] run:   AMZN #16 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:30:44,936 [INFO] run:   AAPL #17 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:30:46,241 [INFO] run: [BANKROLL] Insufficient funds — need $1186.00, have $-310.00 — skipping MSFT
+2026-04-21 11:31:44,141 [INFO] run:   META #14 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:31:44,411 [INFO] run:   GOOGL #15 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:31:44,671 [INFO] run:   AMZN #16 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:31:44,983 [INFO] run:   AAPL #17 exit scoring: action=HOLD conf=0.000 changed=False score_threshold=0.55
+2026-04-21 11:31:45,294 [INFO] run:   Pending order c4f76b10-7ace-40b4-9904-778cb43ee4a1 canceled — removing from reconciliation queue
+2026-04-21 11:31:45,631 [INFO] run:   Pending order e1de9013-b54a-4c1f-b73b-d66950daa1fe canceled — removing from reconciliation queue
+2026-04-21 11:31:45,640 [INFO] run: [BANKROLL] Insufficient funds — need $1186.00, have $-310.00 — skipping MSFT
+2026-04-21 11:31:50,507 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-21 11:31:50,847 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-21 11:31:51,069 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-21 11:31:51,296 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-21 11:31:51,489 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-21 11:32:43,684 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
+2026-04-21 11:32:43,685 [INFO] run: Loop stopped after 16 ticks
+2026-04-21 11:33:02,830 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:33:10,635 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:33:10,636 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:33:22,141 [INFO] database: Database initialized at ./scanner_data_live.db
+2026-04-21 11:34:20,268 [INFO] run: Shutdown signal received — finishing current tick...
+2026-04-21 11:34:33,255 [INFO] database: Database initialized at ./scanner_data_live.db

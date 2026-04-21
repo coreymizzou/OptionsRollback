@@ -1390,6 +1390,13 @@ def evaluate_new_candidates(
         if last_action == "ENTER":
             continue
 
+        # Skip if ticker already has a pending unfilled order
+        if pending_orders and any(
+            v.get("ticker", "").upper() == ticker for v in pending_orders.values()
+        ):
+            logger.debug(f"  {ticker} has pending order — skipping alert")
+            continue
+
         # Skip if on cooldown
         if db.is_on_cooldown(ticker):
             cd = db.get_cooldown(ticker)
@@ -2639,8 +2646,28 @@ def main():
                             if status == "filled":
                                 fill_price = float(order.get("filled_avg_price", 0) or 0)
                                 if fill_price > 0:
+                                    fill_cost = fill_price * 100 * pos_data.get("contracts", 1)
+                                    ticker_r  = pos_data.get("ticker", "?")
+
+                                    # ── Bankroll check — if fill would overdraw, close the position at Alpaca
+                                    if BANKROLL_MODE and fill_cost > BANKROLL[0]:
+                                        logger.warning(f"  [RECONCILE] {ticker_r} filled @ ${fill_price:.2f} but bankroll insufficient "
+                                                       f"(need ${fill_cost:.2f}, have ${BANKROLL[0]:.2f}) — closing position")
+                                        # Close at Alpaca immediately
+                                        try:
+                                            sym = order.get("symbol", "")
+                                            _req.delete(
+                                                f"{broker.ALPACA_BASE}/positions/{sym}",
+                                                headers=broker._headers(), timeout=8
+                                            )
+                                            print(f"  [BANKROLL] Overdraft prevented — {ticker_r} position closed at Alpaca")
+                                        except Exception as _e:
+                                            logger.warning(f"  Failed to close overdraft position: {_e}")
+                                        filled_oids.append(oid)
+                                        continue
+
                                     pos_data["entry_price"]  = fill_price
-                                    pos_data["entry_cost"]   = fill_price * 100 * pos_data.get("contracts", 1)
+                                    pos_data["entry_cost"]   = fill_cost
                                     pos_data["stop_price"]   = round(fill_price * (1 - cfg.STOP_LOSS_PCT), 2)
                                     pos_data["target_price"] = round(fill_price * (1 + cfg.PROFIT_TARGET_PCT), 2)
                                     from database import insert_position as _ins2
@@ -2649,10 +2676,10 @@ def main():
                                         loaded = db.get_position_by_id(pid)
                                         if loaded:
                                             tracker._open[pid] = loaded
-                                        print(f"  [RECONCILE] Late fill detected — ENTER {pos_data.get('ticker')} #{pid} @ ${fill_price:.2f} order={oid}")
-                                        logger.info(f"  Reconciled late fill: {pos_data.get('ticker')} #{pid} order={oid}")
+                                        print(f"  [RECONCILE] Late fill detected — ENTER {ticker_r} #{pid} @ ${fill_price:.2f} order={oid}")
+                                        logger.info(f"  Reconciled late fill: {ticker_r} #{pid} order={oid}")
                                         if BANKROLL_MODE:
-                                            BANKROLL[0] = round(BANKROLL[0] - (fill_price * 100 * pos_data.get("contracts", 1)), 2)
+                                            BANKROLL[0] = round(BANKROLL[0] - fill_cost, 2)
                                             db.set_state("bankroll_remaining", BANKROLL[0])
                                             print(f"  [BANKROLL] Reconciled deduction — remaining=${BANKROLL[0]:,.2f}")
                                 filled_oids.append(oid)
