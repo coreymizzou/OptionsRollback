@@ -2555,9 +2555,10 @@ def main():
         tick += 1
 
         try:
-            # ── Scanner refresh
+            # ── Scanner refresh (market hours only)
             time_since_scan = tick_start - last_scanner_run
-            if time_since_scan >= cfg.SCANNER_RUN_INTERVAL or not last_scanner_results:
+            in_hours_for_scan = is_market_hours_for_entry()
+            if (time_since_scan >= cfg.SCANNER_RUN_INTERVAL or not last_scanner_results) and in_hours_for_scan:
                 if SCANNER_AVAILABLE:
                     try:
                         regime = determine_market_regime()
@@ -2576,6 +2577,8 @@ def main():
                     )
                 else:
                     logger.warning("Scanner unavailable — using cached results")
+            elif not in_hours_for_scan and time_since_scan >= cfg.SCANNER_RUN_INTERVAL:
+                logger.debug(f"Tick {tick}: Outside market hours — skipping scanner refresh")
 
             # ── Evaluate open positions
             if tracker.open_count > 0:
