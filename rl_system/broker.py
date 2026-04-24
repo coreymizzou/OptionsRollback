@@ -173,7 +173,8 @@ def place_spread_order(
     side: str,           # "buy" to open, "sell" to close
     quantity: int,
     net_limit_price: float,
-    tag: str = ""
+    tag: str = "",
+    market_order: bool = False
 ) -> Tuple[bool, Optional[str], Optional[float]]:
     """
     Place a two-leg spread order on Alpaca paper account.
@@ -195,9 +196,13 @@ def place_spread_order(
     long_intent  = "buy_to_open"   if side == "buy" else "buy_to_close"
     short_intent = "sell_to_open"  if side == "buy" else "sell_to_close"
 
+    if market_order:
+        order_type_fields = {"type": "market"}
+    else:
+        order_type_fields = {"type": "limit", "limit_price": str(round(net_limit_price, 2))}
+
     payload = {
-        "type":          "limit",
-        "limit_price":   str(round(net_limit_price, 2)),
+        **order_type_fields,
         "time_in_force": "day",
         "order_class":   "mleg",
         "qty":           str(quantity),   # required at parent level for mleg

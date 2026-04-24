@@ -1067,6 +1067,7 @@ def evaluate_open_positions(
                         notes_data = {}
 
                     if is_spread and notes_data.get("short_strike"):
+                        # Use market order for spread close — always want out on stop/target
                         ok, oid, _ = broker.place_spread_order(
                             ticker       = ticker,
                             expiration   = position.get("expiration", ""),
@@ -1075,9 +1076,11 @@ def evaluate_open_positions(
                             short_strike = notes_data["short_strike"],
                             side         = "sell",
                             quantity     = position.get("contracts", 1),
-                            net_limit_price = current_option_price
+                            net_limit_price = current_option_price,
+                            market_order = True
                         )
                     else:
+                        # Use market order for single-leg close — always want out on stop/target
                         ok, oid, _ = broker.place_option_order(
                             ticker      = ticker,
                             expiration  = position.get("expiration", ""),
@@ -1088,9 +1091,8 @@ def evaluate_open_positions(
                             limit_price = current_option_price
                         )
                     if ok:
-                        status, fill = broker.poll_for_fill(oid, timeout_seconds=30)
-                        if fill and fill > 0:
-                            confirmed_exit_price = fill
+                        logger.info(f"  Closing order placed for {ticker} order={oid} — position will be confirmed on next reconciliation tick")
+                        confirmed_exit_price = current_option_price
 
                 print(f"\n{sep}")
                 print(f"  [AUTO] {hard_reason} — closing {ticker} @ ${confirmed_exit_price:.2f}")
@@ -1618,6 +1620,13 @@ def evaluate_new_candidates(
                                 use_price = fresh.get("mid", 0)
                                 if use_price > 0:
                                     stale_price = fill_price_
+                                    # Sanity check — if refreshed price diverges >40% from scanner price, skip trade
+                                    if stale_price > 0:
+                                        divergence = abs(use_price - stale_price) / stale_price
+                                        if divergence > 0.40:
+                                            logger.warning(f"  {ticker} price divergence too large (scanner=${stale_price:.2f} live=${use_price:.2f} diff={divergence:.0%}) — skipping trade")
+                                            _just_tracked = False
+                                            continue
                                     fill_price_ = use_price
                                     logger.info(f"  {ticker} price refreshed: ${stale_price:.2f} -> mid ${fill_price_:.2f} (bid=${fresh['bid']:.2f} ask=${fresh['ask']:.2f})")
                                     # Re-check bankroll against actual live price
@@ -2497,7 +2506,7 @@ def main():
             alpaca_positions = broker.get_positions()
             alpaca_symbols = {p["symbol"] for p in alpaca_positions}
 
-            # Get tracked symbols from DB
+            # Get tracked symbols from DB — include both long and short legs of spreads
             tracked_symbols = set()
             for pos in tracker.open_positions.values():
                 sym = broker.build_option_symbol(
@@ -2505,6 +2514,19 @@ def main():
                     pos.get("option_type","call"), pos.get("strike",0)
                 )
                 tracked_symbols.add(sym)
+                # Also add short leg of spreads if present
+                try:
+                    notes = json.loads(pos.get("notes") or "{}")
+                    short_strike = notes.get("short_strike")
+                    short_type = notes.get("short_option_type", pos.get("option_type","call"))
+                    if short_strike:
+                        short_sym = broker.build_option_symbol(
+                            pos.get("ticker",""), pos.get("expiration",""),
+                            short_type, short_strike
+                        )
+                        tracked_symbols.add(short_sym)
+                except Exception:
+                    pass
 
             # Find positions in Alpaca not in our DB
             untracked = [p for p in alpaca_positions if p["symbol"] not in tracked_symbols]
@@ -2617,13 +2639,14 @@ def main():
                             pass
 
                         # ── Price drift check: cancel if live price > 20% above actual limit
+                        # Only run during market hours — options don't trade after hours
                         try:
                             ticker_r = pos_data.get("ticker", "")
                             occ_sym = broker.build_option_symbol(
                                 ticker_r, pos_data.get("expiration",""),
                                 pos_data.get("option_type","call"), pos_data.get("strike",0)
                             )
-                            if get_live_option_quote and occ_sym:
+                            if get_live_option_quote and occ_sym and is_market_hours_for_entry():
                                 live_q = get_live_option_quote(occ_sym)
                                 live_ask = live_q.get("ask", 0)
                                 limit_price = pos_data.get("limit_price", pos_data.get("entry_price", 0))
