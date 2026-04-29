@@ -40,6 +40,8 @@ sys.path.insert(0, str(SCANNER_DIR))
 import config as cfg
 cfg.DB_PATH = "./scanner_data_live.db"  # Separate DB for mid-price live simulation
 import database as db
+# Broker is imported dynamically based on --broker flag
+# Default to alpaca broker; overridden after arg parsing
 try:
     import broker
     BROKER_AVAILABLE = True
@@ -1082,13 +1084,14 @@ def evaluate_open_positions(
                     else:
                         # Use market order for single-leg close — always want out on stop/target
                         ok, oid, _ = broker.place_option_order(
-                            ticker      = ticker,
-                            expiration  = position.get("expiration", ""),
-                            option_type = position.get("option_type", "call"),
-                            strike      = position.get("strike", 0),
-                            side        = "sell_to_close",
-                            quantity    = position.get("contracts", 1),
-                            limit_price = current_option_price
+                            ticker       = ticker,
+                            expiration   = position.get("expiration", ""),
+                            option_type  = position.get("option_type", "call"),
+                            strike       = position.get("strike", 0),
+                            side         = "sell_to_close",
+                            quantity     = position.get("contracts", 1),
+                            limit_price  = current_option_price,
+                            market_order = True
                         )
                     if ok:
                         logger.info(f"  Closing order placed for {ticker} order={oid} — position will be confirmed on next reconciliation tick")
@@ -1262,18 +1265,17 @@ def evaluate_open_positions(
                         )
                     else:
                         ok, oid, _ = broker.place_option_order(
-                            ticker      = ticker,
-                            expiration  = position.get("expiration", ""),
-                            option_type = position.get("option_type", "call"),
-                            strike      = position.get("strike", 0),
-                            side        = "sell_to_close",
-                            quantity    = position.get("contracts", 1),
-                            limit_price = current_option_price
+                            ticker       = ticker,
+                            expiration   = position.get("expiration", ""),
+                            option_type  = position.get("option_type", "call"),
+                            strike       = position.get("strike", 0),
+                            side         = "sell_to_close",
+                            quantity     = position.get("contracts", 1),
+                            limit_price  = current_option_price,
+                            market_order = True
                         )
                     if ok:
-                        status, fill = broker.poll_for_fill(oid, timeout_seconds=30)
-                        if fill and fill > 0:
-                            exit_price = fill
+                        logger.info(f"  Exit order placed for {ticker} order={oid} — market order, will fill immediately")
 
                 pnl  = tracker.unrealized_pnl(position_id, exit_price)
                 r_   = tracker.unrealized_r(position_id, exit_price)
@@ -2248,6 +2250,33 @@ def _prompt_and_store_keys():
             db.set_state("tradier_api_key", tradier_key)
             changed = True
 
+    # ── Schwab (optional — only prompted if --broker schwab)
+    import sys
+    if "--broker" in sys.argv and "schwab" in sys.argv:
+        schwab_client_id = db.get_state("schwab_client_id", "")
+        if not schwab_client_id:
+            print("\n  Schwab Client ID not set.")
+            schwab_client_id = input("  Enter Schwab Client ID: ").strip()
+            if schwab_client_id:
+                db.set_state("schwab_client_id", schwab_client_id)
+                changed = True
+
+        schwab_client_secret = db.get_state("schwab_client_secret", "")
+        if not schwab_client_secret:
+            print("\n  Schwab Client Secret not set.")
+            schwab_client_secret = input("  Enter Schwab Client Secret: ").strip()
+            if schwab_client_secret:
+                db.set_state("schwab_client_secret", schwab_client_secret)
+                changed = True
+
+        schwab_account = db.get_state("schwab_account_number", "")
+        if not schwab_account:
+            print("\n  Schwab Account Number not set.")
+            schwab_account = input("  Enter Schwab Account Number: ").strip()
+            if schwab_account:
+                db.set_state("schwab_account_number", schwab_account)
+                changed = True
+
     # ── Alpaca (mid account)
     alpaca_key = db.get_state("alpaca_api_key_live", "")
     if not alpaca_key:
@@ -2333,6 +2362,9 @@ def main():
                         help="Bankroll mode — specify a starting dollar amount (e.g. --bankroll 5000). "
                              "System trades autonomously using only that pool. Profits compound back in. "
                              "1 contract per trade. Stops entering when bankroll can't cover next premium.")
+    parser.add_argument("--broker", type=str, default="alpaca",
+                        choices=["alpaca", "schwab"],
+                        help="Broker to use for order execution (default: alpaca)")
     parser.add_argument("--live-paper", action="store_true",
                         help="Live paper mode — sends real orders to Alpaca paper account. "
                              "Trades visible at app.alpaca.markets/paper-trading/overview. "
@@ -2364,6 +2396,22 @@ def main():
         db.initialize_database()
         _cmd_reset(keep_weights=False)
         return
+
+    # ── Swap broker module based on --broker flag
+    if args.broker == "schwab":
+        try:
+            import broker_schwab as broker
+            # Inject Schwab keys from DB
+            broker.CLIENT_ID      = db.get_state("schwab_client_id", "")
+            broker.CLIENT_SECRET  = db.get_state("schwab_client_secret", "")
+            broker.ACCOUNT_NUMBER = db.get_state("schwab_account_number", "")
+            BROKER_AVAILABLE = True
+            logger.info("Using Schwab broker")
+        except ImportError as e:
+            logger.error(f"Could not import broker_schwab: {e}")
+            BROKER_AVAILABLE = False
+    else:
+        logger.info("Using Alpaca broker")
 
     # ── Handle --reset-keys
     if args.reset_keys:

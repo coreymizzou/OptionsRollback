@@ -108,7 +108,8 @@ def place_option_order(
     side: str,           # "buy" or "sell"
     quantity: int,
     limit_price: float,
-    tag: str = ""
+    tag: str = "",
+    market_order: bool = False
 ) -> Tuple[bool, Optional[str], Optional[float]]:
     """
     Place a single-leg option order on Alpaca paper account.
@@ -132,12 +133,16 @@ def place_option_order(
         alpaca_side     = "sell"
         position_intent = "sell_to_close"
 
+    if market_order:
+        order_type_fields = {"type": "market"}
+    else:
+        order_type_fields = {"type": "limit", "limit_price": str(round(limit_price, 2))}
+
     payload = {
         "symbol":          symbol,
         "qty":             str(quantity),
         "side":            alpaca_side,
-        "type":            "limit",
-        "limit_price":     str(round(limit_price, 2)),
+        **order_type_fields,
         "time_in_force":   "day",
         "position_intent": position_intent,
         "client_order_id": tag or f"rl_{ticker}_{datetime.now().strftime('%H%M%S')}"
