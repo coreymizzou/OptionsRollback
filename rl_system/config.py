@@ -11,7 +11,7 @@ without touching core logic in any other module.
 ACCOUNT_SIZE         = 100_000.0   # Total account size ($)
 MAX_RISK_PCT         = 0.02       # Max risk per trade as fraction of account
 MAX_RISK_DOLLARS     = ACCOUNT_SIZE * MAX_RISK_PCT   # = $500
-MAX_CONCURRENT_POSITIONS = 3      # Hard cap on simultaneous open positions
+MAX_CONCURRENT_POSITIONS = 10      # Hard cap on simultaneous open positions
 
 # ─── Position Management ─────────────────────────────────────────────────────
 STOP_LOSS_PCT        = 0.33       # Close position if down this fraction of entry cost

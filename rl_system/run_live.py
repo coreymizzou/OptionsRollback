@@ -2398,6 +2398,7 @@ def main():
         return
 
     # ── Swap broker module based on --broker flag
+    global BROKER_AVAILABLE, broker
     if args.broker == "schwab":
         try:
             import broker_schwab as broker
@@ -2412,6 +2413,7 @@ def main():
             BROKER_AVAILABLE = False
     else:
         logger.info("Using Alpaca broker")
+        # BROKER_AVAILABLE already set at module level from initial import
 
     # ── Handle --reset-keys
     if args.reset_keys:
