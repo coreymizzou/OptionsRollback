@@ -1512,7 +1512,7 @@ def evaluate_new_candidates(
             else:
                 no_order_reason = "entry gate not satisfied"
             logger.info(
-                f"  {ticker} not ordered — {no_order_reason} "
+                f"  {ticker} not ordered - {no_order_reason} "
                 f"(confluence {scanner_result.get('confluence', {}).get('score', 0)}pts)"
             )
 
