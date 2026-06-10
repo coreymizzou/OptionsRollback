@@ -1756,10 +1756,9 @@ def evaluate_new_candidates(
                 }
             )
 
-        # Only update action state if we didn't already handle it above
-        # If we notified (should_notify=True), state was already set inside the block
-        # If exploration tick, don't update state — real signal may fire next tick
-        if not should_notify and not is_explore_tick:
+        # Only update passive action state for non-entry decisions.
+        # An ENTER that did not notify/place an order should remain eligible on future ticks.
+        if not should_notify and not is_explore_tick and action != "ENTER":
             action_state.update(key, action, confidence)
 
         if DEBUG_MODE or (changed and action == "ENTER"):
