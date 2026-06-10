@@ -89,6 +89,9 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout)
     ]
 )
+
+for _noisy_logger in ("yfinance", "peewee", "urllib3", "urllib3.connectionpool"):
+    logging.getLogger(_noisy_logger).setLevel(logging.WARNING)
 logger = logging.getLogger("run")
 
 
@@ -1498,6 +1501,21 @@ def evaluate_new_candidates(
             not is_explore_tick
         )
 
+        if not should_notify and not is_explore_tick:
+            order_threshold = cfg.NOTIFY_CONFIDENCE_THRESHOLD
+            if action != "ENTER":
+                no_order_reason = f"agent action {action}"
+            elif confidence < order_threshold:
+                no_order_reason = f"confidence {confidence:.2f} below order threshold {order_threshold:.2f}"
+            elif not changed:
+                no_order_reason = "same action state already seen"
+            else:
+                no_order_reason = "entry gate not satisfied"
+            logger.info(
+                f"  {ticker} not ordered — {no_order_reason} "
+                f"(confluence {scanner_result.get('confluence', {}).get('score', 0)}pts)"
+            )
+
         if should_notify:
             pricing  = scanner_result.get("pricing", {})
             trade    = scanner_result.get("trade", {})
@@ -2374,7 +2392,10 @@ def main():
 
     if args.debug:
         cfg.DEBUG_MODE = True
-        logging.getLogger().setLevel(logging.DEBUG)
+        logging.getLogger().setLevel(logging.INFO)
+        logger.setLevel(logging.DEBUG)
+        for _noisy_logger in ("yfinance", "peewee", "urllib3", "urllib3.connectionpool"):
+            logging.getLogger(_noisy_logger).setLevel(logging.WARNING)
 
     DEBUG_MODE      = cfg.DEBUG_MODE
     AUTO_MODE       = args.auto or (args.bankroll is not None) or args.live_paper
@@ -2810,3 +2831,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
