@@ -1,7 +1,0 @@
-2026-04-17 09:22:43,644 [INFO] database: Database initialized at ./scanner_data.db
-2026-04-17 09:22:43,650 [INFO] position_tracker: PositionTracker initialized — 0 open positions restored
-2026-04-17 09:22:43,654 [INFO] rl_agent: DecisionAgent initialized — enter_model: 0 updates, exit_model: 0 updates
-2026-04-17 09:22:43,694 [INFO] notifier: Alert sent: INFO SYSTEM conf=1.00 force=False
-2026-04-17 09:22:43,705 [INFO] run: Starting 60-second loop (LIVE mode)
-2026-04-17 09:22:45,337 [INFO] run: Running options scanner on 19 tickers...
-2026-04-17 09:23:00,324 [INFO] run: Shutdown signal received — finishing current tick...
