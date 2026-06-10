@@ -1387,7 +1387,8 @@ def evaluate_new_candidates(
 
         # Skip if already in a position on this ticker
         if tracker.is_open(ticker):
-            # Don't reset action state here — let it expire naturally
+            logger.info(f"  {ticker} skipped - position already open")
+            # Don't reset action state here - let it expire naturally
             # Resetting to HOLD/0.0 would prevent ENTER from firing
             # again after the position closes
             continue
@@ -1396,13 +1397,14 @@ def evaluate_new_candidates(
         # prevents re-alerting on same signal before user has had time to act
         last_action = action_state.get_last(f"entry_{ticker}")
         if last_action == "ENTER":
+            logger.info(f"  {ticker} skipped - prior ENTER action state still active")
             continue
 
         # Skip if ticker already has a pending unfilled order
         if pending_orders and any(
             v.get("ticker", "").upper() == ticker for v in pending_orders.values()
         ):
-            logger.debug(f"  {ticker} has pending order — skipping alert")
+            logger.info(f"  {ticker} skipped - pending order already exists")
             continue
 
         # Skip if on cooldown
