@@ -163,8 +163,10 @@ class PositionTracker:
         current_value = current_option_price * 100 * contracts
         pct_of_entry  = current_option_price / entry_price if entry_price > 0 else 1
 
-        # 1. Stop loss
-        if pct_of_entry <= (1 - STOP_LOSS_PCT):
+        # 1. Stop loss. Prefer the stored per-position stop so spreads can
+        # have wider stops than single-leg options.
+        stop_price = position.get("stop_price") or (entry_price * (1 - STOP_LOSS_PCT))
+        if current_option_price <= stop_price:
             loss = entry_cost - current_value
             return True, f"STOP_LOSS: down {(1-pct_of_entry)*100:.0f}% (-${loss:.2f})"
 

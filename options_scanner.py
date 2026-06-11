@@ -949,6 +949,34 @@ def select_optimal_expiration(exps: list, dte_target: int = 30,
     best = min(valid, key=lambda e: abs((datetime.strptime(e, "%Y-%m-%d") - datetime.now()).days - dte_target))
     return best
 
+
+def contracts_for_exp(chain_data: dict, exp: str, option_type: str) -> list:
+    """
+    Return contracts for one expiration/type from either supported chain format.
+
+    yfinance format: {"calls": [...], "puts": [...]}
+    Tradier format:  [{..., "option_type": "call"}, ...]
+    """
+    if exp not in chain_data:
+        return []
+
+    data = chain_data[exp]
+    if isinstance(data, dict):
+        return data.get(option_type + "s", []) or []
+
+    if isinstance(data, list):
+        contracts = []
+        for c in data:
+            if not isinstance(c, dict):
+                continue
+            c_type = (c.get("option_type") or "").lower()
+            if c_type == option_type.lower():
+                contracts.append(c)
+        return contracts
+
+    return []
+
+
 def find_best_strike(chain_data: dict, exp: str, spot: float, direction: str,
                      delta_target: float = 0.40, option_type: str = "call") -> dict:
     """
@@ -969,9 +997,7 @@ def find_best_strike(chain_data: dict, exp: str, spot: float, direction: str,
     try:
         if exp not in chain_data:
             return {}
-        data = chain_data[exp]
-
-        contracts = data.get(option_type + "s", []) if isinstance(data, dict) else []
+        contracts = contracts_for_exp(chain_data, exp, option_type)
 
         r = 0.045
         exp_dt = datetime.strptime(exp, "%Y-%m-%d")
@@ -1362,7 +1388,7 @@ def construct_trade(
         # Delta targeting can return a strike on the wrong side of the long leg
         short_leg = None
         if best_exp in chain_data:
-            contracts_list = chain_data[best_exp].get(opt_type + "s", [])
+            contracts_list = contracts_for_exp(chain_data, best_exp, opt_type)
             valid_shorts = []
             for c in contracts_list:
                 K   = float(c.get("strike", 0))

@@ -497,7 +497,7 @@ def ask_track_position(scanner_result: Dict, tracker: PositionTracker,
         "entry_price":      fill_price,
         "entry_cost":       fill_price * 100 * pricing_.get("contracts", 1),
         "contracts":        pricing_.get("contracts", 1),
-        "stop_price":       round(fill_price * (1 - cfg.STOP_LOSS_PCT), 2),
+        "stop_price":       _stop_price_for_strategy(fill_price, strategy_),
         "target_price":     round(fill_price * (1 + cfg.PROFIT_TARGET_PCT), 2),
         "entry_time":       _dt.now().isoformat(),
         "confluence_score": scanner_result.get("confluence", {}).get("score"),
@@ -513,7 +513,7 @@ def ask_track_position(scanner_result: Dict, tracker: PositionTracker,
             tracker._open[position_id] = loaded
         else:
             logger.warning(f"Could not reload position {position_id} from DB after insert")
-        stop_price   = round(fill_price * (1 - cfg.STOP_LOSS_PCT), 2)
+        stop_price   = _stop_price_for_strategy(fill_price, strategy_)
         target_price = round(fill_price * (1 + cfg.PROFIT_TARGET_PCT), 2)
         print(f"  ✓ {ticker} tracked — entry=${fill_price} "
               f"stop=${stop_price} target=${target_price}")
@@ -588,16 +588,30 @@ def ask_close_position(position_id: int, position: Dict, tracker: PositionTracke
 #  LIVE PRICE FETCHER FOR OPEN POSITIONS
 # =============================================================================
 
-# Simple price cache — stores (price, timestamp) per position_id
-# Avoids hammering Tradier API every tick for every open position
-_price_cache: Dict[int, tuple] = {}
-_PRICE_CACHE_TTL = 30  # seconds — refresh twice per tick for faster target/stop detection
+# Simple price cache stores (price, timestamp) per (position_id, valuation).
+# Avoids hammering Tradier API every tick for every open position.
+_price_cache: Dict[tuple, tuple] = {}
+_PRICE_CACHE_TTL = 30  # seconds - refresh twice per tick for faster target/stop detection
+_spread_stop_confirmations: Dict[int, int] = {}
+SPREAD_STOP_LOSS_PCT = 0.50
 
-def _fetch_option_mid(ticker: str, strike: float, expiration: str,
-                      opt_type: str, api_key: str) -> Optional[float]:
+
+def _is_spread_strategy(strategy: str) -> bool:
+    return "SPREAD" in str(strategy or "").upper()
+
+
+def _stop_loss_pct_for_strategy(strategy: str) -> float:
+    return SPREAD_STOP_LOSS_PCT if _is_spread_strategy(strategy) else cfg.STOP_LOSS_PCT
+
+
+def _stop_price_for_strategy(entry_price: float, strategy: str) -> float:
+    return round(entry_price * (1 - _stop_loss_pct_for_strategy(strategy)), 2)
+
+def _fetch_option_quote(ticker: str, strike: float, expiration: str,
+                        opt_type: str, api_key: str) -> Optional[Dict[str, float]]:
     """
-    Fetch mid price for a single option contract from Tradier.
-    Returns None if not found or no valid bid/ask.
+    Fetch bid/ask/mid/last for a single option contract from Tradier.
+    Returns None if not found or no usable quote.
     """
     import requests as req
     try:
@@ -612,35 +626,61 @@ def _fetch_option_mid(ticker: str, strike: float, expiration: str,
             for c in options:
                 if (abs(float(c.get("strike", 0)) - float(strike)) < 0.01 and
                         c.get("option_type", "").lower() == opt_type.lower()):
-                    bid  = float(c.get("bid", 0) or 0)
-                    ask  = float(c.get("ask", 0) or 0)
+                    bid = float(c.get("bid", 0) or 0)
+                    ask = float(c.get("ask", 0) or 0)
                     last = float(c.get("last", 0) or 0)
-                    if bid > 0 and ask > 0:
-                        return round((bid + ask) / 2, 2)
-                    if last > 0:
-                        return round(last, 2)
+                    mid = round((bid + ask) / 2, 2) if bid > 0 and ask > 0 else 0
+                    if bid > 0 or ask > 0 or last > 0:
+                        return {"bid": bid, "ask": ask, "mid": mid or round(last, 2), "last": last}
     except Exception as e:
         logger.debug(f"Tradier fetch failed for {ticker} {strike} {opt_type}: {e}")
     return None
 
 
-def get_current_option_price(position: Dict) -> Optional[float]:
+def _quote_price(quote: Dict[str, float], side: str) -> Optional[float]:
+    """
+    Convert a quote into the price relevant to a side of the market.
+
+    side='sell' is liquidation for a long option: use bid.
+    side='buy' is covering a short option: use ask.
+    side='mid' is non-executable reference pricing.
+    Falls back to mid/last only when the requested side is unavailable.
+    """
+    if not quote:
+        return None
+    if side == "mid":
+        keys = ("mid", "last")
+    elif side == "sell":
+        keys = ("bid", "mid", "last")
+    else:
+        keys = ("ask", "mid", "last")
+    for key in keys:
+        val = quote.get(key)
+        if val and val > 0:
+            return round(val, 2)
+    return None
+
+
+def get_current_option_price(position: Dict, valuation: str = "liquidation") -> Optional[float]:
     """
     Fetch the current net price for an open position.
 
-    For spreads: fetches BOTH legs and returns long_mid - short_mid
-    For single legs: fetches the one contract and returns its mid
+    valuation='liquidation' returns conservative exit value:
+      - long single option: bid
+      - debit spread: long bid minus short ask
+    valuation='mid' returns midpoint pricing for reference only.
 
-    This is the critical function for P&L accuracy — must match ThinkorSwim.
-    Caches for 30 seconds. Falls back to entry_price on failure.
+    This value drives displayed P&L and hard exits, so the default must be
+    liquidation pricing rather than optimistic midpoint pricing.
     """
     import os
 
     position_id = position.get("id")
+    cache_key = (position_id, valuation)
 
     # ── Check cache first
-    if position_id and position_id in _price_cache:
-        cached_price, cached_time = _price_cache[position_id]
+    if position_id and cache_key in _price_cache:
+        cached_price, cached_time = _price_cache[cache_key]
         age = (datetime.now() - cached_time).total_seconds()
         if age < _PRICE_CACHE_TTL:
             return cached_price
@@ -688,18 +728,18 @@ def get_current_option_price(position: Dict) -> Optional[float]:
 
     def _cache_and_return(price: float) -> float:
         if position_id:
-            _price_cache[position_id] = (price, datetime.now())
+            _price_cache[cache_key] = (price, datetime.now())
         return price
 
     api_key = os.environ.get("TRADIER_API_KEY", "")
 
     # ── Fetch long leg price
-    long_mid = None
+    long_quote = None
     if api_key:
-        long_mid = _fetch_option_mid(ticker, strike, expiration, opt_type, api_key)
+        long_quote = _fetch_option_quote(ticker, strike, expiration, opt_type, api_key)
 
     # Fallback to yfinance for long leg
-    if long_mid is None:
+    if long_quote is None:
         try:
             import yfinance as yf
             stock = yf.Ticker(ticker)
@@ -709,23 +749,25 @@ def get_current_option_price(position: Dict) -> Optional[float]:
             if not row.empty:
                 bid = float(row.iloc[0]["bid"] or 0)
                 ask = float(row.iloc[0]["ask"] or 0)
-                if bid > 0 and ask > 0:
-                    long_mid = round((bid + ask) / 2, 2)
+                last = float(row.iloc[0].get("lastPrice", 0) or 0)
+                mid = round((bid + ask) / 2, 2) if bid > 0 and ask > 0 else 0
+                if bid > 0 or ask > 0 or last > 0:
+                    long_quote = {"bid": bid, "ask": ask, "mid": mid or round(last, 2), "last": last}
         except Exception as e:
             logger.debug(f"yfinance long leg failed for {ticker}: {e}")
 
-    if long_mid is None:
-        logger.debug(f"Could not fetch long leg price for {ticker} {strike} — using entry price")
+    if long_quote is None:
+        logger.debug(f"Could not fetch long leg price for {ticker} {strike} - using entry price")
         return entry_price
 
     # ── For spreads: fetch short leg and compute net value
     if is_spread and short_strike:
-        short_mid = None
+        short_quote = None
         if api_key:
-            short_mid = _fetch_option_mid(
+            short_quote = _fetch_option_quote(
                 ticker, short_strike, expiration, short_opt_type, api_key
             )
-        if short_mid is None:
+        if short_quote is None:
             try:
                 import yfinance as yf
                 stock = yf.Ticker(ticker)
@@ -735,24 +777,33 @@ def get_current_option_price(position: Dict) -> Optional[float]:
                 if not row.empty:
                     bid = float(row.iloc[0]["bid"] or 0)
                     ask = float(row.iloc[0]["ask"] or 0)
-                    if bid > 0 and ask > 0:
-                        short_mid = round((bid + ask) / 2, 2)
+                    last = float(row.iloc[0].get("lastPrice", 0) or 0)
+                    mid = round((bid + ask) / 2, 2) if bid > 0 and ask > 0 else 0
+                    if bid > 0 or ask > 0 or last > 0:
+                        short_quote = {"bid": bid, "ask": ask, "mid": mid or round(last, 2), "last": last}
             except Exception as e:
                 logger.debug(f"yfinance short leg failed for {ticker}: {e}")
 
-        if short_mid is not None:
-            # Spread value = long leg mid - short leg mid
-            # This is what ThinkorSwim shows as the spread's current value
-            spread_mid = round(long_mid - short_mid, 2)
+        if short_quote is not None:
+            if valuation == "mid":
+                long_px = _quote_price(long_quote, "mid")
+                short_px = _quote_price(short_quote, "mid")
+            else:
+                long_px = _quote_price(long_quote, "sell")
+                short_px = _quote_price(short_quote, "buy")
+            if long_px is None or short_px is None:
+                return entry_price
+            spread_price = round(long_px - short_px, 2)
             logger.debug(
-                f"{ticker} spread: long={long_mid} short={short_mid} net={spread_mid}"
+                f"{ticker} spread {valuation}: long={long_px} short={short_px} net={spread_price}"
             )
-            return _cache_and_return(max(spread_mid, 0.01))
+            return _cache_and_return(max(spread_price, 0.01))
         else:
-            logger.debug(f"Could not fetch short leg for {ticker} — using long leg only")
+            logger.debug(f"Could not fetch short leg for {ticker} - using long leg only")
 
-    # ── Single leg or spread fallback: return long leg mid
-    return _cache_and_return(long_mid)
+    # ── Single leg or spread fallback
+    long_price = _quote_price(long_quote, "mid" if valuation == "mid" else "sell")
+    return _cache_and_return(long_price or entry_price)
 
 
 # =============================================================================
@@ -990,6 +1041,41 @@ def run_scanner(paper_mode: bool, regime: Dict) -> List[Dict]:
         and (r.get("pricing", {}).get("entry") or 0) >= 0.50
     ]
 
+    if results:
+        scorecard_lines = [f"Scanner scorecard (min_score={cfg.MIN_CONFLUENCE_SCORE_TO_ENTER}):"]
+        ranked = sorted(
+            results,
+            key=lambda r: r.get("confluence", {}).get("score") or -1,
+            reverse=True
+        )
+        for r in ranked:
+            ticker = r.get("ticker", "?")
+            trade = r.get("trade", {}) or {}
+            pricing = r.get("pricing", {}) or {}
+            conf = r.get("confluence", {}) or {}
+            score = conf.get("score")
+            strategy = trade.get("strategy") or "?"
+            direction = trade.get("direction") or "?"
+            entry = pricing.get("entry")
+
+            if r.get("error"):
+                status = f"REJECT:scanner_error:{r.get('error')}"
+            elif (score or 0) < cfg.MIN_CONFLUENCE_SCORE_TO_ENTER:
+                status = "REJECT:low_confluence"
+            elif not trade.get("main_leg", {}).get("strike"):
+                status = "REJECT:missing_contract"
+            elif (entry or 0) < 0.50:
+                status = "REJECT:entry_too_low"
+            else:
+                status = "PASS"
+
+            scorecard_lines.append(
+                f"  {ticker:<5} score={score if score is not None else '?':<2} "
+                f"{strategy:<16} {direction:<7} entry={entry} {status}"
+            )
+        for line in scorecard_lines:
+            logger.info(line)
+
     logger.info(f"Scanner complete: {len(results)} scanned, {len(valid)} meet threshold")
     return sorted(valid, key=lambda r: r.get("confluence", {}).get("score", 0), reverse=True)
 
@@ -1041,7 +1127,20 @@ def evaluate_open_positions(
         # ── HARD RULES FIRST — non-negotiable
         must_exit, hard_reason = tracker.check_hard_exit_rules(position, current_option_price)
 
+        if not must_exit:
+            _spread_stop_confirmations.pop(position_id, None)
+
         if must_exit:
+            if "STOP" in hard_reason.upper() and _is_spread_strategy(position.get("strategy", "")):
+                seen = _spread_stop_confirmations.get(position_id, 0) + 1
+                _spread_stop_confirmations[position_id] = seen
+                if seen < 2:
+                    logger.info(
+                        f"  {ticker} spread stop observed {seen}/2 "
+                        f"(price=${current_option_price:.2f}, stop=${position.get('stop_price', 0):.2f}) - waiting for confirmation"
+                    )
+                    continue
+
             # ── Notify user FIRST before closing
             if "STOP" in hard_reason.upper():
                 notify_stop_hit(
@@ -1097,8 +1196,16 @@ def evaluate_open_positions(
                             market_order = True
                         )
                     if ok:
-                        logger.info(f"  Closing order placed for {ticker} order={oid} — position will be confirmed on next reconciliation tick")
-                        confirmed_exit_price = current_option_price
+                        logger.info(f"  Closing order placed for {ticker} order={oid} - waiting for broker fill confirmation")
+                        fill_status, fill_px = broker.poll_for_fill(oid, timeout_seconds=15, poll_interval=1)
+                        if fill_status != "filled":
+                            logger.error(f"  Closing order for {ticker} not filled ({fill_status}); position remains open in tracker")
+                            continue
+                        if fill_px:
+                            confirmed_exit_price = abs(float(fill_px))
+                    else:
+                        logger.error(f"  Closing order failed for {ticker}; position remains open in tracker")
+                        continue
 
                 print(f"\n{sep}")
                 print(f"  [AUTO] {hard_reason} — closing {ticker} @ ${confirmed_exit_price:.2f}")
@@ -1264,7 +1371,8 @@ def evaluate_open_positions(
                             short_strike = notes_data["short_strike"],
                             side         = "sell",
                             quantity     = position.get("contracts", 1),
-                            net_limit_price = current_option_price
+                            net_limit_price = current_option_price,
+                            market_order = True
                         )
                     else:
                         ok, oid, _ = broker.place_option_order(
@@ -1278,7 +1386,16 @@ def evaluate_open_positions(
                             market_order = True
                         )
                     if ok:
-                        logger.info(f"  Exit order placed for {ticker} order={oid} — market order, will fill immediately")
+                        logger.info(f"  Exit order placed for {ticker} order={oid} - waiting for broker fill confirmation")
+                        fill_status, fill_px = broker.poll_for_fill(oid, timeout_seconds=15, poll_interval=1)
+                        if fill_status != "filled":
+                            logger.error(f"  Exit order for {ticker} not filled ({fill_status}); position remains open in tracker")
+                            continue
+                        if fill_px:
+                            exit_price = abs(float(fill_px))
+                    else:
+                        logger.error(f"  Exit order failed for {ticker}; position remains open in tracker")
+                        continue
 
                 pnl  = tracker.unrealized_pnl(position_id, exit_price)
                 r_   = tracker.unrealized_r(position_id, exit_price)
@@ -1616,7 +1733,7 @@ def evaluate_new_candidates(
                         "entry_price":      fill_price_,
                         "entry_cost":       entry_cost_,
                         "contracts":        contracts_,
-                        "stop_price":       round(fill_price_ * (1 - cfg.STOP_LOSS_PCT), 2),
+                        "stop_price":       _stop_price_for_strategy(fill_price_, strategy_),
                         "target_price":     round(fill_price_ * (1 + cfg.PROFIT_TARGET_PCT), 2),
                         "entry_time":       _dt.now().isoformat(),
                         "confluence_score": scanner_result.get("confluence", {}).get("score"),
@@ -1634,12 +1751,26 @@ def evaluate_new_candidates(
                         # Refresh price from Tradier immediately before order — scanner data may be stale
                         if SCANNER_AVAILABLE:
                             try:
-                                occ_symbol = broker.build_option_symbol(
-                                    ticker, exp_, main_.get("option_type", "call"), main_.get("strike", 0)
-                                )
-                                fresh = get_live_option_quote(occ_symbol) if get_live_option_quote else {}
-                                # run_live.py always uses mid for price discipline
-                                use_price = fresh.get("mid", 0)
+                                is_spread_refresh = "SPREAD" in strategy_ and short_
+                                if is_spread_refresh:
+                                    long_symbol = broker.build_option_symbol(
+                                        ticker, exp_, main_.get("option_type", "call"), main_.get("strike", 0)
+                                    )
+                                    short_symbol = broker.build_option_symbol(
+                                        ticker, exp_, short_.get("option_type") or main_.get("option_type", "call"),
+                                        short_.get("strike", 0)
+                                    )
+                                    long_q = get_live_option_quote(long_symbol) if get_live_option_quote else {}
+                                    short_q = get_live_option_quote(short_symbol) if get_live_option_quote else {}
+                                    long_mid = long_q.get("mid", 0) or 0
+                                    short_mid = short_q.get("mid", 0) or 0
+                                    use_price = round(long_mid - short_mid, 2) if long_mid > 0 and short_mid > 0 else 0
+                                else:
+                                    occ_symbol = broker.build_option_symbol(
+                                        ticker, exp_, main_.get("option_type", "call"), main_.get("strike", 0)
+                                    )
+                                    fresh = get_live_option_quote(occ_symbol) if get_live_option_quote else {}
+                                    use_price = fresh.get("mid", 0)
                                 if use_price > 0:
                                     stale_price = fill_price_
                                     # Sanity check — if refreshed price diverges >40% from scanner price, skip trade
@@ -1650,7 +1781,13 @@ def evaluate_new_candidates(
                                             _just_tracked = False
                                             continue
                                     fill_price_ = use_price
-                                    logger.info(f"  {ticker} price refreshed: ${stale_price:.2f} -> mid ${fill_price_:.2f} (bid=${fresh['bid']:.2f} ask=${fresh['ask']:.2f})")
+                                    if is_spread_refresh:
+                                        logger.info(
+                                            f"  {ticker} spread price refreshed: ${stale_price:.2f} -> net mid ${fill_price_:.2f} "
+                                            f"(long_mid=${long_mid:.2f} short_mid=${short_mid:.2f})"
+                                        )
+                                    else:
+                                        logger.info(f"  {ticker} price refreshed: ${stale_price:.2f} -> mid ${fill_price_:.2f} (bid=${fresh['bid']:.2f} ask=${fresh['ask']:.2f})")
                                     # Re-check bankroll against actual live price
                                     if bankroll is not None and fill_price_ * 100 > bankroll[0]:
                                         logger.info(f"  [BANKROLL] Insufficient funds after price refresh — need ${fill_price_*100:.2f}, have ${bankroll[0]:.2f} — skipping {ticker}")
@@ -1658,6 +1795,16 @@ def evaluate_new_candidates(
                                         continue
                             except Exception as e:
                                 logger.warning(f"  {ticker} price refresh failed: {e} — using cached price")
+
+                    live_entry_cost_ = fill_price_ * 100 * contracts_
+                    max_entry_cost_ = getattr(cfg, "MAX_RISK_DOLLARS", 0) or 0
+                    if max_entry_cost_ > 0 and live_entry_cost_ > max_entry_cost_:
+                        logger.warning(
+                            f"  {ticker} skipped - entry cost ${live_entry_cost_:.2f} exceeds "
+                            f"max risk ${max_entry_cost_:.2f} ({contracts_}x @ ${fill_price_:.2f})"
+                        )
+                        _just_tracked = False
+                        continue
 
                     if live_paper and BROKER_AVAILABLE and broker._is_configured():
                         # Check for existing open order on this ticker before placing
@@ -2007,6 +2154,16 @@ def _cmd_reset(keep_weights: bool = True):
         print(f"  Agent weights preserved — learning continues from where it left off.")
     else:
         print(f"  Full fresh start — agent weights cleared.")
+    print(f"  Run --status to confirm.")
+
+
+def _cmd_clear_cooldowns():
+    """Clear only cooldown rows. Leaves positions, keys, trades, and weights intact."""
+    with db.get_connection() as conn:
+        deleted = conn.execute("DELETE FROM cooldowns").rowcount
+
+    print(f"\n  Cleared {deleted} cooldown(s).")
+    print(f"  Positions, trades, API keys, and agent weights were not changed.")
     print(f"  Run --status to confirm.")
 
 
@@ -2374,6 +2531,8 @@ def main():
                         help="Clear all positions, snapshots, cooldowns and recommendations (keeps agent weights)")
     parser.add_argument("--reset-all", action="store_true",
                         help="Wipe entire database including agent weights — full fresh start")
+    parser.add_argument("--clear-cooldowns", action="store_true",
+                        help="Clear active ticker cooldowns only; leaves positions, keys, trades, and weights intact")
     parser.add_argument("--auto",    action="store_true",
                         help="Fully autonomous mode — no user input, auto enters/exits based on signals. "
                              "No position limit. Use for unattended proof-of-concept runs.")
@@ -2417,6 +2576,11 @@ def main():
     if args.reset_all:
         db.initialize_database()
         _cmd_reset(keep_weights=False)
+        return
+
+    if args.clear_cooldowns:
+        db.initialize_database()
+        _cmd_clear_cooldowns()
         return
 
     # ── Swap broker module based on --broker flag
@@ -2624,7 +2788,7 @@ def main():
                         if fill_price > 0:
                             matched_data["entry_price"]  = fill_price
                             matched_data["entry_cost"]   = fill_price * 100 * matched_data.get("contracts", 1)
-                            matched_data["stop_price"]   = round(fill_price * (1 - cfg.STOP_LOSS_PCT), 2)
+                            matched_data["stop_price"]   = _stop_price_for_strategy(fill_price, matched_data.get("strategy", ""))
                             matched_data["target_price"] = round(fill_price * (1 + cfg.PROFIT_TARGET_PCT), 2)
                             pid = db.insert_position(matched_data)
                             if pid:
@@ -2710,24 +2874,70 @@ def main():
                         except Exception:
                             pass
 
-                        # ── Price drift check: cancel if live price > 20% above actual limit
-                        # Only run during market hours — options don't trade after hours
+                        # Price drift check: cancel if executable live price is too far above
+                        # the submitted limit. Spreads must be checked as net debit, not
+                        # against the long leg's ask.
                         try:
                             ticker_r = pos_data.get("ticker", "")
-                            occ_sym = broker.build_option_symbol(
-                                ticker_r, pos_data.get("expiration",""),
-                                pos_data.get("option_type","call"), pos_data.get("strike",0)
-                            )
-                            if get_live_option_quote and occ_sym and is_market_hours_for_entry():
-                                live_q = get_live_option_quote(occ_sym)
-                                live_ask = live_q.get("ask", 0)
+                            live_ask = 0
+                            price_label = "ask"
+                            if get_live_option_quote and ticker_r and is_market_hours_for_entry():
+                                strategy_r = str(pos_data.get("strategy", "")).upper()
+                                if "SPREAD" in strategy_r:
+                                    short_strike = None
+                                    short_type = pos_data.get("option_type", "call")
+                                    try:
+                                        notes = json.loads(pos_data.get("notes") or "{}")
+                                        short_strike = notes.get("short_strike")
+                                        short_type = notes.get("short_option_type") or short_type
+                                    except Exception:
+                                        pass
+
+                                    if not short_strike:
+                                        try:
+                                            raw_data = json.loads(pos_data.get("raw_scanner_data") or "{}")
+                                            short_leg = (raw_data.get("trade") or {}).get("short_leg") or {}
+                                            short_strike = short_leg.get("strike")
+                                            short_type = short_leg.get("option_type") or short_type
+                                        except Exception:
+                                            pass
+
+                                    long_sym = broker.build_option_symbol(
+                                        ticker_r, pos_data.get("expiration", ""),
+                                        pos_data.get("option_type", "call"), pos_data.get("strike", 0)
+                                    )
+                                    short_sym = None
+                                    if short_strike:
+                                        short_sym = broker.build_option_symbol(
+                                            ticker_r, pos_data.get("expiration", ""), short_type, short_strike
+                                        )
+
+                                    if long_sym and short_sym:
+                                        long_q = get_live_option_quote(long_sym) or {}
+                                        short_q = get_live_option_quote(short_sym) or {}
+                                        long_leg_ask = long_q.get("ask", 0) or 0
+                                        short_leg_bid = short_q.get("bid", 0) or 0
+                                        if long_leg_ask > 0 and short_leg_bid > 0:
+                                            live_ask = round(long_leg_ask - short_leg_bid, 2)
+                                            price_label = "net_ask"
+                                else:
+                                    occ_sym = broker.build_option_symbol(
+                                        ticker_r, pos_data.get("expiration", ""),
+                                        pos_data.get("option_type", "call"), pos_data.get("strike", 0)
+                                    )
+                                    if occ_sym:
+                                        live_q = get_live_option_quote(occ_sym) or {}
+                                        live_ask = live_q.get("ask", 0) or 0
+
                                 limit_price = pos_data.get("limit_price", pos_data.get("entry_price", 0))
-                                if live_ask > 0 and limit_price > 0 and live_ask > limit_price * 1.20:
+                                max_allowed = max(limit_price * 1.20, limit_price + 0.40)
+                                if live_ask > 0 and limit_price > 0 and live_ask > max_allowed:
                                     broker.cancel_order(oid)
-                                    logger.info(f"  [RECONCILE] Cancelled {ticker_r} order {oid} — price drifted too far (limit=${limit_price:.2f} ask=${live_ask:.2f})")
-                                    # Cooldown ticker so it doesn't re-enter this session
+                                    logger.info(f"  [RECONCILE] Cancelled {ticker_r} order {oid} - price drifted too far (limit=${limit_price:.2f} max=${max_allowed:.2f} {price_label}=${live_ask:.2f})")
+                                    # Short pause only: this order never filled, so let the
+                                    # ticker retry if the spread tightens again.
                                     from datetime import timedelta
-                                    cooldown_until = (datetime.now() + timedelta(hours=4)).isoformat()
+                                    cooldown_until = (datetime.now() + timedelta(minutes=15)).isoformat()
                                     db.set_cooldown(ticker_r, cooldown_until, reason="order_drift_cancelled")
                                     filled_oids.append(oid)
                                     continue
@@ -2749,7 +2959,7 @@ def main():
 
                                     pos_data["entry_price"]  = fill_price
                                     pos_data["entry_cost"]   = fill_cost
-                                    pos_data["stop_price"]   = round(fill_price * (1 - cfg.STOP_LOSS_PCT), 2)
+                                    pos_data["stop_price"]   = _stop_price_for_strategy(fill_price, pos_data.get("strategy", ""))
                                     pos_data["target_price"] = round(fill_price * (1 + cfg.PROFIT_TARGET_PCT), 2)
                                     from database import insert_position as _ins2
                                     pid = _ins2(pos_data)
