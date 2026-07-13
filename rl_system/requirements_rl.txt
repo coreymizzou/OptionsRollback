@@ -1,0 +1,12 @@
+# Dependencies for rl_system/ (run.py, run_live.py, and the modules they import)
+#
+# rl_system/ also imports options_scanner.py from the parent folder, which
+# pulls in its own dependencies (yfinance, pandas, scipy, rich, ta, etc. —
+# see ../requirements.txt) and will auto-install them on first run.
+
+numpy>=1.24.0
+requests>=2.28.0
+
+# Optional — Windows desktop toast notifications (notifier.py).
+# Uncomment on Windows if you want NOTIFY_WINDOWS_TOAST alerts.
+# winotify>=1.1.0
