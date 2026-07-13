@@ -10,7 +10,7 @@ without touching core logic in any other module.
 # ─── Account & Risk ──────────────────────────────────────────────────────────
 ACCOUNT_SIZE         = 100_000.0   # Total account size ($)
 MAX_RISK_PCT         = 0.02       # Max risk per trade as fraction of account
-MAX_RISK_DOLLARS     = ACCOUNT_SIZE * MAX_RISK_PCT   # = $500
+MAX_RISK_DOLLARS     = ACCOUNT_SIZE * MAX_RISK_PCT   # = $2,000
 MAX_CONCURRENT_POSITIONS = 10      # Hard cap on simultaneous open positions
 
 # ─── Position Management ─────────────────────────────────────────────────────
@@ -145,7 +145,7 @@ OI_INCREASE_REQUIRED = True      # Require OI to increase to confirm opening flo
 # ─── Auto Mode ───────────────────────────────────────────────────────────────
 AUTO_MAX_POSITIONS   = 10         # Max concurrent positions in --auto mode
 AUTO_MAX_CAPITAL_PCT = 0.90       # Max % of account to deploy at once in --auto mode
-                                  # e.g. 0.40 = never risk more than $10,000 simultaneously
+                                  # at 100k account this allows $90,000 deployed simultaneously
                                   # Each position still respects MAX_RISK_DOLLARS
 
 # ─── Phase 2 Hooks (not active yet) ──────────────────────────────────────────

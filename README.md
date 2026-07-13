@@ -113,7 +113,7 @@ Keys are never stored in code or environment variables.
 Prompts you for confirmation on every entry and exit. You execute trades in ThinkorSwim and confirm fills in the terminal. Max 3 concurrent positions.
 
 ### `--auto` (fully autonomous)
-No user input required. System enters and exits automatically based on signals. Capped at 10 positions and 40% of account capital by default. Recommended for learning/training phase.
+No user input required. System enters and exits automatically based on signals. Capped at 10 positions and 90% of account capital by default. Recommended for learning/training phase.
 
 ### `--bankroll AMOUNT` (compounding pool)
 Specify a fixed dollar pool. System trades autonomously using only that pool — always 1 contract per trade. Profits from closes flow back into the pool. Entries stop when the pool can't cover the next premium.
@@ -196,11 +196,21 @@ Fill confirmed → write to DB → track position → deduct bankroll
 | DTE force-close | 7 days to expiry | `CLOSE_BEFORE_DTE` |
 | Max concurrent (paper) | 3 positions | `MAX_CONCURRENT_POSITIONS` |
 | Max concurrent (auto) | 10 positions | `AUTO_MAX_POSITIONS` |
-| Max capital (auto) | 40% of account | `AUTO_MAX_CAPITAL_PCT` |
+| Max capital (auto) | 90% of account | `AUTO_MAX_CAPITAL_PCT` |
 | Daily drawdown | Down 6% of account | `MAX_DAILY_DRAWDOWN_PCT` |
 | Cooldown | 24 hours post-close | `COOLDOWN_HOURS` |
 
 **R/R ratio:** 2:1 — risk 33% to make 66%.
+
+> **Note:** `STOP_LOSS_PCT`/`PROFIT_TARGET_PCT` are the fallback stop/target
+> used only for manually-entered positions (`--close` aside, positions added
+> via `manual_override_open`). Scanner-generated entries carry their own
+> per-strategy stop/target computed in `options_scanner.py`
+> (`compute_trade_pricing`) — currently a fixed 2:1 R/R with a 50%-of-debit
+> stop for every strategy — which takes priority over the config fallback.
+> `PROFIT_TARGET_PCT` in this file *is* still the hard target-hit rule
+> checked every tick (`position_tracker.check_hard_exit_rules`); only the
+> stop side is overridden per-position.
 
 **Grace period:** Hard rules suppressed for the first 10 minutes after entry.
 

@@ -212,6 +212,13 @@ class LinearBandit:
         wd      = AGENT_WEIGHT_DECAY
         pred    = self.score(features)
         error   = reward - pred
+        # Clip the error term before scaling the gradient step. Reward is an
+        # unbounded R-multiple (a single big winner/loser can be several R),
+        # and with n_updates still in the tens early on, one outlier trade
+        # multiplied straight into the weight update can swing every feature
+        # weight at once. Clipping bounds the influence any single trade can
+        # have, the same role gradient clipping plays in any online learner.
+        error = float(np.clip(error, -3.0, 3.0))
 
         # Gradient step
         self.weights += lr * error * features

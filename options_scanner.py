@@ -117,9 +117,13 @@ WATCHLIST = [
 # not directional speculation. Single stocks give better R/R.
 MACRO_ONLY_TICKERS = {
     "SPY", "QQQ", "IWM", "DIA", "VXX", "UVXY",
-    "SQQQ", "TQQQ", "GLD", "SLV", "TLT", "HYG",
+    "SQQQ", "TQQQ", "SLV", "TLT", "HYG",
     "XLK", "XLF", "XLE", "XBI", "SMH", "ARKK",
     "VTI", "VOO"
+    # NOTE: GLD is deliberately NOT here — it's in WATCHLIST (traded
+    # directionally, see SECTOR_MAP) and would otherwise be scanned every
+    # cycle but silently discarded by is_valid_trade() before it could ever
+    # be recommended.
 }
 
 ACCOUNT_SIZE = 25_000          # Configurable account size ($)
@@ -281,10 +285,22 @@ def get_iv_rank(ticker: str, current_iv: float, lookback_days: int = 252) -> dic
             return {"ivr": None, "iv_pct": None, "iv_1y_high": None, "iv_1y_low": None}
 
         # Use current_iv if provided, else use current 20d HV
+        current_hv = float(rolling_hv.iloc[-1])
         if current_iv is None:
-            current_iv = float(rolling_hv.iloc[-1])
+            current_iv = current_hv
+            iv_series = rolling_hv.values
+        else:
+            # current_iv is a real, live option IV (from the Tradier chain),
+            # but rolling_hv is REALIZED volatility, not a history of IV.
+            # Implied vol structurally trades above realized vol (vol risk
+            # premium), so ranking a live IV directly against a realized-vol
+            # range would push IVR to ~100 on almost every name, almost
+            # always — comparing two different quantities. Anchor the
+            # realized-vol history to today's actual IV/HV ratio so we're
+            # ranking IV-like units against IV-like units.
+            scale = current_iv / current_hv if current_hv > 0 else 1.0
+            iv_series = rolling_hv.values * scale
 
-        iv_series = rolling_hv.values
         iv_high = float(np.max(iv_series))
         iv_low  = float(np.min(iv_series))
 

@@ -1199,6 +1199,12 @@ def evaluate_open_positions(
                         logger.info(f"  Closing order placed for {ticker} order={oid} - waiting for broker fill confirmation")
                         fill_status, fill_px = broker.poll_for_fill(oid, timeout_seconds=15, poll_interval=1)
                         if fill_status != "filled":
+                            # Cancel rather than leave it live — otherwise the position stays
+                            # "open" here, the same hard-exit condition fires again next tick,
+                            # and a second market sell order for this position gets placed
+                            # while the first one may still be working at the broker.
+                            if fill_status not in ("canceled", "cancelled", "rejected", "expired"):
+                                broker.cancel_order(oid)
                             logger.error(f"  Closing order for {ticker} not filled ({fill_status}); position remains open in tracker")
                             continue
                         if fill_px:
@@ -1389,6 +1395,10 @@ def evaluate_open_positions(
                         logger.info(f"  Exit order placed for {ticker} order={oid} - waiting for broker fill confirmation")
                         fill_status, fill_px = broker.poll_for_fill(oid, timeout_seconds=15, poll_interval=1)
                         if fill_status != "filled":
+                            # Cancel rather than leave it live — see comment on the identical
+                            # hard-exit branch above.
+                            if fill_status not in ("canceled", "cancelled", "rejected", "expired"):
+                                broker.cancel_order(oid)
                             logger.error(f"  Exit order for {ticker} not filled ({fill_status}); position remains open in tracker")
                             continue
                         if fill_px:
@@ -1497,6 +1507,20 @@ def evaluate_new_candidates(
     Hard rules checked first, then agent scores ENTER vs WAIT.
     """
     actions_taken = []
+
+    # Daily drawdown circuit breaker. position_tracker.PositionTracker.can_enter()
+    # implements this exact check and is documented as a hard rule the learning
+    # layer can never override — but nothing on this automated entry path ever
+    # calls can_enter() (entries are written straight to the DB below), so a day
+    # that blows through MAX_DAILY_DRAWDOWN_PCT never actually stopped new entries.
+    daily_pnl = db.get_daily_pnl()
+    max_daily_loss = cfg.ACCOUNT_SIZE * cfg.MAX_DAILY_DRAWDOWN_PCT
+    if daily_pnl < -max_daily_loss:
+        logger.warning(
+            f"Daily drawdown limit hit: ${daily_pnl:.2f} loss (limit: -${max_daily_loss:.0f}) "
+            f"— blocking all new entries for the rest of today"
+        )
+        return actions_taken
 
     for scanner_result in scanner_results[:5]:   # top 5 candidates only
         ticker = scanner_result.get("ticker", "?").upper()
@@ -1809,7 +1833,14 @@ def evaluate_new_candidates(
                     if live_paper and BROKER_AVAILABLE and broker._is_configured():
                         # Check for existing open order on this ticker before placing
                         open_orders = broker.get_open_orders()
-                        already_pending = any(ticker in o.get("symbol", "") for o in open_orders)
+                        # OCC symbols are TICKER + YYMMDD + C/P + strike, so match ticker as a
+                        # true prefix (followed by a digit) — plain substring matching would
+                        # let e.g. ticker "F" match any symbol containing an "F" anywhere.
+                        already_pending = any(
+                            (sym := o.get("symbol", "")).startswith(ticker)
+                            and len(sym) > len(ticker) and sym[len(ticker)].isdigit()
+                            for o in open_orders
+                        )
                         if already_pending:
                             logger.info(f"  {ticker} already has open order at Alpaca — skipping duplicate entry")
                             _just_tracked = False
@@ -2414,14 +2445,15 @@ def _prompt_and_store_keys():
     Keys are stored in system_state under file-specific keys so
     run.py and run_live.py can have separate Alpaca accounts.
     """
-    
+    import getpass
+
     changed = False
 
     # ── Tradier (shared — same key for both instances)
     tradier_key = db.get_state("tradier_api_key", "")
     if not tradier_key:
         print("\n  Tradier API key not set.")
-        tradier_key = input("  Enter Tradier API key: ").strip()
+        tradier_key = getpass.getpass("  Enter Tradier API key (hidden): ").strip()
         if tradier_key:
             db.set_state("tradier_api_key", tradier_key)
             changed = True
@@ -2440,7 +2472,7 @@ def _prompt_and_store_keys():
         schwab_client_secret = db.get_state("schwab_client_secret", "")
         if not schwab_client_secret:
             print("\n  Schwab Client Secret not set.")
-            schwab_client_secret = input("  Enter Schwab Client Secret: ").strip()
+            schwab_client_secret = getpass.getpass("  Enter Schwab Client Secret (hidden): ").strip()
             if schwab_client_secret:
                 db.set_state("schwab_client_secret", schwab_client_secret)
                 changed = True
@@ -2457,7 +2489,7 @@ def _prompt_and_store_keys():
     alpaca_key = db.get_state("alpaca_api_key_live", "")
     if not alpaca_key:
         print("\n  Alpaca API key not set (mid account).")
-        alpaca_key = input("  Enter Alpaca API key: ").strip()
+        alpaca_key = getpass.getpass("  Enter Alpaca API key (hidden): ").strip()
         if alpaca_key:
             db.set_state("alpaca_api_key_live", alpaca_key)
             changed = True
@@ -2465,7 +2497,7 @@ def _prompt_and_store_keys():
     alpaca_secret = db.get_state("alpaca_secret_key_live", "")
     if not alpaca_secret:
         print("\n  Alpaca secret key not set (mid account).")
-        alpaca_secret = input("  Enter Alpaca secret key: ").strip()
+        alpaca_secret = getpass.getpass("  Enter Alpaca secret key (hidden): ").strip()
         if alpaca_secret:
             db.set_state("alpaca_secret_key_live", alpaca_secret)
             changed = True
@@ -2618,6 +2650,15 @@ def main():
         broker.ALPACA_SECRET_KEY = _alpaca_secret
     import options_scanner as _scanner_mod
     _scanner_mod.TRADIER_API_KEY = _tradier_key
+    # get_current_option_price() reads os.environ directly (not the module
+    # attribute above) — without this, price refresh silently falls back to
+    # yfinance/stale entry price and hard stop/target rules never fire.
+    os.environ["TRADIER_API_KEY"] = _tradier_key
+    # options_scanner.py has its own hardcoded ACCOUNT_SIZE ($25k) used to size
+    # every trade's contract count — without this override it silently sizes
+    # positions off a different account size than the one configured here.
+    _scanner_mod.ACCOUNT_SIZE     = cfg.ACCOUNT_SIZE
+    _scanner_mod.MAX_RISK_DOLLARS = cfg.MAX_RISK_DOLLARS
 
     tracker      = PositionTracker()
     agent        = DecisionAgent()
