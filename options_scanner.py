@@ -108,7 +108,9 @@ WATCHLIST = [
     "NVDA", "AAPL", "MSFT", "GOOGL", "META",
     "AMZN", "TSLA", "AMD", "CRWD", "PLTR",
     "COIN", "NFLX", "MU", "CRM", "MSTR",
-    "GS", "XOM", "GLD", "MELI",   # ← add these
+    "GS", "XOM", "MELI",
+    # GLD removed by request (2026-07-15) — stop opening new GLD positions.
+    # Add it back here if you want it tradeable again.
 ]
 
 # ── Macro-only tickers — scanned for regime context and flow detection
