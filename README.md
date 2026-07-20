@@ -260,7 +260,7 @@ Check in after 10, 20, and 40 closed trades to evaluate signal quality and tune 
 
 ---
 
-## Watchlist (19 tickers)
+## Watchlist (18 tickers)
 
 | Ticker | Sector |
 |--------|--------|
@@ -273,8 +273,11 @@ Check in after 10, 20, and 40 closed trades to evaluate signal quality and tune 
 | COIN, MSTR | Crypto-adjacent |
 | GS | Financials |
 | XOM | Energy |
-| GLD | Commodities |
 | MELI | International growth |
+
+GLD was removed from the watchlist by request — it's still in `SECTOR_MAP`
+(harmless if unused) so it can be added back to `WATCHLIST` if you want it
+tradeable again.
 
 To add tickers: add to `WATCHLIST` in `options_scanner.py` AND to `SECTOR_MAP` in `config.py`.
 

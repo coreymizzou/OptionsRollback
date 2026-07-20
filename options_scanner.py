@@ -108,7 +108,9 @@ WATCHLIST = [
     "NVDA", "AAPL", "MSFT", "GOOGL", "META",
     "AMZN", "TSLA", "AMD", "CRWD", "PLTR",
     "COIN", "NFLX", "MU", "CRM", "MSTR",
-    "GS", "XOM", "GLD", "MELI",   # ← add these
+    "GS", "XOM", "MELI",
+    # GLD removed by request (2026-07-15) — stop opening new GLD positions.
+    # Add it back here if you want it tradeable again.
 ]
 
 # ── Macro-only tickers — scanned for regime context and flow detection
@@ -842,8 +844,10 @@ def get_sector_correlation(ticker: str) -> dict:
         return {"broad_market": "UNKNOWN", "spy_trend": "UNKNOWN", "qqq_trend": "UNKNOWN"}
 
 # Tickers that never have earnings calendars — skip the lookup entirely
-# to avoid noisy 404 errors. Kept in sync with MACRO_ONLY_TICKERS above.
-_NO_EARNINGS_TICKERS = MACRO_ONLY_TICKERS
+# to avoid noisy 404 errors. This is NOT the same set as MACRO_ONLY_TICKERS:
+# GLD is a tradeable single-name ETF (see WATCHLIST/SECTOR_MAP) but, like every
+# other ETF here, has no earnings calendar, so it still needs to be skipped.
+_NO_EARNINGS_TICKERS = MACRO_ONLY_TICKERS | {"GLD"}
 
 def get_days_to_earnings(ticker: str) -> Optional[int]:
     """

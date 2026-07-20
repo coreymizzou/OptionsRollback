@@ -910,7 +910,10 @@ def check_sector_correlation(
         )
 
     if warnings:
-        return False, " | ".join(warnings)   # warn but don't block
+        # Hard block. These caps existed in config from the start but were
+        # advisory-only, which is how 5 same-direction positions ended up
+        # open at once against a configured max of 2 (2026-07-14).
+        return True, " | ".join(warnings)
     return False, None
 
 
@@ -1497,9 +1500,17 @@ def evaluate_new_candidates(
         # ── OI change detection — validate flow is opening not closing
         oi_valid, oi_note = check_oi_confirms_flow(scanner_result)
 
-        # ── Sector / direction correlation check (warn only, not block)
+        # ── Sector / direction correlation check — hard cap, blocks the entry
         direction = scanner_result.get("trade", {}).get("direction", "")
-        _, correlation_warning = check_sector_correlation(ticker, direction, tracker)
+        correlation_blocked, correlation_warning = check_sector_correlation(ticker, direction, tracker)
+        if correlation_blocked:
+            logger.info(f"  {ticker} BLOCKED — {correlation_warning}")
+            db.log_journal_event(
+                "RISK_BLOCK", ticker=ticker,
+                reason_summary=f"Entry blocked: {correlation_warning}",
+                details={"reason": correlation_warning}
+            )
+            continue
 
         snapshot = build_market_snapshot(scanner_result)
 
@@ -2681,6 +2692,7 @@ def main():
 
             # Find positions in Alpaca not in our DB
             untracked = [p for p in alpaca_positions if p["symbol"] not in tracked_symbols]
+            _orphan_legs = []
             if untracked:
                 logger.warning(f"Found {len(untracked)} Alpaca position(s) not in DB — checking pending orders")
                 for ap in untracked:
@@ -2715,9 +2727,22 @@ def main():
                             if matched_oid:
                                 _pending_orders.pop(matched_oid, None)
                     else:
+                        _orphan_legs.append(ap)
                         logger.warning(f"  Alpaca has {sym} but no pending order match — position may be from outside this system")
 
                 save_pending_orders(_pending_orders)
+
+                if _orphan_legs:
+                    total_mv = sum(abs(float(p.get("market_value", 0) or 0)) for p in _orphan_legs)
+                    print("\n" + "!" * 64)
+                    print(f"  !! {len(_orphan_legs)} UNTRACKED POSITION(S) AT ALPACA — NOT MANAGED BY THIS BOT !!")
+                    print(f"  !! No stop-loss, target, or DTE rules apply to these.")
+                    print(f"  !! Combined |market value|: ${total_mv:,.2f}")
+                    print("  !! Likely causes: another bot instance (run_live.py? an old copy?)")
+                    print("  !! sharing this Alpaca account, or leftovers from failed closes.")
+                    for p in _orphan_legs:
+                        print(f"  !!   {p.get('symbol'):<24} qty={p.get('qty'):>5}  mv=${float(p.get('market_value',0) or 0):>12,.2f}")
+                    print("!" * 64 + "\n")
             else:
                 logger.info("Startup sync complete — all Alpaca positions accounted for")
         except Exception as e:
