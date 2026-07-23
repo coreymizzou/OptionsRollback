@@ -64,7 +64,15 @@ MAX_ROLLING_DRAWDOWN_PCT = 0.10  # Penalty trigger for rolling drawdown in rewar
 
 # ─── Reward Function Weights ─────────────────────────────────────────────────
 # reward = base_R - stop_penalty - drawdown_penalty - churn_penalty
-REWARD_STOP_PENALTY      = 0.5   # Extra penalty (in R) for hitting stop loss
+#
+# STOP_PENALTY is 0 on purpose. A stopped trade already carries its own
+# negative realized R — stacking a flat -0.5 on top double-counts the loss
+# and, worse, flattens the reward signal: live data (2026-07-23) showed all
+# recorded rewards compressed into -0.85..-0.96 regardless of how the trade
+# actually behaved, so the model could only learn "everything is bad" (a
+# negative bias) instead of WHICH feature combinations lose. The raw
+# R-multiple already contains everything the learner needs about stops.
+REWARD_STOP_PENALTY      = 0.0   # Extra penalty (in R) for hitting stop loss — see above
 REWARD_DRAWDOWN_PENALTY  = 0.3   # Penalty for breaching drawdown threshold
 REWARD_CHURN_PENALTY     = 0.2   # Penalty per unnecessary trade (overtrading)
 REWARD_MIN_HOLD_TICKS    = 5     # Minimum ticks held before exit counts as non-churn
@@ -74,7 +82,7 @@ AGENT_LEARNING_RATE      = 0.05   # Online update step size (lower = slower but 
 AGENT_EXPLORATION_RATE   = 0.10   # Fraction of ticks using random exploration
 AGENT_MIN_SAMPLES_TO_LEARN = 10   # Min closed trades before weights deviate from prior
 AGENT_WEIGHT_DECAY       = 0.001  # L2 regularization to prevent overfitting
-AGENT_SAVE_INTERVAL_TICKS = 10    # Save weights to DB every N ticks
+AGENT_SAVE_INTERVAL_TICKS = 10    # (deprecated — weights now save after every update)
 
 # ─── Feature Engineering ─────────────────────────────────────────────────────
 # These features are computed each tick for open positions and entry candidates
