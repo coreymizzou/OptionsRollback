@@ -41,7 +41,6 @@ from config import (
     AGENT_EXPLORATION_RATE,
     AGENT_MIN_SAMPLES_TO_LEARN,
     AGENT_WEIGHT_DECAY,
-    AGENT_SAVE_INTERVAL_TICKS,
     REWARD_STOP_PENALTY,
     REWARD_DRAWDOWN_PENALTY,
     REWARD_CHURN_PENALTY,
@@ -705,10 +704,13 @@ class DecisionAgent:
             }
         )
 
-        # Periodic weight save
+        # Save after EVERY update. Updates only happen when a position closes
+        # (1-2/day), so the write cost is nothing — but the old every-10th-close
+        # schedule meant a killed terminal (the documented way to stop the bot)
+        # could silently discard up to 9 closes' worth of learning. At 1-2
+        # closes/day that's a week of experience lost per hard kill.
         self._tick_count += 1
-        if self._tick_count % AGENT_SAVE_INTERVAL_TICKS == 0:
-            self.save_weights()
+        self.save_weights()
 
     def save_weights(self):
         self.enter_model.save()

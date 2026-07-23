@@ -54,6 +54,7 @@ from rl_agent import DecisionAgent
 
 # ─── OI cache for change detection (Tier 2 feature) ─────────────────────────
 _oi_cache: Dict[str, int] = {}   # "TICKER:strike:exp:type" → last known OI
+_last_risk_block: Dict[str, str] = {}   # ticker → last journaled block reason (dedupe)
 # Earnings cache to avoid hitting API every tick
 _earnings_cache: Dict[str, Optional[str]] = {}   # ticker → next earnings date ISO or None
 _earnings_cache_time: Dict[str, float] = {}       # ticker → timestamp of last fetch
@@ -1609,13 +1610,19 @@ def evaluate_new_candidates(
         direction = scanner_result.get("trade", {}).get("direction", "")
         correlation_blocked, correlation_warning = check_sector_correlation(ticker, direction, tracker)
         if correlation_blocked:
-            logger.info(f"  {ticker} BLOCKED — {correlation_warning}")
-            db.log_journal_event(
-                "RISK_BLOCK", ticker=ticker,
-                reason_summary=f"Entry blocked: {correlation_warning}",
-                details={"reason": correlation_warning}
-            )
+            # Journal only when the block reason for this ticker changes.
+            # The same candidate is re-blocked every 60s tick, which wrote
+            # 1,388 identical RISK_BLOCK rows in 3 days of live running.
+            if _last_risk_block.get(ticker) != correlation_warning:
+                _last_risk_block[ticker] = correlation_warning
+                logger.info(f"  {ticker} BLOCKED — {correlation_warning}")
+                db.log_journal_event(
+                    "RISK_BLOCK", ticker=ticker,
+                    reason_summary=f"Entry blocked: {correlation_warning}",
+                    details={"reason": correlation_warning}
+                )
             continue
+        _last_risk_block.pop(ticker, None)
 
         snapshot = build_market_snapshot(scanner_result)
 
